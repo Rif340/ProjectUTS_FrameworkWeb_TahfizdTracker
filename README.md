@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📖 Tahfizd Tracker - SDIT At-Taubah
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web manajemen tahfizd, monitoring setoran hafalan Al-Qur'an, dan presensi berbasis QR Code serta Geofencing GPS untuk SDIT At-Taubah.  
+Dibangun menggunakan framework **Laravel 12 (PHP 8.4)** dengan dukungan live deployment di cloud.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌐 Demo & Live Deployment
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi sudah dapat diakses secara publik dengan sertifikat HTTPS (mendukung fitur kamera pemindaian QR Code & GPS Geolocation di smartphone):
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **URL Aplikasi**: [https://tahfizd-tracker.onrender.com](https://tahfizd-tracker.onrender.com)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🔑 Akun Testing (Demo Credentials)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Gunakan akun-akun berikut untuk menguji masing-masing role:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Role | Nama Pengguna | NIP / NISN | Email | Password | Hak Akses Utama |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Admin** | **Ino S.Kom** | **NIP:** `1234` | `ino@gmail.com` | `admin123` | Manajemen Master Data, Guru, Siswa, Kelas, Lokasi Presensi GPS, Tahun Akademik |
+| **Guru** | **Belinda Blanche, S.Kom** | **NIP:** `0001` | `belindablache@gmail.com` | `guru123` | Input Setoran Hafalan, Monitoring Target Hafalan, Rekap & Cetak Nilai |
+| **Murid** | **Budi Siregar** | **NISN:** `1001` | `budisiregar@gmail.com` | `murid123` | Presensi Mandiri (Scan QR & GPS), Lihat Progres Hafalan Pribadi, Riwayat Absensi |
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## ✨ Fitur Unggulan
 
+1. **Presensi QR Code Real-Time**:
+   - Validasi QR Code unik per pengguna.
+   - Pengecekan kepemilikan akun agar tidak dapat saling memindai milik pengguna lain.
+2. **Geofencing GPS Radius Absensi**:
+   - Deteksi radius koordinat otomatis menggunakan peta Leaflet.js interaktif.
+   - Presensi hanya dapat dilakukan jika berada di dalam batas radius sekolah yang telah ditentukan admin.
+3. **Pencatatan & Validasi Setoran Hafalan**:
+   - Monitoring capaian hafalan per juz/surat/ayat secara bertahap (sequential).
+   - Validasi urutan ayat agar tidak ada loncatan setoran.
+4. **Multi-Role User**:
+   - Antarmuka dan otorisasi terpisah untuk **Admin**, **Guru**, dan **Murid**.
+5. **Manajemen Tahun Akademik & Rekap Laporan**:
+   - Filter data dinamis sesuai tahun akademik aktif.
+   - Cetak rekapitulasi nilai dan presensi dalam format cetak/PDF.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Backend**: Laravel 12 (PHP 8.4)
+- **Database**: MySQL 8.4 (Cloud Hosted on Aiven.io)
+- **Frontend**: Blade Templating, Tailwind CSS, Leaflet.js, HTML5-QRCode
+- **Deployment**: Render.com (Docker Container Alpine Linux)
+
+---
+
+## 💻 Menjalankan di Lokal (Local Development)
+
+### 1. Clone Repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/Rif340/ProjectUTS_FrameworkWeb_TahfizdTracker.git
+cd ProjectUTS_FrameworkWeb_TahfizdTracker
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install Dependensi
+```bash
+composer install
+npm install && npm run build
+```
 
-## Contributing
+### 3. Konfigurasi Environment
+Salin file `.env.example` menjadi `.env` dan sesuaikan koneksi database MySQL:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Migrasi & Seed Database
+```bash
+php artisan migrate --seed
+php artisan storage:link
+```
 
-## Code of Conduct
+### 5. Jalankan Server
+```bash
+php artisan serve
+```
+Akses di browser melalui: `http://localhost:8000`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 👨‍💻 Author
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Nama**: Muhammad Arif
+- **GitHub**: [@Rif340](https://github.com/Rif340)
+- **Proyek**: Tugas Proyek UTS Pemrograman Framework Web
