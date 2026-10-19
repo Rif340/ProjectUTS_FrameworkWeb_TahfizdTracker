@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\TahunAkademik;
 
+use Illuminate\Support\Facades\URL;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') === 'production' || str_contains(config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
         View::composer('*', function ($view) {
             $activeYearId = session('active_tahun_akademik_id');
             $tahunList = TahunAkademik::orderBy('tanggal_mulai', 'desc')->get();
