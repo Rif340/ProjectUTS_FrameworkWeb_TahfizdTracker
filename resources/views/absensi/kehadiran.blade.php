@@ -288,20 +288,41 @@
                              String(now.getMinutes()).padStart(2, '0') + ':' + 
                              String(now.getSeconds()).padStart(2, '0');
 
+        const isOvernight = jamPulangDefault < jamMasukDefault;
+
         if (tipe === 'masuk') {
-            if (currentHours < bukaMasukDefault) {
-                openAlertErrorModal(
-                    'Absensi Masuk Belum Dibuka!',
-                    'Absensi masuk baru dapat dilakukan mulai pukul ' + bukaMasukDefault.substring(0, 5) + ' WIB (2 jam sebelum jam masuk resmi ' + jamMasukDefault.substring(0, 5) + ' WIB).'
-                );
-                return;
-            }
-            if (currentHours > jamPulangDefault) {
-                openAlertErrorModal(
-                    'Waktu Absensi Masuk Berakhir!',
-                    'Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (' + jamPulangDefault.substring(0, 5) + ' WIB).'
-                );
-                return;
+            if (isOvernight) {
+                // Shift malam melintasi tengah malam (misal buka 21:01, masuk 23:01, pulang 00:01)
+                const isValidMasuk = (currentHours >= bukaMasukDefault || currentHours <= jamPulangDefault);
+                if (!isValidMasuk) {
+                    if (currentHours < '12:00:00') {
+                        openAlertErrorModal(
+                            'Waktu Absensi Masuk Berakhir!',
+                            'Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (' + jamPulangDefault.substring(0, 5) + ' WIB).'
+                        );
+                    } else {
+                        openAlertErrorModal(
+                            'Absensi Masuk Belum Dibuka!',
+                            'Absensi masuk baru dapat dilakukan mulai pukul ' + bukaMasukDefault.substring(0, 5) + ' WIB (2 jam sebelum jam masuk resmi ' + jamMasukDefault.substring(0, 5) + ' WIB).'
+                        );
+                    }
+                    return;
+                }
+            } else {
+                if (currentHours < bukaMasukDefault) {
+                    openAlertErrorModal(
+                        'Absensi Masuk Belum Dibuka!',
+                        'Absensi masuk baru dapat dilakukan mulai pukul ' + bukaMasukDefault.substring(0, 5) + ' WIB (2 jam sebelum jam masuk resmi ' + jamMasukDefault.substring(0, 5) + ' WIB).'
+                    );
+                    return;
+                }
+                if (currentHours > jamPulangDefault) {
+                    openAlertErrorModal(
+                        'Waktu Absensi Masuk Berakhir!',
+                        'Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (' + jamPulangDefault.substring(0, 5) + ' WIB).'
+                    );
+                    return;
+                }
             }
         } else {
             // Tipe pulang
@@ -312,12 +333,23 @@
                 );
                 return;
             }
-            if (currentHours < jamPulangDefault) {
-                openAlertErrorModal(
-                    'Belum Waktunya Absensi Pulang!',
-                    'Absensi pulang baru dibuka mulai pukul ' + jamPulangDefault.substring(0, 5) + ' WIB.'
-                );
-                return;
+            if (isOvernight) {
+                const isBelumPulang = (currentHours >= jamMasukDefault || currentHours < jamPulangDefault);
+                if (isBelumPulang) {
+                    openAlertErrorModal(
+                        'Belum Waktunya Absensi Pulang!',
+                        'Absensi pulang baru dibuka mulai pukul ' + jamPulangDefault.substring(0, 5) + ' WIB.'
+                    );
+                    return;
+                }
+            } else {
+                if (currentHours < jamPulangDefault) {
+                    openAlertErrorModal(
+                        'Belum Waktunya Absensi Pulang!',
+                        'Absensi pulang baru dibuka mulai pukul ' + jamPulangDefault.substring(0, 5) + ' WIB.'
+                    );
+                    return;
+                }
             }
         }
 

@@ -671,17 +671,31 @@ class AbsensiController extends Controller
         $jamPulangResmi = $hariKerja->jam_pulang ?? '14:00:00';
         $bukaAbsenMasuk = Carbon::parse($jamMasukResmi)->subHours(2)->format('H:i:s');
 
-        // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
-        if ($waktuSekarang < $bukaAbsenMasuk) {
-            return back()->with('error', "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).");
-        }
+        $isOvernight = $jamPulangResmi < $jamMasukResmi;
 
-        // Validasi batas akhir absensi masuk (lewat jam pulang)
-        if ($waktuSekarang > $jamPulangResmi) {
-            return back()->with('error', "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB).");
-        }
+        if ($isOvernight) {
+            $isValidMasuk = ($waktuSekarang >= $bukaAbsenMasuk || $waktuSekarang <= $jamPulangResmi);
+            if (!$isValidMasuk) {
+                if ($waktuSekarang < '12:00:00') {
+                    return back()->with('error', "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB).");
+                } else {
+                    return back()->with('error', "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).");
+                }
+            }
+            $status = ($waktuSekarang >= $bukaAbsenMasuk && $waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
+        } else {
+            // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
+            if ($waktuSekarang < $bukaAbsenMasuk) {
+                return back()->with('error', "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).");
+            }
 
-        $status = ($waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
+            // Validasi batas akhir absensi masuk (lewat jam pulang)
+            if ($waktuSekarang > $jamPulangResmi) {
+                return back()->with('error', "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB).");
+            }
+
+            $status = ($waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
+        }
 
         if ($this->roleIs($user->role, 'admin') && $user->admin) {
             $absensi = AbsensiAdmin::firstOrNew([
@@ -760,9 +774,19 @@ class AbsensiController extends Controller
             return back()->with('error', "Hari ini ({$currentDayName}) bukan hari kerja aktif atau sekolah sedang libur.");
         }
 
+        $jamMasukResmi  = $hariKerja->jam_masuk ?? '07:00:00';
         $jamPulangResmi = $hariKerja->jam_pulang ?? '14:00:00';
-        if ($waktuSekarang < $jamPulangResmi) {
-            return back()->with('error', "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.");
+        $isOvernight    = $jamPulangResmi < $jamMasukResmi;
+
+        if ($isOvernight) {
+            $isBelumPulang = ($waktuSekarang >= $jamMasukResmi || $waktuSekarang < $jamPulangResmi);
+            if ($isBelumPulang) {
+                return back()->with('error', "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.");
+            }
+        } else {
+            if ($waktuSekarang < $jamPulangResmi) {
+                return back()->with('error', "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.");
+            }
         }
 
         if ($this->roleIs($user->role, 'admin') && $user->admin) {
@@ -996,23 +1020,47 @@ class AbsensiController extends Controller
             }
         }
 
-        if ($tipe === 'masuk') {
-            // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
-            if ($waktuSekarang < $bukaAbsenMasuk) {
-                return response()->json([
-                    'success'      => false,
-                    'message'      => "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).",
-                    'scanned_code' => $qrData,
-                ], 422);
-            }
+        $isOvernight    = $jamPulangResmi < $jamMasukResmi;
 
-            // Validasi batas akhir absensi masuk (sudah lewat jam pulang sekolah)
-            if ($waktuSekarang > $jamPulangResmi) {
-                return response()->json([
-                    'success'      => false,
-                    'message'      => "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB). Anda tidak dapat melakukan absensi masuk lagi hari ini.",
-                    'scanned_code' => $qrData,
-                ], 422);
+        if ($tipe === 'masuk') {
+            if ($isOvernight) {
+                $isValidMasuk = ($waktuSekarang >= $bukaAbsenMasuk || $waktuSekarang <= $jamPulangResmi);
+                if (!$isValidMasuk) {
+                    if ($waktuSekarang < '12:00:00') {
+                        return response()->json([
+                            'success'      => false,
+                            'message'      => "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB). Anda tidak dapat melakukan absensi masuk lagi hari ini.",
+                            'scanned_code' => $qrData,
+                        ], 422);
+                    } else {
+                        return response()->json([
+                            'success'      => false,
+                            'message'      => "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).",
+                            'scanned_code' => $qrData,
+                        ], 422);
+                    }
+                }
+                $status = ($waktuSekarang >= $bukaAbsenMasuk && $waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
+            } else {
+                // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
+                if ($waktuSekarang < $bukaAbsenMasuk) {
+                    return response()->json([
+                        'success'      => false,
+                        'message'      => "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).",
+                        'scanned_code' => $qrData,
+                    ], 422);
+                }
+
+                // Validasi batas akhir absensi masuk (sudah lewat jam pulang sekolah)
+                if ($waktuSekarang > $jamPulangResmi) {
+                    return response()->json([
+                        'success'      => false,
+                        'message'      => "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB). Anda tidak dapat melakukan absensi masuk lagi hari ini.",
+                        'scanned_code' => $qrData,
+                    ], 422);
+                }
+
+                $status = ($waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
             }
 
             if ($absensi->waktu_masuk) {
@@ -1030,7 +1078,6 @@ class AbsensiController extends Controller
                 ], 422);
             }
 
-            $status              = ($waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
             $absensi->waktu_masuk = $waktuSekarang;
             $absensi->status      = $status;
             $absensi->save();
@@ -1076,12 +1123,23 @@ class AbsensiController extends Controller
             }
 
             // Validasi waktu absensi pulang (belum waktunya jam pulang)
-            if ($waktuSekarang < $jamPulangResmi) {
-                return response()->json([
-                    'success'      => false,
-                    'message'      => "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.",
-                    'scanned_code' => $qrData,
-                ], 422);
+            if ($isOvernight) {
+                $isBelumPulang = ($waktuSekarang >= $jamMasukResmi || $waktuSekarang < $jamPulangResmi);
+                if ($isBelumPulang) {
+                    return response()->json([
+                        'success'      => false,
+                        'message'      => "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.",
+                        'scanned_code' => $qrData,
+                    ], 422);
+                }
+            } else {
+                if ($waktuSekarang < $jamPulangResmi) {
+                    return response()->json([
+                        'success'      => false,
+                        'message'      => "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.",
+                        'scanned_code' => $qrData,
+                    ], 422);
+                }
             }
 
             $absensi->waktu_pulang = $waktuSekarang;
