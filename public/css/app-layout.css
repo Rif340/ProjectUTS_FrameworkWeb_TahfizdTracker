@@ -1,0 +1,524 @@
+/* ==========================================================================
+   CSS LAYOUT APLIKASI (SIDEBAR, NAVBAR, TOPBAR, KONTEN)
+   Figma Node 618:960, 618:939, 618:955, 618:1591, 393:4769
+   ========================================================================== */
+
+/* ==================== FONTS ==================== */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #E8E9F2;
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+}
+
+/* ==================== SIDEBAR (247px Width, Figma Node 618:960) ==================== */
+.sidebar {
+    width: 247px;
+    background: #FFFFFF;
+    border-right: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/* Sidebar Header (Figma Node 618:961) */
+.sidebar-header {
+    height: 82px;
+    padding: 20px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-logo {
+    width: 39px;
+    height: 39px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.sidebar-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.sidebar-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: #71717A;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+/* Sidebar Menu Items */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+.menu-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    user-select: none;
+}
+
+.menu-item:hover {
+    background-color: #F8F9FA;
+}
+
+.menu-item.active {
+    background-color: #F3F6F9;
+    font-weight: 400;
+}
+
+.menu-icon {
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu-icon img {
+    width: 19px;
+    height: 19px;
+    object-fit: contain;
+}
+
+.menu-arrow {
+    margin-left: auto;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.menu-arrow img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Submenu Accordion (Figma Node 618:1591) */
+.submenu-container {
+    display: none;
+    flex-direction: column;
+    background: #FFFFFF;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.submenu-container.open {
+    display: flex;
+}
+
+.submenu-item {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 51px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #000000;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.submenu-item:hover {
+    background-color: #F8F9FA;
+    color: #0E7651;
+}
+
+.submenu-item.active {
+    color: #0E7651;
+    font-weight: 500;
+}
+
+/* ==================== MAIN CONTENT WRAPPER ==================== */
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Top Header / Topbar / Navbar (Figma Node 618:939, Height: 82px) */
+.topbar {
+    height: 82px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 34px;
+    position: sticky;
+    top: 0;
+    z-index: 15;
+}
+
+.school-info {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: #3F4254;
+    line-height: 1.35;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Academic Year Dropdown Badge (Figma Node 393:4826 & 393:4827) */
+.academic-year-dropdown-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.badge-academic-year {
+    background: #E5E7EB;
+    border-radius: 10px;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.badge-academic-year:hover {
+    background: #D1D5DB;
+}
+
+.badge-academic-year img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+/* Dropdown Menu (Figma Node 393:4827) */
+.academic-year-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 100;
+    flex-direction: column;
+    gap: 6px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    min-width: 140px;
+}
+
+.academic-year-menu.show {
+    display: flex;
+}
+
+.academic-year-item {
+    background: #E5E7EB;
+    border-radius: 10px;
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.18s, color 0.18s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #000000;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.academic-year-item:hover {
+    background: #D1D5DB;
+}
+
+.academic-year-item.is-selected {
+    background: #0E7651;
+    color: #FFFFFF;
+}
+
+.academic-year-item.is-selected img {
+    filter: brightness(0) invert(1);
+}
+
+.academic-year-item img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* User Profile Pill (Figma Node 618:941) */
+.user-profile-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #0E7651;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.user-info-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.user-role-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    color: #B5B5C3;
+    line-height: 1.2;
+    margin-top: 2px;
+}
+
+/* Logout Button (Figma Node 618:947) */
+.btn-logout {
+    height: 34px;
+    background: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-logout img {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+}
+
+.btn-logout:hover {
+    background: #DC2626;
+}
+
+/* Sub-Header / Breadcrumb Bar (Figma Node 618:955, Height: 60px) */
+.breadcrumb-bar {
+    height: 60px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+}
+
+.page-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #71717A;
+    letter-spacing: 0.2px;
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #71717A;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.breadcrumb-link:hover {
+    color: #0E7651;
+    text-decoration: underline;
+}
+
+.breadcrumb-current {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #71717A;
+    cursor: default;
+}
+
+.current-datetime {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #71717A;
+}
+
+/* Main Content Viewport (Figma Node 618:938, Width: 982px, Height: 645px) */
+.content-body {
+    flex: 1;
+    padding: 24px 35px;
+    display: flex;
+}
+
+.content-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    min-height: 645px;
+    width: 100%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 70px;
+    }
+    .sidebar-header-text, .sidebar-subtitle, .menu-item span, .menu-arrow, .submenu-container {
+        display: none !important;
+    }
+    .sidebar-header {
+        justify-content: center;
+        padding: 15px 0;
+    }
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+    .topbar {
+        padding: 0 16px;
+    }
+    .school-info {
+        display: none;
+    }
+    .breadcrumb-bar {
+        padding: 0 16px;
+    }
+    .content-body {
+        padding: 16px;
+    }
+}

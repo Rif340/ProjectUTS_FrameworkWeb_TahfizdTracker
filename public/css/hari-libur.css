@@ -1,0 +1,550 @@
+/* =============================================================
+   hari-libur.css  — Halaman Hari Libur & Modals (100% Sesuai Figma)
+   Figma Nodes:
+   - 618:1133 (Detail Hari Libur)
+   - 625:3386 (Form Hari Libur Modal)
+   - 654:7404 (Alert Tambah Berhasil)
+   ============================================================= */
+
+/* ── Flash Messages ── */
+.hl-flash {
+    margin: 16px 36px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+.hl-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.hl-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* ── Card Header (Figma Frame 620:1954, Height: ~79px) ── */
+.hl-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 70px;
+    box-sizing: border-box;
+}
+
+.hl-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hl-head-icon {
+    width: 19px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.hl-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e774f;
+    white-space: nowrap;
+}
+
+.hl-card-head-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Dropdown "Tampilkan 10" (Figma 620:1961 - Icon ep:arrow-down-bold) */
+.hl-select-show {
+    background: #e4e6ef;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 34px 0 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #3f4254;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M1.02246 3.30859C1.13967 3.19141 1.29862 3.12558 1.46436 3.12558C1.63009 3.12558 1.78904 3.19141 1.90625 3.30859L5 6.40234L8.09375 3.30859C8.2122 3.19833 8.3688 3.1383 8.53061 3.14115C8.69242 3.144 8.84681 3.2095 8.96131 3.32387C9.0758 3.43824 9.14147 3.59256 9.1445 3.75436C9.14753 3.91616 9.08768 4.07283 8.97754 4.19141L5.44238 7.72754C5.32518 7.84472 5.16623 7.91055 5.00049 7.91055C4.83475 7.91055 4.6758 7.84472 4.55859 7.72754L1.02246 4.19238C0.90528 4.07518 0.83945 3.91623 0.83945 3.75049C0.83945 3.58475 0.90528 3.4258 1.02246 3.30859Z' fill='%233F4254'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Tombol + Tambah (Figma 620:1965) */
+.hl-btn-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #0e7651;
+    border-radius: 10px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff;
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.18s;
+}
+.hl-btn-add:hover {
+    background: #0a5e3f;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* ── Table Wrap (Figma 620:1967, x: 37, y: 123, width: 896, height: 288) ── */
+.hl-table-wrap {
+    margin: 36px 36px 36px;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+/* ── Table ── */
+.hl-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+/* Header row (Height: 48px, bg: #e8e7f2) */
+.hl-th {
+    background: #e8e7f2;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 0 8px;
+    height: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+}
+.hl-th:last-child { border-right: none; }
+.hl-th-no   { width: 61px; }
+.hl-th-ket  { width: 144px; }
+.hl-th-tipe { width: 144px; }
+.hl-th-tgl1 { width: 169px; }
+.hl-th-tgl2 { width: 156px; }
+.hl-th-aksi { width: 225px; }
+
+/* Body rows (Height: 48px, bg: #ffffff) */
+.hl-td {
+    background: #ffffff;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 0 10px;
+    height: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    vertical-align: middle;
+}
+.hl-td:last-child { border-right: none; }
+.hl-tbl tbody tr:last-child .hl-td { border-bottom: none; }
+.hl-td-no { font-weight: 600; }
+
+.hl-td-aksi {
+    padding: 0 15px;
+}
+
+.hl-aksi-cell-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.hl-aksi-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.18s;
+}
+.hl-aksi-btn:hover {
+    opacity: 0.75;
+}
+
+.hl-icon-trash {
+    width: 13px;
+    height: 15px;
+    display: block;
+}
+
+.hl-icon-edit {
+    width: 18px;
+    height: 16px;
+    display: block;
+}
+
+.hl-empty {
+    color: #b5b5c3;
+    font-style: italic;
+    padding: 24px;
+    text-align: center;
+}
+
+/* =============================================================
+   MODAL OVERLAY (Backdrop Dimmed: rgba(0,0,0,0.25))
+   ============================================================= */
+.hl-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* =============================================================
+   FORM MODAL (Figma Node 625:3386 / 625:4016)
+   ============================================================= */
+.hl-form-modal {
+    background: #ffffff;
+    border: 1px solid #6fbe8e;
+    border-radius: 10px;
+    width: 1040px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 35px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.hl-form-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.hl-form-header {
+    text-align: center;
+    width: 100%;
+}
+.hl-form-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    color: #000000;
+    margin: 0 0 5px;
+    line-height: 1.2;
+}
+.hl-form-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #91919c;
+    margin: 0;
+}
+
+/* Grid input 2 kolom (Figma 625:4021) */
+.hl-form-grid {
+    display: flex;
+    gap: 60px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.hl-form-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Row Form Field */
+.hl-field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+}
+
+.hl-field-label {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #000000;
+    width: 140px;
+    flex-shrink: 0;
+}
+.hl-field-label .hl-req {
+    color: red;
+    font-size: 24px;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.hl-field-input-wrap {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hl-input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 0 16px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #3f4254;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.18s;
+}
+.hl-input:focus {
+    border-color: #0e7651;
+}
+
+.hl-input-date {
+}
+
+.hl-date-icon-box {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hl-date-icon-box img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Select dengan ikon ep:arrow-down-bold (Figma 625:4046 / 625:4032) */
+.hl-select {
+    width: 100%;
+    height: 42px;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 0 34px 0 18px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #3f4254;
+    outline: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M1.02246 3.30859C1.13967 3.19141 1.29862 3.12558 1.46436 3.12558C1.63009 3.12558 1.78904 3.19141 1.90625 3.30859L5 6.40234L8.09375 3.30859C8.2122 3.19833 8.3688 3.1383 8.53061 3.14115C8.69242 3.144 8.84681 3.2095 8.96131 3.32387C9.0758 3.43824 9.14147 3.59256 9.1445 3.75436C9.14753 3.91616 9.08768 4.07283 8.97754 4.19141L5.44238 7.72754C5.32518 7.84472 5.16623 7.91055 5.00049 7.91055C4.83475 7.91055 4.6758 7.84472 4.55859 7.72754L1.02246 4.19238C0.90528 4.07518 0.83945 3.91623 0.83945 3.75049C0.83945 3.58475 0.90528 3.4258 1.02246 3.30859Z' fill='%233F4254'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+.hl-select:focus {
+    border-color: #0e7651;
+}
+
+/* Action Buttons (Batal & Simpan, Figma 625:4062) */
+.hl-form-btns {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.hl-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: red;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.hl-btn-batal:hover {
+    opacity: 0.88;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.hl-btn-simpan {
+    flex: 1;
+    height: 44px;
+    background: #0e7651;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.hl-btn-simpan:hover {
+    opacity: 0.88;
+}
+
+/* =============================================================
+   ALERT MODAL (Figma Node 654:7404 / 654:7640)
+   ============================================================= */
+.hl-alert-modal {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 35px 40px;
+    width: 356px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.hl-alert-modal.berhasil { border: 1px solid #6fbe8e; }
+.hl-alert-modal.gagal    { border: 1px solid #f87171; }
+
+.hl-alert-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.hl-alert-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    color: #000000;
+    margin: 0 0 5px;
+    line-height: 1.2;
+}
+.hl-alert-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #91919c;
+    margin: 0;
+}
+
+.hl-alert-btn-wrap {
+    width: 100%;
+}
+.hl-alert-btn-wrap a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.18s;
+}
+.hl-alert-btn-wrap a:hover { opacity: 0.88; color: #ffffff; text-decoration: none; }
+.hl-alert-btn-wrap.berhasil a { background: #0e7651; }
+.hl-alert-btn-wrap.gagal    a { background: #ef4444; }
+
+.hl-alert-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.18s;
+}
+.hl-alert-close:hover { opacity: 0.7; }
+.hl-alert-close img { width: 32px; height: 32px; object-fit: contain; }
+
+/* ── Delete Confirmation Modal (Figma Node 657:12673) ── */
+.hl-confirm-btns {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.hl-btn-confirm-batal {
+    flex: 1;
+    height: 44px;
+    background: red;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.hl-btn-confirm-batal:hover {
+    opacity: 0.88;
+}
+
+.hl-btn-confirm-setujui {
+    flex: 1;
+    height: 44px;
+    background: #0e7651;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.hl-btn-confirm-setujui:hover {
+    opacity: 0.88;
+}
+

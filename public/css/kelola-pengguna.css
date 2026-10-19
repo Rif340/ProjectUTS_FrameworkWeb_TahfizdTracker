@@ -1,0 +1,517 @@
+/* =============================================================
+   kelola-pengguna.css — Halaman Kelola Pengguna (Sesuai Figma)
+   Figma Nodes:
+   - 620:2600 (Detail/Index Kelola Pengguna)
+   - 625:3040 (Form Tambah Pengguna)
+   - 625:4901 (Form Edit Pengguna)
+   - 665:28738 (Delete Confirm Modal)
+   - 666:29983 (Alert Berhasil)
+   ============================================================= */
+
+/* ── Flash Messages ── */
+.pg-flash {
+    margin: 16px 36px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+.pg-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.pg-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* ── Card Header (Figma ~79px) ── */
+.pg-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 70px;
+    box-sizing: border-box;
+}
+.pg-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pg-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e774f;
+    white-space: nowrap;
+}
+.pg-card-head-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ── Dropdown "Tampilkan 10" (Disamakan persis dengan modul lain) ── */
+.pg-select-show {
+    background: #e4e6ef;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 34px 0 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: #3f4254;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M1.02246 3.30859C1.13967 3.19141 1.29862 3.12558 1.46436 3.12558C1.63009 3.12558 1.78904 3.19141 1.90625 3.30859L5 6.40234L8.09375 3.30859C8.2122 3.19833 8.3688 3.1383 8.53061 3.14115C8.69242 3.144 8.84681 3.2095 8.96131 3.32387C9.0758 3.43824 9.14147 3.59256 9.1445 3.75436C9.14753 3.91616 9.08768 4.07283 8.97754 4.19141L5.44238 7.72754C5.32518 7.84472 5.16623 7.91055 5.00049 7.91055C4.83475 7.91055 4.6758 7.84472 4.55859 7.72754L1.02246 4.19238C0.90528 4.07518 0.83945 3.91623 0.83945 3.75049C0.83945 3.58475 0.90528 3.4258 1.02246 3.30859Z' fill='%233F4254'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ── Tombol Tambah ── */
+.pg-btn-tambah {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #0e7651;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+.pg-btn-tambah:hover { background: #0a5c3e; color: #fff; text-decoration: none; }
+
+/* ── Content Area ── */
+.pg-content {
+    padding: 30px 36px;
+}
+
+/* ── Table Wrapper ── */
+.pg-table-wrap {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
+/* ── Table ── */
+.pg-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+.pg-table thead tr th {
+    background: #e8e7f2;
+    padding: 14px 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+}
+.pg-table thead tr th:last-child { border-right: none; }
+.pg-table tbody tr td {
+    padding: 10px 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    vertical-align: middle;
+}
+.pg-table tbody tr td:last-child { border-right: none; }
+.pg-table tbody tr:last-child td { border-bottom: none; }
+
+/* ── Aksi Cell ── */
+.pg-aksi-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.pg-aksi-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: opacity 0.18s;
+    text-decoration: none;
+}
+.pg-aksi-btn:hover { opacity: 0.7; }
+
+/* ── Empty State ── */
+.pg-empty {
+    padding: 40px;
+    text-align: center;
+    color: #999;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+
+/* =============================================================
+   OVERLAY (dipakai di delete modal & form overlay)
+   ============================================================= */
+.pg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* =============================================================
+   MODAL KONFIRMASI HAPUS (Figma 665:28738 — sama pola ta-alert-modal)
+   Width: 356px, border hijau, logo, judul, batal+hapus
+   ============================================================= */
+.pg-delete-modal {
+    background: #ffffff;
+    border: 1px solid #6fbe8e;
+    border-radius: 10px;
+    padding: 35px 40px;
+    width: 356px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.pg-delete-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.18s;
+    background: none;
+    border: none;
+}
+.pg-delete-close:hover { opacity: 0.7; }
+.pg-delete-close img { width: 32px; height: 32px; object-fit: contain; }
+
+.pg-delete-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.pg-delete-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #000;
+    margin: 0 0 5px;
+}
+
+.pg-delete-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #91919c;
+    margin: 0;
+}
+
+.pg-delete-actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.pg-delete-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: transparent;
+    border: 1.5px solid #ef4444;
+    color: #ef4444;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.pg-delete-btn-batal:hover { background: #fee2e2; }
+
+.pg-delete-btn-hapus {
+    flex: 1;
+    height: 44px;
+    background: #ef4444;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.pg-delete-btn-hapus:hover { opacity: 0.85; }
+
+/* =============================================================
+   ALERT BERHASIL / GAGAL (Figma 666:29983 — sama pola ta-alert-modal)
+   ============================================================= */
+.pg-alert-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-alert-box {
+    background: #ffffff;
+    border: 1px solid #6fbe8e;
+    border-radius: 10px;
+    padding: 35px 40px;
+    width: 460px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+.pg-alert-box.alert-gagal { border-color: #f87171; }
+
+.pg-alert-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.pg-alert-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.pg-alert-message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #91919c;
+    margin: 0;
+}
+
+.pg-alert-btn-wrap {
+    width: 100%;
+}
+.pg-alert-btn-wrap a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.18s;
+}
+.pg-alert-btn-wrap a:hover { opacity: 0.88; color: #fff; text-decoration: none; }
+.pg-alert-btn-wrap.berhasil a { background: #0e7651; }
+.pg-alert-btn-wrap.gagal    a { background: #ef4444; }
+
+/* =============================================================
+   MODAL FORM (Figma 625:3040 & 625:4901) — overlay
+   ============================================================= */
+.pg-form-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pg-modal {
+    background: #fff;
+    border: 1px solid #6fbe8e;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1040px;
+    padding: 35px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.pg-modal-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.pg-modal-title-block {
+    text-align: center;
+    width: 100%;
+}
+.pg-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: #000;
+    margin: 0 0 5px;
+}
+.pg-modal-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #91919c;
+    margin: 0;
+}
+
+/* ── Form Grid (2 kolom) ── */
+.pg-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 80px;
+    width: 100%;
+}
+.pg-form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+}
+.pg-form-label {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: #000;
+    white-space: nowrap;
+    width: 135px;
+    flex-shrink: 0;
+}
+.pg-form-label span { color: red; font-size: 18px; line-height: 0; vertical-align: middle; }
+
+.pg-form-input,
+.pg-form-select {
+    flex: 1;
+    width: 100%;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    padding: 0 16px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    color: #3f4254;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    height: 42px;
+    box-sizing: border-box;
+}
+.pg-form-input:focus, .pg-form-select:focus { border-color: #0e7651; }
+
+/* ── Password Container with Eye Icon ── */
+.pg-password-wrap {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.pg-password-wrap .pg-form-input {
+    padding-right: 42px;
+}
+
+.pg-toggle-pwd {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    object-fit: contain;
+    user-select: none;
+}
+
+/* ── Tombol Batal & Simpan ── */
+.pg-modal-actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.pg-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pg-btn-batal:hover { opacity: 0.85; color: #fff; text-decoration: none; }
+
+.pg-btn-simpan {
+    flex: 1;
+    height: 44px;
+    background: #0e7651;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.pg-btn-simpan:hover { opacity: 0.85; }

@@ -1,0 +1,176 @@
+/* ==========================================================================
+   CSS RIWAYAT ABSENSI PENGGUNA (ALL USERS ATTENDANCE)
+   ========================================================================== */
+
+/* Card Header */
+.detail-card-header {
+    height: 67px;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-header-left img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.detail-header-left span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+}
+
+.detail-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Tombol Cetak Kehadiran */
+.btn-action-print {
+    background: #0E7651;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    padding: 9px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-action-print:hover {
+    background: #0b5e40;
+}
+
+.btn-action-print img {
+    width: 15px;
+    height: 14px;
+}
+
+/* Card Scrollable Viewport Body */
+.detail-card-body {
+    flex: 1;
+    padding: 30px 46px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+.section-desc {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: #71717A;
+    margin-bottom: 16px;
+}
+
+/* Table Container Responsive */
+.table-container-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #808080;
+    border-radius: 10px;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.attendance-table th {
+    background-color: #E8E7F2;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 12px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #263023;
+    white-space: nowrap;
+    height: 48px;
+}
+
+.attendance-table th:last-child {
+    border-right: none;
+}
+
+.attendance-table td {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #263023;
+    height: 48px;
+}
+
+.attendance-table td:last-child {
+    border-right: none;
+}
+
+.attendance-table tr:last-child td {
+    border-bottom: none;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.role-badge.guru { background-color: #E0F2FE; color: #0369A1; }
+.role-badge.admin { background-color: #FEF3C7; color: #B45309; }
+.role-badge.murid { background-color: #DCFCE7; color: #15803D; }
+
+.status-cell {
+    font-weight: 500;
+}
+.status-cell.tepat {
+    color: #0E7651;
+}
+.status-cell.terlambat {
+    color: #D97706;
+}
+.status-cell.tidak-masuk {
+    color: #DC2626;
+}
+
+@media (max-width: 768px) {
+    .detail-card-header {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+        padding: 15px;
+    }
+    .detail-card-body {
+        padding: 20px 15px;
+    }
+}

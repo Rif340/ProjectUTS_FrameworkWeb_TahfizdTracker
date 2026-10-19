@@ -1,0 +1,494 @@
+/* =============================================================
+   pengaturan-absensi.css — Halaman Pengaturan Batas Absensi
+   Figma Node: 709:72997 (Radius Absensi / Detail Absensi)
+   ============================================================= */
+
+/* ── Flash Messages ── */
+.pa-flash {
+    margin: 16px 36px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+.pa-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.pa-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* ── Card Main Container ── */
+.pa-card-container {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    margin: 20px 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    min-height: 600px;
+}
+
+/* ── Card Header (Figma: Detail Absensi + Gear Icon + Tambah) ── */
+.pa-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 36px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 70px;
+    box-sizing: border-box;
+}
+
+.pa-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pa-head-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.pa-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e774f;
+    white-space: nowrap;
+}
+
+.pa-card-head-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pa-select-show {
+    background: #e4e6ef;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0 34px 0 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #3f4254;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10' fill='none'%3E%3Cpath d='M1.02246 3.30859C1.13967 3.19141 1.29862 3.12558 1.46436 3.12558C1.63009 3.12558 1.78904 3.19141 1.90625 3.30859L5 6.40234L8.09375 3.30859C8.2122 3.19833 8.3688 3.1383 8.53061 3.14115C8.69242 3.144 8.84681 3.2095 8.96131 3.32387C9.0758 3.43824 9.14147 3.59256 9.1445 3.75436C9.14753 3.91616 9.08768 4.07283 8.97754 4.19141L5.44238 7.72754C5.32518 7.84472 5.16623 7.91055 5.00049 7.91055C4.83475 7.91055 4.6758 7.84472 4.55859 7.72754L1.02246 4.19238C0.90528 4.07518 0.83945 3.91623 0.83945 3.75049C0.83945 3.58475 0.90528 3.4258 1.02246 3.30859Z' fill='%233F4254'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    box-sizing: border-box;
+}
+
+.pa-btn-add {
+    background: #0e7651;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+}
+.pa-btn-add:hover {
+    background: #0b5c3e;
+}
+
+/* ── Content Body ── */
+.pa-body {
+    padding: 24px 36px 36px;
+}
+
+.pa-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+/* ── Proportional Table Wrap ── */
+.pa-table-wrap {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    width: 100%;
+}
+
+.pa-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.pa-th {
+    background: #e8e7f2;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    color: #263023;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    height: 48px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+}
+
+.pa-th:last-child {
+    border-right: none;
+}
+
+/* Kolom Proporsional */
+.pa-col-no     { width: 60px; }
+.pa-col-nama   { width: 28%; }
+.pa-col-lat    { width: 20%; }
+.pa-col-lng    { width: 20%; }
+.pa-col-radius { width: 16%; }
+.pa-col-aksi   { width: 16%; }
+
+.pa-td {
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    color: #263023;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    height: 48px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pa-td:last-child {
+    border-right: none;
+}
+
+.pa-td-nama {
+    text-align: left;
+    font-weight: 500;
+}
+
+.pa-tbl tbody tr:last-child .pa-td {
+    border-bottom: none;
+}
+
+.pa-empty {
+    text-align: center;
+    color: #888888;
+    padding: 30px;
+    font-style: italic;
+}
+
+/* ── Tombol Aksi (Trash & Edit) ── */
+.pa-aksi-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.pa-btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease;
+}
+.pa-btn-icon:hover {
+    transform: scale(1.15);
+}
+
+/* ── Modal Overlays ── */
+.pa-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(2px);
+}
+
+.pa-modal-card {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 620px;
+    max-width: 95vw;
+    max-height: 94vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+    padding: 24px 28px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.pa-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eef0f3;
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+}
+
+.pa-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.pa-modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #9ca3af;
+    line-height: 1;
+    padding: 4px;
+    transition: color 0.15s ease;
+}
+.pa-modal-close:hover {
+    color: #374151;
+}
+
+/* ── Form Row: 2 Kolom (Label Kiri, Input Kanan) ── */
+.pa-form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 16px;
+}
+
+.pa-label-col {
+    width: 125px;
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.pa-input-col {
+    flex: 1;
+}
+
+.pa-form-input {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 0 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #1f2937;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pa-form-input:focus {
+    border-color: #0e7651;
+    box-shadow: 0 0 0 3px rgba(14, 118, 81, 0.12);
+}
+.pa-form-input::placeholder {
+    color: #b5b5c3;
+    font-weight: 300;
+}
+
+/* ── Kontainer Peta Leaflet + Floating Button Lokasi ── */
+.pa-map-box {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    overflow: hidden;
+    margin: 16px 0;
+    background: #f8fafc;
+}
+
+.pa-map-inner {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Floating Button "📍 Lokasi Saya" di pojok kanan atas peta */
+.pa-btn-locate-float {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 500;
+    background: #ffffff;
+    color: #0e7651;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+.pa-btn-locate-float:hover {
+    background: #f0fdf4;
+    border-color: #0e7651;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Modal Footer Action Buttons (Persis Screenshot) ── */
+.pa-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Tombol Batal (Pink Muda Soft) */
+.pa-btn-cancel {
+    background: #fed7d7;
+    color: #e53e3e;
+    border: 1px solid #feb2b2;
+    border-radius: 6px;
+    padding: 8px 22px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+.pa-btn-cancel:hover {
+    background: #feb2b2;
+    color: #c53030;
+}
+
+/* Tombol Simpan (Toska Muda Soft) */
+.pa-btn-submit {
+    background: #b2f5ea;
+    color: #234e52;
+    border: 1px solid #81e6d9;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s ease;
+}
+.pa-btn-submit:hover {
+    background: #81e6d9;
+    color: #1d4044;
+}
+
+/* ── Modal Konfirmasi Hapus (Exact Match Tahfizd Tracker) ── */
+.pa-alert-modal {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 400px;
+    max-width: 90vw;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pa-alert-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.pa-alert-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.pa-alert-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 6px;
+}
+
+.pa-alert-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0 0 20px;
+}
+
+.pa-confirm-btns {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.pa-btn-confirm-batal {
+    flex: 1;
+    height: 38px;
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.pa-btn-confirm-batal:hover {
+    background: #b91c1c;
+}
+
+.pa-btn-confirm-setujui {
+    flex: 1;
+    height: 38px;
+    background: #0e7651;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.pa-btn-confirm-setujui:hover {
+    background: #0b5c3e;
+}

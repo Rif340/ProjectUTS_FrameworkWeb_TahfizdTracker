@@ -1,0 +1,379 @@
+/* ==========================================================================
+   CSS RIWAYAT ABSENSI / DETAIL ABSENSI (Figma Node 638:4162)
+   ========================================================================== */
+
+/* Card Header (Figma Node 638:4200) */
+.detail-card-header {
+    height: 67px;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-header-left img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.detail-header-left span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+}
+
+.detail-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Tombol Cetak QR Code (Figma Node 638:4207) */
+.btn-action-qr {
+    background: #FFA800;
+    border: 1px solid #FFA800;
+    border-radius: 10px;
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.btn-action-qr:hover {
+    opacity: 0.9;
+}
+
+.btn-action-qr img {
+    width: 16px;
+    height: 16px;
+}
+
+/* Tombol Cetak Kehadiran (Figma Node 638:4216) */
+.btn-action-print {
+    background: #0E7651;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    padding: 9px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-action-print:hover {
+    background: #0b5e40;
+}
+
+.btn-action-print img {
+    width: 15px;
+    height: 14px;
+}
+
+/* Card Scrollable Viewport Body */
+.detail-card-body {
+    flex: 1;
+    padding: 30px 46px;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    overflow-y: auto;
+}
+
+/* Section 1: Statistik Kehadiran (Figma Node 638:4285) */
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 14px;
+}
+
+.stats-card-box {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 20px;
+    padding: 18px 24px;
+    width: 472px;
+    max-width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.stats-user-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.9);
+    margin-bottom: 12px;
+}
+
+.chart-container-flex {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Donut SVG Chart */
+.donut-chart-box {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    flex-shrink: 0;
+}
+
+.donut-chart-box svg {
+    transform: rotate(-90deg);
+    border-radius: 50%;
+    overflow: visible;
+}
+
+.donut-slice {
+    cursor: pointer;
+    transition: stroke-width 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+}
+
+.donut-slice:hover {
+    stroke-width: 32;
+    filter: drop-shadow(0px 2px 6px rgba(0,0,0,0.25));
+}
+
+.donut-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Google Charts Style Popup / Tooltip */
+.chart-tooltip-popup {
+    position: absolute;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+    pointer-events: none;
+    z-index: 100;
+    min-width: 130px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transform: translateY(4px);
+}
+
+.chart-tooltip-popup.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.tooltip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.tooltip-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+}
+
+.tooltip-value-line {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    padding-left: 14px;
+    line-height: 1.2;
+}
+
+.tooltip-percent {
+    font-weight: 500;
+    color: #6B7280;
+}
+
+.donut-center-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
+}
+
+.donut-center-value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.2;
+}
+
+/* Chart Legends (Figma Node 638:4300) */
+.chart-legends-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-dot.blue { background-color: #638CFF; }
+.legend-dot.green { background-color: #5CD096; }
+.legend-dot.orange { background-color: #FFA800; }
+
+/* Section 2: Riwayat Kehadiran (Figma Node 638:4220) */
+.table-container-responsive {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #808080;
+    border-radius: 10px;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.attendance-table th {
+    background-color: #E8E7F2;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 12px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #263023;
+    white-space: nowrap;
+    height: 48px;
+}
+
+.attendance-table th:last-child {
+    border-right: none;
+}
+
+.attendance-table td {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #263023;
+    height: 48px;
+}
+
+.attendance-table td:last-child {
+    border-right: none;
+}
+
+.attendance-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-cell {
+    font-weight: 500;
+}
+
+.status-cell.tepat {
+    color: #0E7651;
+}
+
+.status-cell.terlambat {
+    color: #D97706;
+}
+
+.status-cell.tidak-masuk {
+    color: #DC2626;
+}
+
+/* Print View Styling */
+@media print {
+    body {
+        background: #FFFFFF !important;
+    }
+    .sidebar, .topbar, .breadcrumb-bar, .detail-header-actions, .modal-overlay {
+        display: none !important;
+    }
+    .main-container {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .content-body, .content-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    .table-container-responsive {
+        border: 1px solid #333333 !important;
+    }
+    .attendance-table th, .attendance-table td {
+        border-color: #333333 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-card-header {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+        padding: 15px;
+    }
+    .detail-card-body {
+        padding: 20px 15px;
+    }
+    .stats-card-box {
+        width: 100%;
+    }
+}

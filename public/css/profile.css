@@ -1,0 +1,545 @@
+/* =============================================================
+   profile.css — Halaman Profile & Perbarui Profile (Figma 621:2785 & 621:2862)
+   ============================================================= */
+
+/* ── Container Profile ── */
+.pf-container {
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Flash Messages ── */
+.pf-flash {
+    margin: 16px 36px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+.pf-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.pf-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* ── Card Header (Figma 621:2897 - Height 79px) ── */
+.pf-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 70px;
+    box-sizing: border-box;
+}
+
+.pf-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pf-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: #0e774f;
+    white-space: nowrap;
+}
+
+.pf-card-head-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Tombol Cetak QR Code (Figma 621:2903) */
+.pf-btn-qr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #0e7651;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.18s;
+}
+.pf-btn-qr:hover {
+    background: #0a5e3f;
+    color: #ffffff;
+}
+
+/* ── Content Body (Figma 667:31368) ── */
+.pf-content {
+    padding: 20px 36px 40px;
+}
+
+/* ── Top Header Profile: Avatar + Welcome + Edit Button (Figma 621:2905) ── */
+.pf-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+}
+
+.pf-user-summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pf-avatar-thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #e4e6ef;
+}
+
+/* Inisial avatar jika belum ada foto profil (seperti di navbar) */
+.pf-avatar-initials {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #0e7651;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    user-select: none;
+    box-shadow: 0 4px 10px rgba(14, 118, 81, 0.2);
+}
+
+.pf-photo-circle-initials {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #0e7651;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(14, 118, 81, 0.25);
+}
+
+.pf-user-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.pf-welcome-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.pf-user-fullname {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #222222;
+    margin: 2px 0 0;
+}
+
+/* Tombol Edit Oval (Figma 621:2911) */
+.pf-btn-edit-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px solid #0e7651;
+    background: transparent;
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: #0e7651;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.18s;
+}
+.pf-btn-edit-badge:hover {
+    background: #0e7651;
+    color: #ffffff;
+}
+.pf-btn-edit-badge:hover svg path {
+    fill: #ffffff;
+}
+
+/* =============================================================
+   VIEW 1: TAMPILAN PROFILE (Figma 621:2785)
+   ============================================================= */
+.pf-detail-card {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 40px 48px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.pf-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 36px;
+    column-gap: 30px;
+}
+
+.pf-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pf-info-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #222222;
+}
+
+.pf-info-value {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #555555;
+    word-break: break-word;
+}
+
+/* Badge Status Aktif (Figma Hijau Centang) */
+.pf-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.pf-status-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0e7651;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 11px;
+}
+
+/* =============================================================
+   VIEW 2: FORM PERBARUI PROFILE (Figma 621:2862)
+   ============================================================= */
+.pf-edit-card {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 34px 40px;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.pf-edit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.pf-edit-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    margin: 0;
+}
+
+.pf-btn-close-edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.18s;
+}
+.pf-btn-close-edit:hover {
+    opacity: 0.6;
+}
+
+/* Foto Formal Section di Tengah Form (Figma 621:2921) */
+.pf-edit-photo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 10px auto 32px;
+}
+
+.pf-photo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f4f5f8;
+    border: 1px solid #e4e6ef;
+}
+
+.pf-btn-upload-label {
+    background: #0e7651;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.18s;
+    user-select: none;
+}
+.pf-btn-upload-label:hover {
+    background: #0a5e3f;
+}
+
+/* Input Fields 2 Kolom (Figma 621:2925) */
+.pf-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    row-gap: 24px;
+    margin-bottom: 40px;
+}
+
+.pf-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pf-form-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #222222;
+}
+
+.pf-required {
+    color: #ef4444;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.pf-form-input {
+    width: 100%;
+    height: 42px;
+    background: #ffffff;
+    border: 1px solid #e4e6ef;
+    border-radius: 10px;
+    padding: 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #3f4254;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.pf-form-input:focus {
+    border-color: #0e7651;
+}
+
+/* Action Buttons (Figma 621:2942) */
+.pf-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.pf-btn-batal-form {
+    flex: 1;
+    max-width: 380px;
+    height: 48px;
+    border: 1px solid #0e7651;
+    background: transparent;
+    color: #0e7651;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+.pf-btn-batal-form:hover {
+    background: #ecfdf5;
+}
+
+.pf-btn-simpan-form {
+    flex: 1;
+    max-width: 380px;
+    height: 48px;
+    background: #0e7651;
+    border: 1px solid #0e7651;
+    color: #ffffff;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+.pf-btn-simpan-form:hover {
+    background: #0a5e3f;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .pf-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .pf-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .pf-form-actions {
+        flex-direction: column;
+    }
+    .pf-btn-batal-form, .pf-btn-simpan-form {
+        max-width: 100%;
+    }
+}
+
+/* =============================================================
+   ALERT POPUP MODAL (BERHASIL / GAGAL — Sesuai Figma & Modul Lainnya)
+   ============================================================= */
+.pf-alert-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pf-alert-box {
+    background: #ffffff;
+    border: 1px solid #10b981;
+    border-radius: 20px;
+    padding: 35px 40px;
+    width: 460px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.pf-alert-box.alert-gagal {
+    border-color: #f87171;
+}
+
+.pf-alert-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.18s;
+}
+.pf-alert-close:hover { opacity: 0.6; }
+.pf-alert-close img { width: 28px; height: 28px; object-fit: contain; }
+
+.pf-alert-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+}
+
+.pf-alert-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000000;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.pf-alert-message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #91919c;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.pf-alert-btn-wrap {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.pf-alert-btn-wrap button,
+.pf-alert-btn-wrap a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.18s;
+}
+.pf-alert-btn-wrap button:hover,
+.pf-alert-btn-wrap a:hover {
+    opacity: 0.88;
+}
+
+.pf-alert-btn-wrap.berhasil button,
+.pf-alert-btn-wrap.berhasil a {
+    background: #0e7651;
+}
+
+.pf-alert-btn-wrap.gagal button,
+.pf-alert-btn-wrap.gagal a {
+    background: #ef4444;
+}
+

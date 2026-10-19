@@ -1,0 +1,1568 @@
+/* =============================================================
+   tahfizd.css — Modul Tahfizd / Daftar Kelas (SDIT At-Taubah)
+   Figma Node: 393:4682
+   ============================================================= */
+
+/* ---------- Card Header (Figma 595:6242) ---------- */
+.tz-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 37px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    gap: 12px;
+    background: #fff;
+}
+.tz-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tz-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+    line-height: normal;
+}
+.tz-card-head-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Tampilkan 10 dropdown (Figma 595:6249) */
+.tz-select-show {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    height: 40px;
+    padding: 0 32px 0 14px;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    outline: none;
+    color: #3F4254;
+    background-color: #E4E6EF;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L5 5.5L9 1.5' stroke='%233F4254' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Tombol + Tambah (Figma 595:6253) */
+.tz-btn-tambah {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    height: 38px;
+    padding: 0 18px;
+    background: #0E7651;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: opacity 0.2s;
+}
+.tz-btn-tambah:hover {
+    opacity: 0.9;
+    color: #fff;
+}
+
+/* ---------- Content Container & Cards List (Figma 616:949) ---------- */
+.tz-content {
+    padding: 33px 37px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 33px;
+    background: #fff;
+    min-height: 400px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ---------- Single Class Card (Figma 597:6528) ---------- */
+.tz-card {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tz-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Top Section (Figma 597:6530) */
+.tz-card-top {
+    background: #0E774F;
+    height: 93px;
+    padding: 11px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    width: 100%;
+}
+.tz-card-top-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+.tz-card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 25px;
+    margin: 0;
+    color: #FFFFFF;
+}
+.tz-card-kelas {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    margin: 0;
+    color: #FFFFFF;
+}
+.tz-card-jadwal {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 22px;
+    margin: 0;
+    color: #FFFFFF;
+}
+.tz-card-cap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.tz-card-cap-img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Card Bottom Section (Figma 597:6547) */
+.tz-card-bottom {
+    background: #FFFFFF;
+    height: 89px;
+    padding: 18px 24px 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+/* Teacher Info (Figma 597:6548) */
+.tz-teacher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tz-teacher-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+.tz-teacher-initials {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    background: #0E774F;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+.tz-teacher-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: normal;
+}
+.tz-teacher-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6C757D;
+    line-height: normal;
+    margin: 0;
+}
+.tz-teacher-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222222;
+    line-height: normal;
+    margin: 0;
+}
+
+/* Actions Row (Figma 597:6553) */
+.tz-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 49px;
+}
+.tz-btn-icon {
+    width: 42px;
+    height: 33px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s, transform 0.15s;
+    box-sizing: border-box;
+}
+.tz-btn-icon:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+.tz-btn-icon svg {
+    display: block;
+    width: 42px;
+    height: 33px;
+}
+.tz-btn-pergi {
+    width: 87px;
+    height: 32px;
+    background: #0E774F;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s, transform 0.15s;
+    box-sizing: border-box;
+}
+.tz-btn-pergi:hover {
+    opacity: 0.9;
+    color: #FFFFFF;
+    transform: scale(1.03);
+}
+
+/* Empty State */
+.tz-empty {
+    text-align: center;
+    color: #6C757D;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    padding: 60px 20px;
+    width: 100%;
+}
+
+/* Pagination */
+.tz-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.tz-pagination a,
+.tz-pagination span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    color: #374151;
+    text-decoration: none;
+}
+.tz-pagination a:hover { background: #F3F4F6; }
+.tz-pagination span.current {
+    background: #0E7651;
+    color: #fff;
+    border-color: #0E7651;
+}
+
+/* =============================================================
+   MODAL STYLES (Tambah, Edit, Hapus)
+   ============================================================= */
+.tz-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.tz-modal-overlay.open {
+    display: flex;
+}
+.tz-modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 40px 36px;
+    width: 90%;
+    max-width: 580px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.tz-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.tz-modal-close img { width: 14px; height: 14px; }
+.tz-modal-logo {
+    display: block;
+    margin: 0 auto 12px;
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+}
+.tz-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #263023;
+    text-align: center;
+    margin: 0 0 6px;
+}
+.tz-modal-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #8C8C8C;
+    text-align: center;
+    margin: 0 0 24px;
+}
+
+.tz-form-row {
+    margin-bottom: 16px;
+}
+.tz-form-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #263023;
+    margin-bottom: 6px;
+    display: block;
+}
+.tz-form-label span { color: #E53E3E; }
+.tz-form-input,
+.tz-form-select {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #E4E6EF;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    background: #fff;
+    color: #3F4254;
+    transition: border-color 0.2s;
+}
+.tz-form-input:focus,
+.tz-form-select:focus { border-color: #0E7651; }
+
+.tz-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.tz-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+}
+.tz-btn-batal {
+    padding: 10px 24px;
+    border: 1px solid #D1D5DB;
+    background: #fff;
+    border-radius: 8px;
+    color: #374151;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+}
+.tz-btn-simpan {
+    padding: 10px 28px;
+    border: none;
+    background: #0E7651;
+    color: #fff;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.tz-btn-simpan:hover { opacity: 0.9; }
+
+/* =============================================================
+   MODAL HAPUS KELAS (Figma Node 599:7804)
+   ============================================================= */
+.tz-del-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.tz-del-overlay.open {
+    display: flex;
+}
+
+.tz-del-modal {
+    background: #FFFFFF;
+    border: 1px solid #6FBE8E;
+    border-radius: 10px;
+    width: 356px;
+    max-width: 90vw;
+    padding: 35px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.tz-del-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tz-del-close img {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.tz-del-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.tz-del-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.35;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+}
+
+.tz-del-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #91919C;
+    text-align: center;
+    margin: 5px 0 0;
+    white-space: normal;
+}
+
+.tz-del-actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tz-del-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: red;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.tz-del-btn-batal:hover {
+    opacity: 0.9;
+}
+
+.tz-del-form {
+    flex: 1;
+    display: flex;
+    margin: 0;
+}
+
+.tz-del-btn-setujui {
+    width: 100%;
+    height: 44px;
+    background: #0E7651;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.tz-del-btn-setujui:hover {
+    opacity: 0.9;
+}
+
+/* =============================================================
+   FORM TAMBAH KELAS MODAL (Figma Node 597:6618)
+   ============================================================= */
+.tz-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+.tz-overlay.open {
+    display: flex;
+}
+
+.tz-form-modal {
+    background: #FFFFFF;
+    border: 1px solid #6FBE8E;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1140px;
+    padding: 35px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: auto;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.tz-fm-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.tz-fm-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.35;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+}
+
+.tz-fm-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #91919C;
+    text-align: center;
+    margin: 5px 0 0;
+}
+
+.tz-form-modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tz-fm-cols {
+    display: flex;
+    gap: 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tz-fm-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+
+.tz-fm-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+}
+
+.tz-fm-label {
+    font-family: 'Arial', 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #000000;
+    margin: 0;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tz-fm-label span {
+    color: red;
+    font-size: 24px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.tz-fm-input,
+.tz-fm-select {
+    width: 341px;
+    height: 42px;
+    background: #FFFFFF;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-family: 'Arial', 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #3F4254;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.tz-fm-input:focus,
+.tz-fm-select:focus {
+    border-color: #0E7651;
+}
+
+.tz-fm-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/icon/figma_arrow_down_bold.svg');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 10px 10px;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.tz-fm-time-wrap {
+    position: relative;
+    width: 341px;
+}
+
+.tz-fm-time-wrap .tz-fm-time {
+    width: 100%;
+    cursor: pointer;
+}
+
+.tz-fm-actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.tz-fm-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: red;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.tz-fm-btn-batal:hover {
+    opacity: 0.9;
+}
+
+.tz-fm-btn-simpan {
+    flex: 1;
+    height: 44px;
+    background: #0E7651;
+    border-radius: 10px;
+    border: none;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.tz-fm-btn-simpan:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+    .tz-fm-cols {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .tz-fm-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .tz-fm-input,
+    .tz-fm-select,
+    .tz-fm-time-wrap {
+        width: 100%;
+    }
+}
+
+/* =============================================================
+   DETAIL TARGET HAFALAN (Figma Node 599:8288)
+   ============================================================= */
+.tz-tg-container {
+    padding: 24px 37px 40px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.tz-tg-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 23px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.tz-tg-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.tz-tg-filter-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #000000;
+    line-height: 1.35;
+    margin: 0;
+}
+
+.tz-tg-select {
+    height: 42px;
+    background: #FFFFFF;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    padding: 0 36px 0 18px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #3F4254;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/icon/figma_arrow_down_bold.svg');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 10px 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.tz-tg-select.surat {
+    width: 244px;
+}
+
+.tz-tg-select.kelas {
+    width: 271px;
+}
+
+.tz-tg-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.35;
+    color: #000000;
+    margin: 0 0 23px 0;
+}
+
+.tz-tg-table-wrap {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+
+.tz-tg-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tz-tg-table th {
+    background: #E8E7F2;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.tz-tg-table th:last-child {
+    border-right: none;
+}
+
+.tz-tg-table td {
+    background: #FFFFFF;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #263023;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.tz-tg-table td:last-child {
+    border-right: none;
+}
+.tz-tg-table tr:last-child td {
+    border-bottom: none;
+}
+
+.tz-tg-btn-hapus {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 41px;
+    height: 42px;
+    transition: transform 0.15s, opacity 0.15s;
+}
+.tz-tg-btn-hapus:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+}
+
+
+
+
+/* =============================================================
+   PROGRES KELAS — Figma Node 603:2185 / 607:7363
+   Prefix: tz-pk-
+   ============================================================= */
+
+/* --- Outer Wrapper --- */
+.tz-pk-wrap {
+    background: #FFFFFF;
+    border: 1px dashed #e5e7eb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* --- Flash Messages --- */
+.tz-pk-flash {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    border-radius: 0;
+}
+.tz-pk-flash--success {
+    background: #DFF6E4;
+    color: #0E7651;
+    border-bottom: 1px solid #b8e6c8;
+}
+.tz-pk-flash--error {
+    background: #FEE2E2;
+    color: #DC2626;
+    border-bottom: 1px solid #f5c6c6;
+}
+
+/* --- Header Bar (Figma 607:7364) --- */
+.tz-pk-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 18px 37px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.tz-pk-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 31px;
+}
+.tz-pk-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+    line-height: normal;
+}
+.tz-pk-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Cetak Hafalan button (Figma 607:7371) */
+.tz-pk-btn-cetak {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #0E7651;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+.tz-pk-btn-cetak:hover { opacity: 0.87; color: #fff; }
+
+/* + Setoran button (Figma 607:7375) */
+.tz-pk-btn-setoran {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    background: #0E7651;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #FFFFFF;
+    white-space: nowrap;
+    cursor: pointer;
+    height: 46px;
+    min-width: 107px;
+    transition: opacity 0.2s;
+}
+.tz-pk-btn-setoran:hover { opacity: 0.87; }
+
+/* --- Info Row (Figma 607:7377) — exactly matching Figma node 607:7378 --*/
+.tz-pk-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 29px;
+    padding: 0 37px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Metadata block (Figma 607:7379) */
+.tz-pk-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 289px;
+    flex-shrink: 0;
+    padding-top: 9px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+.tz-pk-meta-item {
+    display: grid;
+    grid-template-columns: 139px 1fr;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+}
+.tz-pk-meta-label { font-weight: 700; color: #000; }
+.tz-pk-meta-val   { font-weight: 300; color: #55566E; }
+
+/* Vertical divider (Figma 607:7392 & 607:7407: height 99px) */
+.tz-pk-vdivider {
+    width: 1px;
+    height: 99px;
+    background: rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+/* Stat card (Figma 607:7393: 148px, 607:7400: 136px) */
+.tz-pk-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #FFFFFF;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+.tz-pk-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+}
+.tz-pk-stat-icon svg {
+    width: 34px;
+    height: 34px;
+    display: block;
+}
+.tz-pk-stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.tz-pk-stat-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #6C757D;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+.tz-pk-stat-value {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+/* Circular Progress (Figma 607:7408) */
+.tz-pk-circle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 120px;
+}
+.tz-pk-circle-chart {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.tz-pk-circle-svg {
+    width: 100px;
+    height: 100px;
+}
+.tz-pk-circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+}
+.tz-pk-circle-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #71717A;
+    text-align: center;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+/* --- Section --- */
+.tz-pk-section {
+    padding: 0 37px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.tz-pk-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.35;
+}
+
+/* --- Surat Target Grid (Figma 607:7417) --- */
+.tz-pk-surat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px 33px;
+}
+
+/* Surat Card (Figma 607:7418) */
+.tz-pk-surat-card {
+    border: 1px dashed #000;
+    border-radius: 10px;
+    padding: 16px 20px 16px 90px;
+    position: relative;
+    min-height: 130px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
+}
+
+/* Islamic star badge */
+.tz-pk-star-badge {
+    position: absolute;
+    left: 14px;
+    top: 11px;
+    width: 58px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tz-pk-star-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 60px;
+}
+.tz-pk-star-num {
+    position: relative;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1;
+}
+
+.tz-pk-surat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+}
+.tz-pk-surat-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0E7651;
+    line-height: 1.35;
+    margin: 0;
+}
+.tz-pk-surat-ayat {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #71717A;
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* Status badge top right (Figma 607:7427) */
+.tz-pk-badge {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    padding: 6px 10px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+.tz-pk-badge--tuntas   { background: #DFF6E4; color: #078E42; }
+.tz-pk-badge--progress { background: #FDBA74; color: #5F2D18; }
+.tz-pk-badge--belum    { background: #E5E7EB; color: #6C757D; }
+
+/* Lulus text (Figma 607:7434) */
+.tz-pk-lulus-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #71717A;
+    margin: 4px 0;
+    line-height: 1.35;
+}
+
+/* Progress bar (Figma 607:7429) */
+.tz-pk-progbar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2px;
+}
+.tz-pk-progbar-track {
+    flex: 1;
+    height: 10px;
+    background: #E5E7EB;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.tz-pk-progbar-fill {
+    height: 100%;
+    background: #0E7651;
+    border-radius: 50px;
+    min-width: 0;
+}
+.tz-pk-progbar-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #71717A;
+    white-space: nowrap;
+    min-width: 28px;
+}
+
+/* --- Empty state --- */
+.tz-pk-empty {
+    text-align: center;
+    padding: 30px;
+    color: #9CA3AF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    border: 1px dashed #D1D5DB;
+    border-radius: 10px;
+}
+
+/* --- Table (Figma 607:7488, 607:7561) --- */
+.tz-pk-table-wrap {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+.tz-pk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.tz-pk-table thead th {
+    background: #E8E7F2;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.tz-pk-table thead th:last-child { border-right: none; }
+.tz-pk-table tbody td {
+    background: #fff;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-size: 12px;
+    color: #263023;
+    padding: 6px 12px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.tz-pk-table tbody td:last-child { border-right: none; }
+.tz-pk-table tbody tr:last-child td { border-bottom: none; }
+
+/* Action buttons in table */
+.tz-pk-act-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.15s;
+}
+.tz-pk-act-btn:hover { background: rgba(0,0,0,0.06); }
+
+/* Status Text Colors */
+.tz-status-lancar { color: #0E7651; font-weight: 600; }
+.tz-status-perbaikan { color: #D97706; font-weight: 600; }
+.tz-status-mengulang { color: #DC2626; font-weight: 600; }
+.tz-status-menunggu { color: #6C757D; font-weight: 600; }
+
+.tz-lulus-lancar { color: #0E7651; font-weight: 700; }
+.tz-lulus-progress { color: #fdba74; font-weight: 700; }
+.tz-lulus-belum { color: #6c757d; font-weight: 700; }
+
+/* --- Modal overlays --- */
+.tz-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tz-modal-box {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+    overflow: hidden;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+}
+.tz-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid #E5E7EB;
+}
+.tz-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0E774F;
+}
+.tz-modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #6B7280;
+    line-height: 1;
+    padding: 0 4px;
+}
+.tz-modal-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.tz-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #E5E7EB;
+}
+.tz-modal-btn-cancel {
+    padding: 9px 22px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.tz-modal-btn-cancel:hover { background: #F3F4F6; }
+.tz-modal-btn-submit {
+    padding: 9px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #0E7651;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.tz-modal-btn-submit:hover { opacity: 0.88; }
+
+.tz-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.tz-form-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+}
+.tz-req { color: #E11D48; }
+.tz-form-input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    color: #111827;
+    background: #FAFAFA;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+    box-sizing: border-box;
+    appearance: auto;
+}
+.tz-form-input:focus { border-color: #0E7651; background: #fff; }
+
+/* Radio options for Hasil Setoran (Figma 607:8043) */
+.tz-radio-group {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 42px;
+}
+.tz-radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: #000000;
+    user-select: none;
+}
+.tz-radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 50%;
+    outline: none;
+    margin: 0;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+.tz-radio-label input[type="radio"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: #0E7651;
+}
+.tz-radio-label input[type="radio"]:checked {
+    border-color: #0E7651;
+}
+.tz-radio-label input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+

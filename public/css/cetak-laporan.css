@@ -1,0 +1,261 @@
+/* ==========================================================================
+   CSS CETAK LAPORAN REKAPITULASI KEHADIRAN (Figma Node 639:8484)
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Tinos';
+    src: url('/font/Tinos-Regular.ttf') format('truetype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'Tinos';
+    src: url('/font/Tinos-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Tinos', 'Times New Roman', serif;
+    background-color: #E8E9F2;
+    color: #000000;
+    padding: 24px 0 50px 0;
+}
+
+/* Top Action Bar (Hidden when printing) */
+.toolbar-top {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto 20px auto;
+    padding: 12px 20px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Poppins', sans-serif;
+}
+
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-toolbar {
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    transition: opacity 0.2s;
+}
+
+.btn-toolbar:hover {
+    opacity: 0.9;
+}
+
+.btn-print {
+    background-color: #0E7651;
+    color: #FFFFFF;
+}
+
+.btn-excel {
+    background-color: #107C41;
+    color: #FFFFFF;
+}
+
+.btn-back {
+    background-color: #F3F4F6;
+    color: #374151;
+    border: 1px solid #D1D5DB;
+}
+
+/* Printable Paper Sheet (Figma Node 639:8484) */
+.paper-sheet {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 48px 42px 60px 42px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+}
+
+/* 1. KOP SURAT (Figma Node 639:8485) */
+.school-letterhead {
+    position: relative;
+    text-align: center;
+    padding-bottom: 6px;
+}
+
+.school-logo-img {
+    position: absolute;
+    left: 10px;
+    top: 2px;
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+}
+
+.school-name {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.school-address {
+    font-size: 16px;
+    line-height: 1.35;
+    max-width: 680px;
+    margin: 0 auto 12px auto;
+}
+
+/* Dual letterhead rules */
+.rule-thick {
+    height: 3px;
+    background-color: #000000;
+    width: 100%;
+}
+.rule-gap {
+    height: 2px;
+    width: 100%;
+}
+.rule-thin {
+    height: 1px;
+    background-color: #000000;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+/* 2. REPORT HEADING (Figma Node 639:8493) */
+.report-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.report-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: underline;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.report-subtitle {
+    font-size: 17px;
+    line-height: 1.3;
+}
+
+/* 3. REPORT DETAILS / METADATA (Figma Node 639:8496) */
+.report-details-grid {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.details-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.details-row {
+    display: flex;
+    gap: 10px;
+}
+
+.details-label {
+    width: 170px;
+}
+
+/* 4. ATTENDANCE TABLE (Figma Node 639:8515) */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.report-table th, .report-table td {
+    border: 1px solid #000000;
+    padding: 6px 8px;
+}
+
+.report-table th {
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.report-table td {
+    vertical-align: middle;
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.font-bold { font-weight: 700; }
+
+/* 5. AUTHORIZATION / SIGNATURE (Figma Node 639:8574) */
+.signatures-wrapper {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+.signature-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+}
+
+.sig-date { margin-bottom: 2px; }
+.sig-title { margin-bottom: 75px; font-weight: 400; }
+.sig-line {
+    width: 220px;
+    border-bottom: 1px solid #000000;
+    margin: 0 4px;
+}
+.sig-name-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Print Settings */
+@media print {
+    body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+    }
+    .toolbar-top {
+        display: none !important;
+    }
+    .paper-sheet {
+        box-shadow: none !important;
+        padding: 20px 20px 0 20px !important;
+        max-width: 100% !important;
+    }
+    @page {
+        size: A4 portrait;
+        margin: 15mm 10mm;
+    }
+}

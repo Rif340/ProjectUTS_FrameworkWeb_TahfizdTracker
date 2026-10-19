@@ -1,0 +1,396 @@
+/* ==========================================================================
+   CSS HALAMAN LOGIN (GURU, ADMIN, & MURID)
+   Figma Node: Login Guru & Admin, Login Murid
+   ========================================================================== */
+
+/* ==================== LOCAL FONT DEFINITIONS ==================== */
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('/font/PlusJakartaSans-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Poppins';
+    src: url('/font/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* ==================== GLOBAL STYLES ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    background-image: url('/gambar/grid-grid-20x20 1.png');
+    background-repeat: repeat;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ==================== NAVBAR (WIDTH: 100% FULL-WIDTH, HEIGHT: 115px) ==================== */
+.navbar {
+    width: 100%;
+    height: 115px;
+    background: linear-gradient(180deg, #D7EDDF 0%, rgba(215, 237, 223, 0) 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 48px;
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-brand {
+    width: 296px;
+    height: 51px;
+    display: flex;
+    align-items: center;
+    gap: 23px;
+}
+
+.navbar-logo {
+    width: 51px;
+    height: 51px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.navbar-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navbar-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.navbar-subtitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #71717A;
+    line-height: 1.2;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+/* ==================== FOOTER SHAPE (WIDTH: 100% FULL-WIDTH, REDUP KE ATAS) ==================== */
+.footer-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 110px;
+    background: linear-gradient(0deg, #D7EDDF 0%, rgba(215, 237, 223, 0) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ==================== CONTENT AREA & FORM CARD ==================== */
+.content-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 75px 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.login-card {
+    width: 543px;
+    max-width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #6FBE8E;
+    border-radius: 10px;
+    padding: 35px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 24px rgba(111, 190, 142, 0.08);
+    position: relative;
+}
+
+/* Logo Form (95 x 95) */
+.card-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+}
+
+/* Header Texts (461 x 74) */
+.card-header-texts {
+    width: 461px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.card-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #91919C;
+    line-height: 1.3;
+}
+
+/* Error Alert */
+.alert-error {
+    width: 461px;
+    max-width: 100%;
+    padding: 10px 14px;
+    background-color: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    border-radius: 6px;
+    color: #B91C1C;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Form Element Group (461 x ~70) */
+.form-group {
+    width: 461px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-label {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.2;
+}
+
+.form-input {
+    width: 100%;
+    height: 44px;
+    padding: 10px 20px;
+    border: 1px solid #71717A;
+    border-radius: 6px;
+    background: #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-input::placeholder {
+    color: #71717A;
+    opacity: 1;
+}
+
+.form-input:focus {
+    border-color: #0E7651;
+    box-shadow: 0 0 0 2px rgba(14, 118, 81, 0.15);
+}
+
+/* Password Input with Eye Icon */
+.password-container {
+    width: 100%;
+    height: 44px;
+    padding: 0 20px;
+    border: 1px solid #71717A;
+    border-radius: 6px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s;
+}
+
+.password-container:focus-within {
+    border-color: #0E7651;
+    box-shadow: 0 0 0 2px rgba(14, 118, 81, 0.15);
+}
+
+.password-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    height: 100%;
+}
+
+.password-input::placeholder {
+    color: #71717A;
+}
+
+.toggle-password {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    object-fit: contain;
+    margin-left: 10px;
+    user-select: none;
+}
+
+/* Submit Button (461 x 44, Background #0E7651) */
+.btn-submit {
+    width: 461px;
+    max-width: 100%;
+    height: 44px;
+    background: #0E7651;
+    border: none;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 4px;
+}
+
+.btn-submit:hover {
+    background: #09593d;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+    .navbar {
+        height: 90px;
+        padding: 0 20px;
+    }
+
+    .navbar-brand {
+        width: auto;
+        gap: 15px;
+    }
+
+    .navbar-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .navbar-title {
+        font-size: 20px;
+    }
+
+    .navbar-subtitle {
+        font-size: 12px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 480px;
+        padding: 30px 24px;
+        gap: 16px;
+    }
+
+    .card-title {
+        font-size: 28px;
+    }
+
+    .card-subtitle {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        height: 80px;
+        padding: 0 16px;
+    }
+
+    .navbar-title {
+        font-size: 18px;
+    }
+
+    .navbar-subtitle {
+        font-size: 11px;
+    }
+
+    .login-card {
+        padding: 24px 18px;
+        border-radius: 8px;
+    }
+
+    .card-logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .card-title {
+        font-size: 24px;
+    }
+
+    .card-subtitle {
+        font-size: 13px;
+    }
+
+    .form-input, .password-container, .btn-submit {
+        height: 42px;
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+}

@@ -1,0 +1,1296 @@
+/* =============================================================
+   murid.css — Modul Kelola Murid & Tahfizd (SDIT At-Taubah)
+   Prefix: mu-
+   Figma Nodes: 393:4622, 408:2774, 408:3363, 408:3611, 412:4268, 599:8288, 603:1543, 603:1917
+   ============================================================= */
+
+/* ---------- Card Header (Figma 393:4965) ---------- */
+.mu-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 36px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.mu-card-head-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mu-head-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+}
+.mu-card-head-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Tampilkan 10 dropdown (Figma 393:4976) */
+.mu-select-show {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    height: 40px;
+    padding: 0 32px 0 14px;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    outline: none;
+    color: #3F4254;
+    background-color: #E4E6EF;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L5 5.5L9 1.5' stroke='%233F4254' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+}
+.mu-btn-tambah {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    height: 38px;
+    padding: 0 18px;
+    background: #0E7651;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: opacity 0.2s;
+}
+.mu-btn-tambah:hover { opacity: 0.9; color: #fff; }
+
+/* ---------- Filter Bar (Figma Node 393:4993, 393:5005, 402:7719) ---------- */
+.mu-filter-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 37px;
+    padding: 24px 37px 20px;
+    flex-wrap: wrap;
+    background: #fff;
+}
+.mu-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+.mu-filter-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #000;
+    padding-left: 2px;
+}
+.mu-filter-input,
+.mu-filter-select {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    height: 42px;
+    padding: 0 18px;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    outline: none;
+    color: #3F4254;
+    background: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+.mu-filter-input:focus,
+.mu-filter-select:focus { border-color: #0E7651; }
+.mu-filter-input::placeholder { color: #3F4254; opacity: 0.85; }
+
+.mu-filter-input.w-nama  { width: 244px; }
+.mu-filter-input.w-nisn  { width: 237px; }
+.mu-filter-select.w-kelas { 
+    width: 271px; 
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L5 5.5L9 1.5' stroke='%233F4254' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 32px;
+}
+
+/* ---------- Table Container & Table (Figma Node 393:6663) ---------- */
+.mu-content { padding: 8px 36px 36px; }
+.mu-table-wrap {
+    overflow-x: auto;
+    width: 100%;
+}
+.mu-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+    font-size: 12px;
+}
+.mu-table thead tr {
+    background: #E8E7F2;
+    height: 48px;
+}
+.mu-table th {
+    padding: 6px;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    white-space: nowrap;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    box-sizing: border-box;
+}
+.mu-table th:last-child {
+    border-right: none;
+}
+.mu-table tbody tr {
+    background: #FFFFFF;
+    height: 48px;
+    transition: background 0.15s;
+}
+.mu-table tbody tr:hover { background: #FAFAFC; }
+.mu-table td {
+    padding: 6px;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    color: #263023;
+    font-size: 12px;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.mu-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.mu-table td:last-child {
+    border-right: none;
+}
+
+/* Specific cell styles matching Figma 393:6676 */
+.mu-td-no {
+    text-align: center;
+    font-weight: 600;
+}
+.mu-td-nama {
+    text-align: left;
+    padding-left: 30px !important;
+    font-weight: 700;
+}
+.mu-td-nisn {
+    text-align: center;
+    font-weight: 400;
+}
+.mu-td-kelas {
+    text-align: center;
+    font-weight: 400;
+}
+.mu-td-aksi {
+    text-align: center;
+    padding: 6px 15px !important;
+}
+
+/* Action icons row (Figma Node 402:7260: Red trash, Green edit, Blue eye) */
+.mu-table-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+.mu-icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, opacity 0.15s;
+    text-decoration: none;
+}
+.mu-icon-btn:hover {
+    transform: scale(1.2);
+    opacity: 0.85;
+}
+.mu-empty {
+    text-align: center;
+    color: #9CA3AF;
+    padding: 36px 0;
+    font-size: 13px;
+}
+
+/* ---------- Pagination ---------- */
+.mu-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 24px;
+    flex-wrap: wrap;
+}
+.mu-pagination a,
+.mu-pagination span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    color: #374151;
+    text-decoration: none;
+}
+.mu-pagination a:hover { background: #F3F4F6; }
+.mu-pagination span.current {
+    background: #0E7651;
+    color: #fff;
+    border-color: #0E7651;
+}
+
+/* =============================================================
+   MODAL OVERLAY — Form Tambah / Perbarui Murid (Figma Node 408:2774 & 408:3363)
+   ============================================================= */
+.mu-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+.mu-modal-overlay.open { display: flex; }
+.mu-modal {
+    background: #FFFFFF;
+    border: 1px solid #6FBE8E;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1140px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 35px 40px;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: auto;
+}
+.mu-modal form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.mu-modal-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+.mu-modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.35;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+}
+.mu-modal-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.35;
+    color: #91919C;
+    text-align: center;
+    margin: 0;
+}
+.mu-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    transition: opacity 0.2s;
+}
+.mu-modal-close:hover { opacity: 0.7; }
+.mu-modal-close img { width: 20px; height: 20px; }
+
+/* 2-Column Layout matching Figma 408:2774 */
+.mu-form-cols {
+    display: flex;
+    gap: 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mu-form-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
+.mu-form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+}
+.mu-form-row-label {
+    font-family: 'Arial', 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #000000;
+    margin: 0;
+    white-space: nowrap;
+}
+.mu-form-row-label span {
+    color: red;
+    font-size: 24px;
+    line-height: 1;
+    vertical-align: middle;
+}
+.mu-form-input,
+.mu-form-select {
+    width: 341px;
+    height: 42px;
+    background: #FFFFFF;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    padding: 9px 18px;
+    font-family: 'Arial', 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #3F4254;
+    box-sizing: border-box;
+    outline: none;
+}
+.mu-form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/icon/figma_arrow_down_bold.svg');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 10px;
+    padding-right: 32px;
+    cursor: pointer;
+}
+.mu-form-input:focus,
+.mu-form-select:focus {
+    border-color: #0E7651;
+}
+
+/* Password field with eye icon */
+.mu-password-wrap {
+    position: relative;
+    width: 341px;
+}
+.mu-password-wrap .mu-form-input {
+    width: 100%;
+    padding-right: 42px;
+}
+.mu-toggle-pwd {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+}
+.mu-toggle-pwd:hover { opacity: 1; }
+
+/* Murid Search Engine Autocomplete Dropdown */
+.mu-search-murid-wrap {
+    position: relative;
+    width: 341px;
+}
+.mu-murid-search-dropdown {
+    position: absolute;
+    top: 46px;
+    left: 0;
+    width: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    background: #FFFFFF;
+    border: 1px solid #6FBE8E;
+    border-radius: 10px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 1050;
+    box-sizing: border-box;
+    padding: 6px 0;
+}
+.mu-murid-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #F3F4F6;
+    transition: background 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+}
+.mu-murid-item:last-child {
+    border-bottom: none;
+}
+.mu-murid-item:hover,
+.mu-murid-item.active {
+    background: #E8F5E9;
+}
+.mu-murid-item-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1F2937;
+}
+.mu-murid-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #6B7280;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    flex-wrap: wrap;
+}
+.mu-murid-item-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    background: #E0E7FF;
+    color: #3730A3;
+}
+.mu-murid-item-badge.empty {
+    background: #FEF3C7;
+    color: #92400E;
+}
+.mu-murid-no-result {
+    padding: 12px 14px;
+    font-size: 12px;
+    color: #9CA3AF;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.mu-search-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #9CA3AF;
+    display: none;
+    padding: 0;
+    line-height: 1;
+}
+.mu-search-clear-btn:hover {
+    color: #374151;
+}
+
+/* Modal actions (Batal / Simpan) - Exact Figma 408:2774 */
+.mu-modal-actions {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+}
+.mu-btn-batal {
+    flex: 1;
+    height: 44px;
+    background: red;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.mu-btn-batal:hover { opacity: 0.9; }
+
+.mu-btn-simpan {
+    flex: 1;
+    height: 44px;
+    background: #0E7651;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.mu-btn-simpan:hover { opacity: 0.9; }
+
+@media (max-width: 900px) {
+    .mu-form-cols {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .mu-form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .mu-form-input,
+    .mu-form-select,
+    .mu-password-wrap,
+    .mu-search-murid-wrap {
+        width: 100% !important;
+    }
+}
+
+/* =============================================================
+   ALERT MENGHAPUS MODAL (Figma Node 408:3611)
+   ============================================================= */
+.mu-delete-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1100;
+    align-items: center;
+    justify-content: center;
+}
+.mu-delete-overlay.open { display: flex; }
+.mu-delete-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 36px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mu-delete-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.mu-delete-close img { width: 20px; height: 20px; }
+.mu-delete-logo {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+.mu-delete-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 6px;
+}
+.mu-delete-msg {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #91919C;
+    margin: 0 0 24px;
+}
+.mu-delete-btns {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+.mu-delete-btn-batal {
+    flex: 1;
+    height: 42px;
+    background: #EF4444;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.mu-delete-btn-batal:hover { opacity: 0.88; }
+.mu-delete-btn-setujui {
+    flex: 1;
+    height: 42px;
+    background: #0E7651;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.mu-delete-btn-setujui:hover { opacity: 0.88; }
+
+/* =============================================================
+   ALERT BERHASIL / GAGAL OVERLAY (Figma Node 603:1917)
+   ============================================================= */
+.mu-alert-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mu-alert-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 40px;
+    width: 420px;
+    max-width: 90vw;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mu-alert-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    text-decoration: none;
+    padding: 4px;
+}
+.mu-alert-close img { width: 20px; height: 20px; }
+.mu-alert-logo {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+.mu-alert-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 6px;
+}
+.mu-alert-title.gagal { color: #EF4444; }
+.mu-alert-message {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #91919C;
+    margin: 0 0 24px;
+}
+.mu-alert-btn-wrap {
+    width: 100%;
+}
+.mu-alert-btn-wrap a,
+.mu-alert-btn-wrap button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.mu-alert-btn-wrap.berhasil a,
+.mu-alert-btn-wrap.berhasil button {
+    background: #0E7651;
+}
+.mu-alert-btn-wrap.gagal a,
+.mu-alert-btn-wrap.gagal button {
+    background: #EF4444;
+}
+
+/* =============================================================
+   PROGRESS SETORAN MURID PAGE (Figma Node 412:4268)
+   ============================================================= */
+
+/* Header bar with back + print buttons */
+.mu-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid #E5E7EB;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.mu-page-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mu-page-header-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0E7651;
+}
+.mu-btn-back {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: #374151;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.mu-btn-back:hover { background: #F9FAFB; }
+.mu-btn-cetak {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    height: 38px;
+    padding: 0 16px;
+    background: #0E7651;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+.mu-btn-cetak:hover { background: #0a5c3e; color: #fff; }
+.mu-page-header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* =============================================================
+   PROGRES MURID — Figma Node 412:4268
+   Prefix: mu-pk-
+   ============================================================= */
+
+/* --- Outer Wrapper (Figma 459:3141: border dashed #E5E7EB, border-radius 10px, gap 30px) --- */
+.mu-pk-wrap {
+    background: #FFFFFF;
+    border: 1px dashed #E5E7EB;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* --- Top Header Bar (Figma 459:3142) --- */
+.mu-pk-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 18px 37px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.mu-pk-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 31px;
+}
+.mu-pk-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0E774F;
+    line-height: normal;
+}
+.mu-pk-header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Cetak Hafalan button (Figma 459:3148: bg #0E7651, border #E4E6EF, rounded 10px, padding 10px) */
+.mu-pk-btn-cetak {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #0E7651;
+    border: 1px solid #E4E6EF;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+.mu-pk-btn-cetak:hover { opacity: 0.88; color: #FFFFFF; }
+.mu-pk-btn-cetak svg {
+    width: 26px;
+    height: 24px;
+    display: block;
+}
+
+.mu-pk-btn-back {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 14px;
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.mu-pk-btn-back:hover { background: #E5E7EB; }
+
+/* --- Section Container --- */
+.mu-pk-section {
+    padding: 0 37px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+.mu-pk-section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* --- Informasi Pribadi Row (Figma 459:3154: gap 29px, width 900px centered) --- */
+.mu-pk-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 29px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+/* User block (Avatar + Name + Gender + Email) */
+.mu-pk-user-col {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+.mu-pk-avatar-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #0E7651;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+.mu-pk-avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #FFFFFF;
+}
+.mu-pk-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+.mu-pk-user-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #272C2C;
+    line-height: 1.35;
+    margin: 0;
+}
+.mu-pk-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: #55566E;
+    line-height: 1.35;
+}
+.mu-pk-user-meta svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Vertical divider (Figma 459:3171: height 99px, width 1px, rgba(0,0,0,0.2)) */
+.mu-pk-vdivider {
+    width: 1px;
+    height: 99px;
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+/* Metadata block (Guru Pengampu, Kelas, Waktu) (Figma 459:3172: width 289px) */
+.mu-pk-meta-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 289px;
+    flex-shrink: 0;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100px;
+    padding: 10px 0;
+}
+.mu-pk-meta-row {
+    display: grid;
+    grid-template-columns: 139px 1fr;
+    gap: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+}
+.mu-pk-meta-label {
+    font-weight: 700;
+    color: #000000;
+}
+.mu-pk-meta-val {
+    font-weight: 300;
+    color: #55566E;
+    white-space: nowrap;
+}
+
+/* Circular Progress Chart (Figma 459:3183: 159px width, 100px chart) */
+.mu-pk-chart-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 159px;
+    flex-shrink: 0;
+}
+.mu-pk-chart-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.mu-pk-chart-svg {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+}
+.mu-pk-chart-pct {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+}
+.mu-pk-chart-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #71717A;
+    text-align: center;
+    line-height: 1.35;
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* --- Daftar Surat (Figma 459:3190) --- */
+.mu-pk-surat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 19px 33px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Surat Card (Figma 459:3193: border dashed #000, rounded 10px, padding with left space for star) */
+.mu-pk-surat-card {
+    border: 1px dashed #000000;
+    border-radius: 10px;
+    padding: 16px 20px 16px 85px;
+    position: relative;
+    min-height: 138px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2px;
+    background: #FFFFFF;
+}
+
+/* Islamic 8-Point Star Badge (Figma 459:3194: 58px x 61px, left 14.5px, top 11.5px) */
+.mu-pk-star-badge {
+    position: absolute;
+    left: 14px;
+    top: 11px;
+    width: 58px;
+    height: 61px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mu-pk-star-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 61px;
+}
+.mu-pk-star-num {
+    position: relative;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1;
+}
+
+.mu-pk-surat-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0E7651;
+    line-height: 1.35;
+    margin: 0;
+}
+.mu-pk-surat-last {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #71717A;
+    line-height: 1.35;
+    margin: 0;
+}
+
+/* Status badge top right (Figma 459:3202: height 32px, rounded 50px, padding 10px) */
+.mu-pk-badge {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    height: 32px;
+    border-radius: 50px;
+    padding: 0 16px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.mu-pk-badge--selesai  { background: #DFF6E4; color: #078E42; }
+.mu-pk-badge--progress { background: #FDBA74; color: #5F2D18; }
+.mu-pk-badge--belum    { background: #E5E7EB; color: #6C757D; }
+
+/* Ayat lulus text (Figma 459:3209) */
+.mu-pk-lulus-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #71717A;
+    margin: 6px 0 2px;
+    line-height: 1.35;
+}
+
+/* Progress bar (Figma 459:3204) */
+.mu-pk-progbar-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-top: 4px;
+}
+.mu-pk-progbar-track {
+    flex: 1;
+    height: 11px;
+    background: #E5E7EB;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.mu-pk-progbar-fill {
+    height: 100%;
+    background: #0E7651;
+    border-radius: 50px;
+    min-width: 0;
+    transition: width 0.3s;
+}
+.mu-pk-progbar-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #71717A;
+    white-space: nowrap;
+    min-width: 32px;
+    text-align: right;
+}
+
+/* --- Riwayat Setoran Table (Figma 459:3261) --- */
+.mu-pk-table-wrap {
+    border: 1px solid #808080;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+.mu-pk-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+.mu-pk-table th {
+    background: #E8E7F2;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: #263023;
+    text-align: center;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.mu-pk-table th:last-child {
+    border-right: none;
+}
+.mu-pk-table td {
+    background: #FFFFFF;
+    height: 48px;
+    border-bottom: 1px solid #808080;
+    border-right: 1px solid #808080;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #263023;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.mu-pk-table td:last-child {
+    border-right: none;
+}
+.mu-pk-table tr:last-child td {
+    border-bottom: none;
+}
+.mu-pk-table td.mu-pk-col-nama {
+    font-weight: 700;
+    text-align: left;
+    padding-left: 24px;
+}
+.mu-pk-table td.mu-pk-col-no {
+    font-weight: 600;
+    text-align: center;
+}
+.mu-pk-empty {
+    text-align: center;
+    padding: 30px;
+    color: #9CA3AF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .mu-pk-surat-grid {
+        grid-template-columns: 1fr;
+    }
+    .mu-pk-info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .mu-pk-vdivider {
+        display: none;
+    }
+}
