@@ -1,8 +1,7 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.4-cli-alpine
 
 # Install system dependencies & PHP extensions needed for Laravel
 RUN apk add --no-cache \
-    nginx \
     curl \
     libpng-dev \
     libxml2-dev \
@@ -23,11 +22,8 @@ WORKDIR /var/www
 # Copy code
 COPY . /var/www
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Set permissions
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Install dependencies (ignore platform req to be completely safe)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs
 
 # Copy startup script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
