@@ -1,8 +1,4 @@
-/* ==========================================================================
-   CSS ABSENSI KEHADIRAN & SCANNER BARCODE (Figma Node 635:1687 & 637:2471)
-   ========================================================================== */
-
-/* Card Header (Figma Node 635:1746) */
+/* header kartu absensi */
 .absensi-card-header {
     height: 67px;
     padding: 18px 37px;
@@ -67,8 +63,9 @@
     color: #FFFFFF;
     white-space: nowrap;
 }
+/* akhir header kartu absensi */
 
-/* Card Main Body Container (Figma Node 635:1717) */
+/* badan utama kartu absensi */
 .absensi-card-body {
     flex: 1;
     display: flex;
@@ -148,8 +145,9 @@
     color: #F64E60;
     font-weight: 600;
 }
+/* akhir badan utama kartu absensi */
 
-/* Action Buttons (Figma Node 635:1720 & 635:1734) */
+/* tombol aksi absensi masuk dan pulang */
 .btn-absen-action {
     width: 215px;
     height: 62px;
@@ -203,8 +201,9 @@
     line-height: 1.35;
     white-space: nowrap;
 }
+/* akhir tombol aksi absensi masuk dan pulang */
 
-/* ==================== SCANNER MODAL (Figma Node 637:2471) ==================== */
+/* modal pemindai kode qr */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -258,8 +257,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
-    border-radius: 6px;
+    padding: 6px;
+    border-radius: 8px;
     transition: background 0.2s;
 }
 
@@ -268,11 +267,11 @@
 }
 
 .modal-close-btn img {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
 }
 
-/* Scanner Viewport */
+/* area kamera pemindai */
 .scanner-viewport-box {
     width: 100%;
     max-width: 400px;
@@ -298,7 +297,6 @@
     width: 100% !important;
 }
 
-/* Hilangkan kotak putih, garis sudut putih, dan shaded region bawaan library html5-qrcode */
 #qr-shaded-region,
 #qr-shaded-region *,
 #reader__scan_region svg,
@@ -311,7 +309,7 @@
     background: transparent !important;
 }
 
-/* Scanner Corner Target Overlay (Figma Node 637:2606) */
+/* bingkai sudut pemindai */
 .scan-target-overlay {
     position: absolute;
     width: 240px;
@@ -350,6 +348,7 @@
     border-bottom-right-radius: 8px;
 }
 
+/* garis laser animasi pemindai */
 .scan-laser-line {
     position: absolute;
     top: 0;
@@ -367,6 +366,7 @@
     100% { top: 10%; opacity: 0.2; }
 }
 
+/* kontrol dan instruksi pemindai */
 .scanner-controls {
     display: flex;
     flex-direction: column;
@@ -400,8 +400,9 @@
 .upload-qr-btn:hover {
     background: #E5E7EB;
 }
+/* akhir kontrol dan instruksi pemindai */
 
-/* Result State Cards (Berhasil vs Gagal, Figma Node 637:2616) */
+/* kartu hasil pemindaian */
 .scan-result-card {
     display: none;
     flex-direction: column;
@@ -526,8 +527,9 @@
 .btn-result-action:hover {
     opacity: 0.9;
 }
+/* akhir kartu hasil pemindaian */
 
-/* Quick Test Bar */
+/* tombol tes cepat barcode */
 .quick-test-bar {
     background: #F8FAF7;
     border: 1px dashed #6FBE8E;
@@ -562,7 +564,10 @@
     color: #FFFFFF;
     border-color: #F64E60;
 }
+/* akhir tombol tes cepat barcode */
+/* akhir modal pemindai kode qr */
 
+/* responsive tampilan absensi */
 @media (max-width: 992px) {
     .absensi-columns-wrapper {
         flex-direction: column;
@@ -576,3 +581,77 @@
         padding: 20px;
     }
 }
+
+@media (max-width: 640px) {
+    .absensi-card-header {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        height: auto;
+        flex-wrap: wrap;
+    }
+    .header-actions {
+        justify-content: flex-end;
+    }
+    .absensi-card-body {
+        padding: 20px 16px;
+    }
+    .absensi-columns-wrapper {
+        gap: 28px;
+    }
+    .absensi-col {
+        width: 100%;
+        max-width: 300px;
+    }
+    .absensi-icon-box {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 8px;
+    }
+    .absensi-icon-box img {
+        width: 44px;
+        height: 44px;
+    }
+    .absensi-col-title {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+    .absensi-status-badge {
+        font-size: 12px;
+        margin-bottom: 16px;
+        min-height: 32px;
+    }
+    .btn-absen-action {
+        width: 100%;
+        max-width: 280px;
+        height: 48px;
+        font-size: 16px;
+        margin-bottom: 16px;
+        border-radius: 10px;
+    }
+    .absensi-footer-info {
+        font-size: 14px;
+    }
+    .modal-card {
+        width: 92vw;
+        padding: 20px 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .absensi-col-title {
+        font-size: 16px;
+    }
+    .btn-absen-action {
+        height: 44px;
+        font-size: 15px;
+    }
+    .absensi-footer-info {
+        font-size: 13px;
+        white-space: normal;
+        text-align: center;
+    }
+}
+/* akhir responsive tampilan absensi */

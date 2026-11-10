@@ -9,9 +9,7 @@ use Carbon\Carbon;
 
 class HariLiburController extends Controller
 {
-    /**
-     * Tampilkan daftar hari libur.
-     */
+    // daftar hari libur
     public function index()
     {
         $activeYearId = session('active_tahun_akademik_id');
@@ -22,22 +20,21 @@ class HariLiburController extends Controller
         $hariLiburList = $query->get();
         return view('hari-libur.index', compact('hariLiburList'));
     }
+    // akhir daftar hari libur
 
-    /**
-     * Tampilkan form tambah hari libur.
-     */
+    // form tambah hari libur
     public function create()
     {
         $hariLiburList     = HariLibur::with('tahunAkademik')->orderBy('tanggal_mulai', 'desc')->get();
         $tahunAkademikList = TahunAkademik::orderBy('nama_tahun', 'desc')->get();
         return view('hari-libur.create', compact('hariLiburList', 'tahunAkademikList'));
     }
+    // akhir form tambah hari libur
 
-    /**
-     * Simpan hari libur baru.
-     */
+    // simpan hari libur
     public function store(Request $request)
     {
+        // validasi input
         $request->validate([
             'id_tahun_akademik' => 'required|exists:tahun_akademik,id_tahun_akademik',
             'keterangan'        => 'required|string|max:255',
@@ -45,6 +42,7 @@ class HariLiburController extends Controller
             'tanggal_mulai'     => 'required|date',
             'tanggal_selesai'   => 'required|date|after_or_equal:tanggal_mulai',
         ]);
+        // akhir validasi input
 
         $tahun = TahunAkademik::find($request->id_tahun_akademik);
         if ($tahun && !$tahun->is_aktif) {
@@ -53,7 +51,7 @@ class HariLiburController extends Controller
         }
 
         try {
-            // Cek apakah ada data yang overlapping atau sama persis
+            // cek tanggal bertabrakan
             $exists = HariLibur::where('id_tahun_akademik', $request->id_tahun_akademik)
                 ->where(function ($q) use ($request) {
                     $q->where(function ($sub) use ($request) {
@@ -67,7 +65,9 @@ class HariLiburController extends Controller
             if ($exists) {
                 return redirect()->route('hari-libur.gagal')->with('error', 'Data hari libur dengan tanggal bertabrakan atau keterangan yang sama sudah ada.');
             }
+            // akhir cek tanggal bertabrakan
 
+            // simpan data ke database
             HariLibur::create([
                 'id_tahun_akademik' => $request->id_tahun_akademik,
                 'keterangan'        => $request->keterangan,
@@ -76,16 +76,16 @@ class HariLiburController extends Controller
                 'tanggal_selesai'   => $request->tanggal_selesai,
                 'status'            => 'Aktif',
             ]);
+            // akhir simpan data ke database
 
             return redirect()->route('hari-libur.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('hari-libur.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir simpan hari libur
 
-    /**
-     * Tampilkan form edit hari libur (Figma Node 625:4377).
-     */
+    // form edit hari libur
     public function edit($id)
     {
         $hariLibur         = HariLibur::findOrFail($id);
@@ -93,12 +93,12 @@ class HariLiburController extends Controller
         $tahunAkademikList = TahunAkademik::orderBy('nama_tahun', 'desc')->get();
         return view('hari-libur.edit', compact('hariLibur', 'hariLiburList', 'tahunAkademikList'));
     }
+    // akhir form edit hari libur
 
-    /**
-     * Perbarui data hari libur.
-     */
+    // perbarui hari libur
     public function update(Request $request, $id)
     {
+        // validasi input
         $request->validate([
             'id_tahun_akademik' => 'required|exists:tahun_akademik,id_tahun_akademik',
             'keterangan'        => 'required|string|max:255',
@@ -106,6 +106,7 @@ class HariLiburController extends Controller
             'tanggal_mulai'     => 'required|date',
             'tanggal_selesai'   => 'required|date|after_or_equal:tanggal_mulai',
         ]);
+        // akhir validasi input
 
         $tahun = TahunAkademik::find($request->id_tahun_akademik);
         if ($tahun && !$tahun->is_aktif) {
@@ -116,7 +117,7 @@ class HariLiburController extends Controller
         try {
             $hariLibur = HariLibur::findOrFail($id);
 
-            // Cek apakah ada data yang overlapping atau sama persis selain record ini
+            // cek data ganda
             $exists = HariLibur::where('id_tahun_akademik', $request->id_tahun_akademik)
                 ->where('id_hari_libur', '!=', $id)
                 ->where(function ($q) use ($request) {
@@ -131,7 +132,9 @@ class HariLiburController extends Controller
             if ($exists) {
                 return redirect()->route('hari-libur.gagal')->with('error', 'Data hari libur dengan tanggal bertabrakan atau keterangan yang sama sudah ada.');
             }
+            // akhir cek data ganda
 
+            // perbarui ke database
             $hariLibur->update([
                 'id_tahun_akademik' => $request->id_tahun_akademik,
                 'keterangan'        => $request->keterangan,
@@ -139,35 +142,33 @@ class HariLiburController extends Controller
                 'tanggal_mulai'     => $request->tanggal_mulai,
                 'tanggal_selesai'   => $request->tanggal_selesai,
             ]);
+            // akhir perbarui ke database
 
             return redirect()->route('hari-libur.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('hari-libur.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir perbarui hari libur
 
-    /**
-     * Halaman alert berhasil.
-     */
+    // tampilan berhasil
     public function berhasil(Request $request)
     {
         $hariLiburList = HariLibur::with('tahunAkademik')->orderBy('tanggal_mulai', 'desc')->get();
         $isDelete = $request->query('action') === 'delete' || session('action') === 'delete';
         return view('hari-libur.berhasil', compact('hariLiburList', 'isDelete'));
     }
+    // akhir tampilan berhasil
 
-    /**
-     * Halaman alert gagal.
-     */
+    // tampilan gagal
     public function gagal(Request $request)
     {
         $hariLiburList = HariLibur::with('tahunAkademik')->orderBy('tanggal_mulai', 'desc')->get();
         return view('hari-libur.gagal', compact('hariLiburList'));
     }
+    // akhir tampilan gagal
 
-    /**
-     * Hapus hari libur.
-     */
+    // hapus hari libur
     public function destroy($id)
     {
         try {
@@ -183,11 +184,9 @@ class HariLiburController extends Controller
             return redirect()->route('hari-libur.gagal')->with('error', 'Gagal menghapus data hari libur.');
         }
     }
+    // akhir hapus hari libur
 
-    /**
-     * Cek apakah tanggal tertentu adalah hari libur.
-     * Digunakan oleh AbsensiController.
-     */
+    // pengecekan hari libur hari ini
     public static function isTodayHoliday(): bool
     {
         $today = Carbon::today()->toDateString();
@@ -196,4 +195,5 @@ class HariLiburController extends Controller
             ->where('tanggal_selesai', '>=', $today)
             ->exists();
     }
+    // akhir pengecekan hari libur hari ini
 }

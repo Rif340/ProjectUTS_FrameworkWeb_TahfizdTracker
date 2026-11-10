@@ -11,25 +11,22 @@ use App\Models\Murid;
 
 class TargetHafalanController extends Controller
 {
-    /**
-     * Helper: Dapatkan Tahun Akademik aktif (dari session atau DB).
-     */
-     private function getActiveTahunAkademik(): ?\App\Models\TahunAkademik
-     {
-         $activeYearId = session('active_tahun_akademik_id');
-         if ($activeYearId) {
-             $tahun = \App\Models\TahunAkademik::find($activeYearId);
-             if ($tahun) {
-                 return $tahun;
-             }
-         }
+    // ambil tahun akademik aktif
+    private function getActiveTahunAkademik(): ?\App\Models\TahunAkademik
+    {
+        $activeYearId = session('active_tahun_akademik_id');
+        if ($activeYearId) {
+            $tahun = \App\Models\TahunAkademik::find($activeYearId);
+            if ($tahun) {
+                return $tahun;
+            }
+        }
 
-         return \App\Models\TahunAkademik::where('is_aktif', true)->first() ?? \App\Models\TahunAkademik::orderBy('tanggal_mulai', 'desc')->first();
-     }
+        return \App\Models\TahunAkademik::where('is_aktif', true)->first() ?? \App\Models\TahunAkademik::orderBy('tanggal_mulai', 'desc')->first();
+    }
+    // akhir ambil tahun akademik aktif
 
-    /**
-     * Helper: Ambil data target untuk view index/berhasil/gagal.
-     */
+    // data tampilan target hafalan
     private function getTargetViewData(Request $request)
     {
         $perPage     = (int) $request->get('per_page', 10);
@@ -63,20 +60,19 @@ class TargetHafalanController extends Controller
 
         return compact('targetList', 'kelasList', 'suratList', 'perPage', 'searchSurat', 'searchKelas');
     }
+    // akhir data tampilan target hafalan
 
-    /**
-     * Daftar Target Hafalan (Figma Node 599:8288)
-     */
+    // daftar target hafalan
     public function index(Request $request)
     {
         return view('tahfizd.target.index', $this->getTargetViewData($request));
     }
+    // akhir daftar target hafalan
 
-    /**
-     * Simpan target hafalan baru.
-     */
+    // simpan target hafalan
     public function store(Request $request)
     {
+        // validasi input
         $request->validate([
             'id_surat' => 'required|exists:surat,id_surat',
             'id_kelas' => 'required|exists:kelas,id_kelas',
@@ -84,6 +80,7 @@ class TargetHafalanController extends Controller
             'id_surat.required' => 'Pilih surat terlebih dahulu.',
             'id_kelas.required' => 'Pilih kelas terlebih dahulu.',
         ]);
+        // akhir validasi input
 
         try {
             $kelas = Kelas::with('tahunAkademik')->findOrFail($request->id_kelas);
@@ -92,6 +89,7 @@ class TargetHafalanController extends Controller
                     ->with('error', 'Tahun akademik untuk kelas ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
             }
 
+            // cek target ganda
             $exists = TargetHafalan::where('id_surat', $request->id_surat)
                 ->where('id_kelas', $request->id_kelas)
                 ->exists();
@@ -99,22 +97,24 @@ class TargetHafalanController extends Controller
                 return redirect()->route('tahfizd.target.gagal')
                     ->with('error', 'Target hafalan untuk surat ini di kelas tersebut sudah ada.');
             }
+            // akhir cek target ganda
 
+            // simpan ke database
             TargetHafalan::create([
                 'id_surat' => $request->id_surat,
                 'id_kelas' => $request->id_kelas,
                 'status'   => 'aktif',
             ]);
+            // akhir simpan ke database
 
             return redirect()->route('tahfizd.target.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('tahfizd.target.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir simpan target hafalan
 
-    /**
-     * Hapus target hafalan.
-     */
+    // hapus target hafalan
     public function destroy($id)
     {
         try {
@@ -129,10 +129,9 @@ class TargetHafalanController extends Controller
             return redirect()->route('tahfizd.target.gagal')->with('error', 'Gagal menghapus target hafalan.');
         }
     }
+    // akhir hapus target hafalan
 
-    /**
-     * Alert berhasil (Figma Node 603:2185).
-     */
+    // tampilan berhasil
     public function berhasil(Request $request)
     {
         $isDelete = $request->query('action') === 'delete';
@@ -140,18 +139,16 @@ class TargetHafalanController extends Controller
         $data['isDelete'] = $isDelete;
         return view('tahfizd.target.berhasil', $data);
     }
+    // akhir tampilan berhasil
 
-    /**
-     * Alert gagal.
-     */
+    // tampilan gagal
     public function gagal(Request $request)
     {
         return view('tahfizd.target.gagal', $this->getTargetViewData($request));
     }
+    // akhir tampilan gagal
 
-    /**
-     * Cetak Rekap Per Kelas (Figma Node 439:3678)
-     */
+    // cetak rekap per kelas
     public function cetakKelas($kelasId)
     {
         $kelas      = Kelas::with(['guru.user', 'tahunAkademik'])->findOrFail($kelasId);
@@ -236,4 +233,5 @@ class TargetHafalanController extends Controller
             'jumlahTargetTuntas'
         ));
     }
+    // akhir cetak rekap per kelas
 }

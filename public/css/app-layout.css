@@ -1,9 +1,4 @@
-/* ==========================================================================
-   CSS LAYOUT APLIKASI (SIDEBAR, NAVBAR, TOPBAR, KONTEN)
-   Figma Node 618:960, 618:939, 618:955, 618:1591, 393:4769
-   ========================================================================== */
-
-/* ==================== FONTS ==================== */
+/* font */
 @font-face {
     font-family: 'Plus Jakarta Sans';
     src: url('/font/PlusJakartaSans-Regular.ttf') format('truetype');
@@ -24,7 +19,6 @@
     src: url('/font/PlusJakartaSans-Bold.ttf') format('truetype');
     font-weight: 700;
 }
-
 @font-face {
     font-family: 'Poppins';
     src: url('/font/Poppins-Light.ttf') format('truetype');
@@ -40,7 +34,10 @@
     src: url('/font/Poppins-Medium.ttf') format('truetype');
     font-weight: 500;
 }
+/* akhir font */
 
+
+/* reset & body */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -55,8 +52,10 @@ body {
     display: flex;
     overflow-x: hidden;
 }
+/* akhir reset & body */
 
-/* ==================== SIDEBAR (247px Width, Figma Node 618:960) ==================== */
+
+/* sidebar */
 .sidebar {
     width: 247px;
     background: #FFFFFF;
@@ -70,7 +69,6 @@ body {
     z-index: 20;
 }
 
-/* Sidebar Header (Figma Node 618:961) */
 .sidebar-header {
     height: 82px;
     padding: 20px;
@@ -109,8 +107,10 @@ body {
     line-height: 1.35;
     white-space: nowrap;
 }
+/* akhir sidebar */
 
-/* Sidebar Menu Items */
+
+/* menu navigasi */
 .sidebar-menu {
     display: flex;
     flex-direction: column;
@@ -179,8 +179,10 @@ body {
     height: 16px;
     object-fit: contain;
 }
+/* akhir menu navigasi */
 
-/* Submenu Accordion (Figma Node 618:1591) */
+
+/* submenu */
 .submenu-container {
     display: none;
     flex-direction: column;
@@ -217,16 +219,20 @@ body {
     color: #0E7651;
     font-weight: 500;
 }
+/* akhir submenu */
 
-/* ==================== MAIN CONTENT WRAPPER ==================== */
+
+/* wrapper konten utama */
 .main-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
+/* akhir wrapper konten utama */
 
-/* Top Header / Topbar / Navbar (Figma Node 618:939, Height: 82px) */
+
+/* topbar */
 .topbar {
     height: 82px;
     background: #FFFFFF;
@@ -253,8 +259,10 @@ body {
     align-items: center;
     gap: 20px;
 }
+/* akhir topbar */
 
-/* Academic Year Dropdown Badge (Figma Node 393:4826 & 393:4827) */
+
+/* dropdown tahun akademik */
 .academic-year-dropdown-wrap {
     position: relative;
     display: inline-block;
@@ -286,7 +294,6 @@ body {
     object-fit: contain;
 }
 
-/* Dropdown Menu (Figma Node 393:4827) */
 .academic-year-menu {
     display: none;
     position: absolute;
@@ -346,8 +353,10 @@ body {
     object-fit: contain;
     flex-shrink: 0;
 }
+/* akhir dropdown tahun akademik */
 
-/* User Profile Pill (Figma Node 618:941) */
+
+/* profil pengguna */
 .user-profile-badge {
     display: flex;
     align-items: center;
@@ -390,8 +399,10 @@ body {
     line-height: 1.2;
     margin-top: 2px;
 }
+/* akhir profil pengguna */
 
-/* Logout Button (Figma Node 618:947) */
+
+/* tombol logout */
 .btn-logout {
     height: 34px;
     background: #EF4444;
@@ -418,8 +429,10 @@ body {
 .btn-logout:hover {
     background: #DC2626;
 }
+/* akhir tombol logout */
 
-/* Sub-Header / Breadcrumb Bar (Figma Node 618:955, Height: 60px) */
+
+/* breadcrumb */
 .breadcrumb-bar {
     height: 60px;
     background: #FFFFFF;
@@ -472,8 +485,10 @@ body {
     font-weight: 500;
     color: #71717A;
 }
+/* akhir breadcrumb */
 
-/* Main Content Viewport (Figma Node 618:938, Width: 982px, Height: 645px) */
+
+/* konten halaman */
 .content-body {
     flex: 1;
     padding: 24px 35px;
@@ -492,33 +507,173 @@ body {
     display: flex;
     flex-direction: column;
 }
+/* akhir konten halaman */
 
-/* Responsive */
+
+/* tombol navigasi seluler */
+.btn-hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.btn-close-sidebar-mobile {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: #64748B;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 4px 8px;
+}
+
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.25s ease;
+}
+.sidebar-backdrop.active {
+    display: block;
+}
+/* akhir tombol navigasi seluler */
+
+/* responsive tablet ke bawah */
 @media (max-width: 992px) {
+    .btn-hamburger {
+        display: inline-flex;
+    }
+
+    .btn-close-sidebar-mobile {
+        display: block;
+    }
+
     .sidebar {
-        width: 70px;
+        position: fixed;
+        top: 0;
+        left: -270px;
+        width: 260px;
+        height: 100vh;
+        z-index: 999;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.15);
+        overflow-y: auto;
     }
-    .sidebar-header-text, .sidebar-subtitle, .menu-item span, .menu-arrow, .submenu-container {
-        display: none !important;
+
+    .sidebar.mobile-open {
+        left: 0;
     }
-    .sidebar-header {
-        justify-content: center;
-        padding: 15px 0;
-    }
-    .menu-item {
-        justify-content: center;
-        padding: 0;
-    }
-    .topbar {
-        padding: 0 16px;
-    }
+
     .school-info {
         display: none;
     }
+
+    .topbar {
+        padding: 0 16px;
+        height: 68px;
+    }
+
     .breadcrumb-bar {
         padding: 0 16px;
+        height: 48px;
     }
+
     .content-body {
         padding: 16px;
     }
 }
+
+@media (max-width: 640px) {
+    .topbar {
+        padding: 0 12px;
+        height: 64px;
+    }
+
+    .topbar-right {
+        gap: 10px;
+    }
+
+    .badge-academic-year {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .badge-academic-year span {
+        max-width: 75px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .user-info-text {
+        display: none;
+    }
+
+    .user-profile-badge {
+        padding: 4px;
+    }
+
+    .btn-logout span {
+        display: none;
+    }
+
+    .btn-logout {
+        padding: 6px 10px;
+        min-width: 38px;
+        justify-content: center;
+    }
+
+    .breadcrumb-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: auto;
+        padding: 10px 12px;
+        gap: 4px;
+    }
+
+    .current-datetime {
+        font-size: 11px;
+    }
+
+    .content-body {
+        padding: 12px 10px;
+    }
+}
+/* akhir responsive tablet ke bawah */
+
+
+/* standardisasi tabel global */
+table {
+    width: 100% !important;
+}
+
+table th,
+table td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+table td .mu-table-actions,
+table td .pg-aksi-cell,
+table td .hk-aksi-cell-grid,
+table td .hl-aksi-cell-grid,
+table td .pa-aksi-container,
+table td .tz-tg-btn-hapus,
+table td .tz-pk-act-btn {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+}
+/* akhir standardisasi tabel global */

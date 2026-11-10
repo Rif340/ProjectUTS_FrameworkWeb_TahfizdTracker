@@ -1,9 +1,4 @@
-/* ==========================================================================
-   CSS HALAMAN LOGIN (GURU, ADMIN, & MURID)
-   Figma Node: Login Guru & Admin, Login Murid
-   ========================================================================== */
-
-/* ==================== LOCAL FONT DEFINITIONS ==================== */
+/* font */
 @font-face {
     font-family: 'Plus Jakarta Sans';
     src: url('/font/PlusJakartaSans-Regular.ttf') format('truetype');
@@ -22,7 +17,6 @@
     font-weight: 700;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'Poppins';
     src: url('/font/Poppins-Regular.ttf') format('truetype');
@@ -41,8 +35,10 @@
     font-weight: 700;
     font-style: normal;
 }
+/* akhir font */
 
-/* ==================== GLOBAL STYLES ==================== */
+
+/* reset & body */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -62,8 +58,10 @@ html, body {
     position: relative;
     overflow-x: hidden;
 }
+/* akhir reset & body */
 
-/* ==================== NAVBAR (WIDTH: 100% FULL-WIDTH, HEIGHT: 115px) ==================== */
+
+/* navbar */
 .navbar {
     width: 100%;
     height: 115px;
@@ -114,8 +112,10 @@ html, body {
     margin-top: 2px;
     white-space: nowrap;
 }
+/* akhir navbar */
 
-/* ==================== FOOTER SHAPE (WIDTH: 100% FULL-WIDTH, REDUP KE ATAS) ==================== */
+
+/* dekorasi bawah halaman */
 .footer-shape {
     position: absolute;
     bottom: 0;
@@ -127,8 +127,10 @@ html, body {
     pointer-events: none;
     z-index: 1;
 }
+/* akhir dekorasi bawah halaman */
 
-/* ==================== CONTENT AREA & FORM CARD ==================== */
+
+/* area tengah halaman */
 .content-area {
     flex: 1;
     display: flex;
@@ -138,7 +140,10 @@ html, body {
     position: relative;
     z-index: 5;
 }
+/* akhir area tengah halaman */
 
+
+/* kartu form login */
 .login-card {
     width: 543px;
     max-width: 100%;
@@ -154,14 +159,12 @@ html, body {
     position: relative;
 }
 
-/* Logo Form (95 x 95) */
 .card-logo {
     width: 95px;
     height: 95px;
     object-fit: contain;
 }
 
-/* Header Texts (461 x 74) */
 .card-header-texts {
     width: 461px;
     max-width: 100%;
@@ -187,8 +190,10 @@ html, body {
     color: #91919C;
     line-height: 1.3;
 }
+/* akhir kartu form login */
 
-/* Error Alert */
+
+/* pesan error login */
 .alert-error {
     width: 461px;
     max-width: 100%;
@@ -203,8 +208,10 @@ html, body {
     align-items: center;
     gap: 8px;
 }
+/* akhir pesan error login */
 
-/* Form Element Group (461 x ~70) */
+
+/* field input form */
 .form-group {
     width: 461px;
     max-width: 100%;
@@ -245,8 +252,10 @@ html, body {
     border-color: #0E7651;
     box-shadow: 0 0 0 2px rgba(14, 118, 81, 0.15);
 }
+/* akhir field input form */
 
-/* Password Input with Eye Icon */
+
+/* input password dengan tombol lihat */
 .password-container {
     width: 100%;
     height: 44px;
@@ -289,8 +298,10 @@ html, body {
     margin-left: 10px;
     user-select: none;
 }
+/* akhir input password dengan tombol lihat */
 
-/* Submit Button (461 x 44, Background #0E7651) */
+
+/* tombol masuk */
 .btn-submit {
     width: 461px;
     max-width: 100%;
@@ -314,8 +325,10 @@ html, body {
 .btn-submit:active {
     transform: scale(0.99);
 }
+/* akhir tombol masuk */
 
-/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* responsive */
 @media (max-width: 768px) {
     .navbar {
         height: 90px;
@@ -394,3 +407,4 @@ html, body {
         padding: 8px 14px;
     }
 }
+/* akhir responsive */

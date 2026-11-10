@@ -66,7 +66,7 @@
         </table>
     </div>
 
-    {{-- Modal Overlay Form (Figma Node 625:3386) --}}
+    <!-- jendela formulir tambah hari libur -->
     <div class="hl-overlay">
         <div class="hl-form-modal">
             {{-- Logo --}}
@@ -85,7 +85,7 @@
                 <div class="hl-form-grid">
                     {{-- Kolom Kiri --}}
                     <div class="hl-form-col">
-                        {{-- Tahun Akademik (Figma 625:4042) --}}
+                        <!-- pilihan tahun akademik -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tahun Akademik <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        {{-- Keterangan Libur (Figma 625:4023) --}}
+                        <!-- masukan keterangan libur -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Keterangan Libur <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        {{-- Tipe Libur (Figma 625:4028) --}}
+                        <!-- pilihan jenis libur -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tipe Libur <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -124,7 +124,7 @@
 
                     {{-- Kolom Kanan --}}
                     <div class="hl-form-col">
-                        {{-- Tanggal Mulai (Figma 625:4049) --}}
+                        <!-- masukan tanggal mulai -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tanggal Mulai <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -135,7 +135,7 @@
                             </div>
                         </div>
 
-                        {{-- Tanggal Selesai (Figma 625:4114) --}}
+                        <!-- masukan tanggal selesai -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tanggal Selesai <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -148,7 +148,7 @@
                     </div>
                 </div>
 
-                {{-- Action Buttons (Figma 625:4062) --}}
+                <!-- tombol aksi simpan -->
                 <div class="hl-form-btns">
                     <a href="{{ route('hari-libur.index') }}" class="hl-btn-batal">Batal</a>
                     <button type="submit" class="hl-btn-simpan">Simpan</button>

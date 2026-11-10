@@ -1,13 +1,4 @@
-/* =============================================================
-   hari-kerja.css  — Halaman Hari Kerja & Modals (100% Sesuai Figma)
-   Figma Nodes:
-   - 618:1003 (Detail Hari Kerja)
-   - 625:3576 (Form Tambah Hari Kerja)
-   - 625:4612 (Form Edit Hari Kerja)
-   - 657:9841 (Alert Menghapus Hari Kerja)
-   ============================================================= */
-
-/* ── Flash Messages ── */
+/* flash message sukses dan error */
 .hk-flash {
     margin: 16px 36px 0;
     padding: 12px 18px;
@@ -17,8 +8,10 @@
 }
 .hk-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .hk-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+/* akhir flash message sukses dan error */
 
-/* ── Card Header (Figma 620:1704, Height: ~79px) ── */
+
+/* header kartu */
 .hk-card-head {
     display: flex;
     align-items: center;
@@ -55,8 +48,10 @@
     align-items: center;
     gap: 16px;
 }
+/* akhir header kartu */
 
-/* Dropdown "Tampilkan 10" */
+
+/* dropdown jumlah tampil */
 .hk-select-show {
     background: #e4e6ef;
     border: 1px solid #e4e6ef;
@@ -79,8 +74,10 @@
     display: inline-flex;
     align-items: center;
 }
+/* akhir dropdown jumlah tampil */
 
-/* Tombol + Tambah */
+
+/* tombol tambah hari kerja */
 .hk-btn-add {
     display: inline-flex;
     align-items: center;
@@ -106,8 +103,10 @@
     color: #ffffff;
     text-decoration: none;
 }
+/* akhir tombol tambah hari kerja */
 
-/* ── Table Wrap (Figma 620:1796, width: 896px) ── */
+
+/* tabel data hari kerja */
 .hk-table-wrap {
     margin: 36px 36px 36px;
     border: 1px solid #808080;
@@ -115,14 +114,12 @@
     overflow: auto;
 }
 
-/* ── Table ── */
 .hk-tbl {
     width: 100%;
     border-collapse: collapse;
     min-width: 720px;
 }
 
-/* Header row (Height: 48px, bg: #e8e7f2) */
 .hk-th {
     background: #e8e7f2;
     border-bottom: 1px solid #808080;
@@ -142,7 +139,6 @@
 .hk-th-jam2 { width: 156px; }
 .hk-th-aksi { width: 225px; }
 
-/* Body rows (Height: 48px, bg: #ffffff) */
 .hk-td {
     background: #ffffff;
     border-bottom: 1px solid #808080;
@@ -160,8 +156,7 @@
 .hk-td-no { font-weight: 600; }
 .hk-td-hari {
     font-weight: 700;
-    text-align: left;
-    padding-left: 30px;
+    text-align: center;
 }
 
 .hk-td-aksi {
@@ -208,10 +203,10 @@
     padding: 24px;
     text-align: center;
 }
+/* akhir tabel data hari kerja */
 
-/* =============================================================
-   MODAL OVERLAY (Backdrop Dimmed: rgba(0,0,0,0.25))
-   ============================================================= */
+
+/* overlay latar modal */
 .hk-overlay {
     position: fixed;
     inset: 0;
@@ -223,10 +218,10 @@
     padding: 20px;
     box-sizing: border-box;
 }
+/* akhir overlay latar modal */
 
-/* =============================================================
-   FORM MODAL (Figma Node 625:3576 / 625:3798, Width: 544px)
-   ============================================================= */
+
+/* modal form tambah dan edit hari kerja */
 .hk-form-modal {
     background: #ffffff;
     border: 1px solid #6fbe8e;
@@ -271,7 +266,6 @@
     margin: 0;
 }
 
-/* Fields Single Column Stack (Figma 625:3804) */
 .hk-form-fields {
     display: flex;
     flex-direction: column;
@@ -281,7 +275,6 @@
     box-sizing: border-box;
 }
 
-/* Row Form Field */
 .hk-field-row {
     display: flex;
     align-items: center;
@@ -329,7 +322,6 @@
     border-color: #0e7651;
 }
 
-
 .hk-time-icon-box {
     position: absolute;
     right: 12px;
@@ -347,7 +339,6 @@
     height: 20px;
 }
 
-/* Select dengan ikon ep:arrow-down-bold */
 .hk-select {
     width: 100%;
     height: 42px;
@@ -371,7 +362,6 @@
     border-color: #0e7651;
 }
 
-/* Action Buttons (Batal & Simpan, Figma 625:3844) */
 .hk-form-btns {
     display: flex;
     gap: 20px;
@@ -421,10 +411,10 @@
 .hk-btn-simpan:hover {
     opacity: 0.88;
 }
+/* akhir modal form tambah dan edit hari kerja */
 
-/* =============================================================
-   ALERT / CONFIRM MODAL (Figma Node 657:9841 & 654:7404)
-   ============================================================= */
+
+/* modal notifikasi dan konfirmasi hapus */
 .hk-alert-modal {
     background: #ffffff;
     border-radius: 10px;
@@ -501,7 +491,6 @@
 .hk-alert-close:hover { opacity: 0.7; }
 .hk-alert-close img { width: 32px; height: 32px; object-fit: contain; }
 
-/* ── Delete Confirmation Buttons (Figma Node 657:9841) ── */
 .hk-confirm-btns {
     display: flex;
     gap: 20px;
@@ -546,3 +535,31 @@
 .hk-btn-confirm-setujui:hover {
     opacity: 0.88;
 }
+/* akhir modal notifikasi dan konfirmasi hapus */
+
+/* responsive hari kerja */
+@media (max-width: 768px) {
+    .hk-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: auto;
+        flex-wrap: wrap;
+    }
+    .hk-content {
+        padding: 16px 14px;
+    }
+    .hk-modal-card,
+    .hk-alert-card {
+        width: 92vw;
+        max-width: 500px;
+        padding: 24px 18px;
+    }
+    .hk-form-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+/* akhir responsive hari kerja */

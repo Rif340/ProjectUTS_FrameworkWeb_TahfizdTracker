@@ -1,10 +1,4 @@
-/* =============================================================
-   murid.css — Modul Kelola Murid & Tahfizd (SDIT At-Taubah)
-   Prefix: mu-
-   Figma Nodes: 393:4622, 408:2774, 408:3363, 408:3611, 412:4268, 599:8288, 603:1543, 603:1917
-   ============================================================= */
-
-/* ---------- Card Header (Figma 393:4965) ---------- */
+/* header kartu murid */
 .mu-card-head {
     display: flex;
     align-items: center;
@@ -32,7 +26,7 @@
     flex-wrap: wrap;
 }
 
-/* Tampilkan 10 dropdown (Figma 393:4976) */
+/* dropdown tampilkan entri */
 .mu-select-show {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
@@ -55,6 +49,8 @@
     display: inline-flex;
     align-items: center;
 }
+
+/* tombol tambah murid */
 .mu-btn-tambah {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
@@ -75,8 +71,9 @@
     transition: opacity 0.2s;
 }
 .mu-btn-tambah:hover { opacity: 0.9; color: #fff; }
+/* akhir header kartu murid */
 
-/* ---------- Filter Bar (Figma Node 393:4993, 393:5005, 402:7719) ---------- */
+/* bar penyaring data murid */
 .mu-filter-bar {
     display: flex;
     align-items: flex-end;
@@ -129,8 +126,9 @@
     background-position: right 14px center;
     padding-right: 32px;
 }
+/* akhir bar penyaring data murid */
 
-/* ---------- Table Container & Table (Figma Node 393:6663) ---------- */
+/* tabel data murid */
 .mu-content { padding: 8px 36px 36px; }
 .mu-table-wrap {
     overflow-x: auto;
@@ -188,14 +186,13 @@
     border-right: none;
 }
 
-/* Specific cell styles matching Figma 393:6676 */
+/* format kolom tabel murid */
 .mu-td-no {
     text-align: center;
     font-weight: 600;
 }
 .mu-td-nama {
-    text-align: left;
-    padding-left: 30px !important;
+    text-align: center;
     font-weight: 700;
 }
 .mu-td-nisn {
@@ -211,7 +208,7 @@
     padding: 6px 15px !important;
 }
 
-/* Action icons row (Figma Node 402:7260: Red trash, Green edit, Blue eye) */
+/* tombol aksi tabel murid */
 .mu-table-actions {
     display: flex;
     align-items: center;
@@ -240,8 +237,9 @@
     padding: 36px 0;
     font-size: 13px;
 }
+/* akhir tabel data murid */
 
-/* ---------- Pagination ---------- */
+/* pagination murid */
 .mu-pagination {
     display: flex;
     justify-content: center;
@@ -265,10 +263,9 @@
     color: #fff;
     border-color: #0E7651;
 }
+/* akhir pagination murid */
 
-/* =============================================================
-   MODAL OVERLAY — Form Tambah / Perbarui Murid (Figma Node 408:2774 & 408:3363)
-   ============================================================= */
+/* modal form murid */
 .mu-modal-overlay {
     display: none;
     position: fixed;
@@ -337,18 +334,25 @@
 }
 .mu-modal-close {
     position: absolute;
-    top: 20px;
-    right: 24px;
+    top: 18px;
+    right: 22px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 6px;
-    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background-color 0.2s, opacity 0.2s;
 }
-.mu-modal-close:hover { opacity: 0.7; }
-.mu-modal-close img { width: 20px; height: 20px; }
+.mu-modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    opacity: 0.85;
+}
+.mu-modal-close img { width: 28px; height: 28px; display: block; }
 
-/* 2-Column Layout matching Figma 408:2774 */
+/* tata letak kolom formulir */
 .mu-form-cols {
     display: flex;
     gap: 100px;
@@ -365,7 +369,7 @@
 .mu-form-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     gap: 16px;
 }
@@ -375,6 +379,11 @@
     color: #000000;
     margin: 0;
     white-space: nowrap;
+    width: 175px;
+    min-width: 175px;
+    max-width: 175px;
+    flex-shrink: 0;
+    display: inline-block;
 }
 .mu-form-row-label span {
     color: red;
@@ -384,7 +393,9 @@
 }
 .mu-form-input,
 .mu-form-select {
-    width: 341px;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
     height: 42px;
     background: #FFFFFF;
     border: 1px solid #E4E6EF;
@@ -412,10 +423,12 @@
     border-color: #0E7651;
 }
 
-/* Password field with eye icon */
+/* bidang kata sandi */
 .mu-password-wrap {
     position: relative;
-    width: 341px;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
 }
 .mu-password-wrap .mu-form-input {
     width: 100%;
@@ -435,10 +448,12 @@
 }
 .mu-toggle-pwd:hover { opacity: 1; }
 
-/* Murid Search Engine Autocomplete Dropdown */
+/* dropdown pencarian murid */
 .mu-search-murid-wrap {
     position: relative;
-    width: 341px;
+    flex: 1;
+    width: 100%;
+    min-width: 0;
 }
 .mu-murid-search-dropdown {
     position: absolute;
@@ -524,7 +539,7 @@
     color: #374151;
 }
 
-/* Modal actions (Batal / Simpan) - Exact Figma 408:2774 */
+/* tombol aksi modal murid */
 .mu-modal-actions {
     display: flex;
     gap: 20px;
@@ -570,6 +585,26 @@
 .mu-btn-simpan:hover { opacity: 0.9; }
 
 @media (max-width: 900px) {
+    .mu-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .mu-filter-bar {
+        padding: 16px 14px;
+        gap: 12px;
+    }
+    .mu-filter-group {
+        width: 100%;
+    }
+    .mu-modal {
+        width: 92vw;
+        max-width: 500px;
+        padding: 24px 16px;
+    }
     .mu-form-cols {
         flex-direction: column;
         gap: 20px;
@@ -577,6 +612,10 @@
     .mu-form-row {
         flex-direction: column;
         align-items: flex-start;
+        gap: 6px;
+    }
+    .mu-form-label {
+        width: 100%;
     }
     .mu-form-input,
     .mu-form-select,
@@ -584,11 +623,21 @@
     .mu-search-murid-wrap {
         width: 100% !important;
     }
+    .mu-delete-box,
+    .mu-alert-box {
+        width: 92vw;
+        max-width: 420px;
+        padding: 24px 16px;
+    }
+    .mu-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
 }
+/* akhir modal form murid */
 
-/* =============================================================
-   ALERT MENGHAPUS MODAL (Figma Node 408:3611)
-   ============================================================= */
+/* modal konfirmasi hapus murid */
 .mu-delete-overlay {
     display: none;
     position: fixed;
@@ -674,10 +723,9 @@
     transition: opacity 0.2s;
 }
 .mu-delete-btn-setujui:hover { opacity: 0.88; }
+/* akhir modal konfirmasi hapus murid */
 
-/* =============================================================
-   ALERT BERHASIL / GAGAL OVERLAY (Figma Node 603:1917)
-   ============================================================= */
+/* modal notifikasi berhasil dan gagal */
 .mu-alert-overlay {
     position: fixed;
     inset: 0;
@@ -755,12 +803,9 @@
 .mu-alert-btn-wrap.gagal button {
     background: #EF4444;
 }
+/* akhir modal notifikasi berhasil dan gagal */
 
-/* =============================================================
-   PROGRESS SETORAN MURID PAGE (Figma Node 412:4268)
-   ============================================================= */
-
-/* Header bar with back + print buttons */
+/* header halaman progres setoran murid */
 .mu-page-header {
     display: flex;
     align-items: center;
@@ -820,13 +865,9 @@
     align-items: center;
     flex-wrap: wrap;
 }
+/* akhir header halaman progres setoran murid */
 
-/* =============================================================
-   PROGRES MURID — Figma Node 412:4268
-   Prefix: mu-pk-
-   ============================================================= */
-
-/* --- Outer Wrapper (Figma 459:3141: border dashed #E5E7EB, border-radius 10px, gap 30px) --- */
+/* konten progres murid */
 .mu-pk-wrap {
     background: #FFFFFF;
     border: 1px dashed #E5E7EB;
@@ -840,7 +881,7 @@
     overflow: hidden;
 }
 
-/* --- Top Header Bar (Figma 459:3142) --- */
+/* header bar progres murid */
 .mu-pk-header {
     display: flex;
     align-items: center;
@@ -869,7 +910,7 @@
     gap: 12px;
 }
 
-/* Cetak Hafalan button (Figma 459:3148: bg #0E7651, border #E4E6EF, rounded 10px, padding 10px) */
+/* tombol cetak progres murid */
 .mu-pk-btn-cetak {
     display: inline-flex;
     align-items: center;
@@ -910,8 +951,9 @@
     transition: background 0.2s;
 }
 .mu-pk-btn-back:hover { background: #E5E7EB; }
+/* akhir header bar progres murid */
 
-/* --- Section Container --- */
+/* seksi konten progres murid */
 .mu-pk-section {
     padding: 0 37px;
     display: flex;
@@ -929,7 +971,7 @@
     margin: 0;
 }
 
-/* --- Informasi Pribadi Row (Figma 459:3154: gap 29px, width 900px centered) --- */
+/* baris informasi pribadi murid */
 .mu-pk-info-row {
     display: flex;
     align-items: center;
@@ -940,7 +982,7 @@
     flex-wrap: wrap;
 }
 
-/* User block (Avatar + Name + Gender + Email) */
+/* data profil murid */
 .mu-pk-user-col {
     display: flex;
     align-items: center;
@@ -1003,7 +1045,7 @@
     flex-shrink: 0;
 }
 
-/* Vertical divider (Figma 459:3171: height 99px, width 1px, rgba(0,0,0,0.2)) */
+/* garis pemisah vertikal */
 .mu-pk-vdivider {
     width: 1px;
     height: 99px;
@@ -1011,7 +1053,7 @@
     flex-shrink: 0;
 }
 
-/* Metadata block (Guru Pengampu, Kelas, Waktu) (Figma 459:3172: width 289px) */
+/* metadata kelas dan pengampu */
 .mu-pk-meta-col {
     display: flex;
     flex-direction: column;
@@ -1041,7 +1083,7 @@
     white-space: nowrap;
 }
 
-/* Circular Progress Chart (Figma 459:3183: 159px width, 100px chart) */
+/* grafik lingkaran progres murid */
 .mu-pk-chart-col {
     display: flex;
     flex-direction: column;
@@ -1081,8 +1123,9 @@
     white-space: nowrap;
     margin: 0;
 }
+/* akhir baris informasi pribadi murid */
 
-/* --- Daftar Surat (Figma 459:3190) --- */
+/* grid daftar target surat */
 .mu-pk-surat-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1091,7 +1134,7 @@
     box-sizing: border-box;
 }
 
-/* Surat Card (Figma 459:3193: border dashed #000, rounded 10px, padding with left space for star) */
+/* kartu rincian surat */
 .mu-pk-surat-card {
     border: 1px dashed #000000;
     border-radius: 10px;
@@ -1106,7 +1149,7 @@
     background: #FFFFFF;
 }
 
-/* Islamic 8-Point Star Badge (Figma 459:3194: 58px x 61px, left 14.5px, top 11.5px) */
+/* lencana bintang islami nomor surat */
 .mu-pk-star-badge {
     position: absolute;
     left: 14px;
@@ -1152,7 +1195,7 @@
     margin: 0;
 }
 
-/* Status badge top right (Figma 459:3202: height 32px, rounded 50px, padding 10px) */
+/* lencana status surat */
 .mu-pk-badge {
     position: absolute;
     right: 20px;
@@ -1174,7 +1217,7 @@
 .mu-pk-badge--progress { background: #FDBA74; color: #5F2D18; }
 .mu-pk-badge--belum    { background: #E5E7EB; color: #6C757D; }
 
-/* Ayat lulus text (Figma 459:3209) */
+/* teks keterangan kelulusan */
 .mu-pk-lulus-text {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
@@ -1184,7 +1227,7 @@
     line-height: 1.35;
 }
 
-/* Progress bar (Figma 459:3204) */
+/* progress bar kelulusan surat */
 .mu-pk-progbar-row {
     display: flex;
     align-items: center;
@@ -1215,7 +1258,7 @@
     text-align: right;
 }
 
-/* --- Riwayat Setoran Table (Figma 459:3261) --- */
+/* tabel riwayat setoran murid */
 .mu-pk-table-wrap {
     border: 1px solid #808080;
     border-radius: 10px;
@@ -1266,8 +1309,7 @@
 }
 .mu-pk-table td.mu-pk-col-nama {
     font-weight: 700;
-    text-align: left;
-    padding-left: 24px;
+    text-align: center;
 }
 .mu-pk-table td.mu-pk-col-no {
     font-weight: 600;
@@ -1294,3 +1336,5 @@
         display: none;
     }
 }
+/* akhir tabel riwayat setoran murid */
+/* akhir konten progres murid */

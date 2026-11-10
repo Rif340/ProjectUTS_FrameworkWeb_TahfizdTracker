@@ -16,7 +16,7 @@
 
 @section('content')
 
-{{-- ===== CARD HEADER (Figma Node 603:1919) ===== --}}
+<!-- kepala kartu target hafalan -->
 <div class="tz-card-head">
     <div class="tz-card-head-left">
         {{-- Quran Icon --}}
@@ -37,9 +37,9 @@
     </div>
 </div>
 
-{{-- ===== CONTENT (Figma Node 603:1932) ===== --}}
+<!-- konten target hafalan -->
 <div class="tz-tg-container">
-    {{-- Filter Bar (Figma Node 603:1642 & 402:7707) --}}
+    <!-- bilah penyaring target hafalan -->
     <form method="GET" action="{{ route('tahfizd.target.index') }}" class="tz-tg-filters" id="form-filter-target">
         <input type="hidden" name="per_page" value="{{ $perPage }}">
 
@@ -70,10 +70,10 @@
         </div>
     </form>
 
-    {{-- Title (Figma 603:1933) --}}
+    <!-- judul target hafalan -->
     <h3 class="tz-tg-heading">Daftar Target Hafalan</h3>
 
-    {{-- Table (Figma Node 603:1935) --}}
+    <!-- tabel target hafalan -->
     <div class="tz-tg-table-wrap">
         <table class="tz-tg-table">
             <thead>

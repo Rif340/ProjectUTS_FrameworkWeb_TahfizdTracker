@@ -9,9 +9,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Menampilkan halaman login Guru & Admin
-     */
+    // halaman login guru dan admin
     public function showLoginForm()
     {
         if (Auth::check()) {
@@ -20,10 +18,9 @@ class AuthController extends Controller
 
         return view('auth.login');
     }
+    // akhir halaman login guru dan admin
 
-    /**
-     * Menampilkan halaman login khusus Murid
-     */
+    // halaman login khusus murid
     public function showLoginMuridForm()
     {
         if (Auth::check()) {
@@ -32,12 +29,12 @@ class AuthController extends Controller
 
         return view('auth.login_murid');
     }
+    // akhir halaman login khusus murid
 
-    /**
-     * Proses autentikasi login (Email + Password + NIP / NISN)
-     */
+    // proses autentikasi login
     public function login(Request $request)
     {
+        // validasi form login
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -48,12 +45,13 @@ class AuthController extends Controller
             'password.required' => 'Password wajib diisi.',
             'nip.required' => 'NIP / NISN wajib diisi.',
         ]);
+        // akhir validasi form login
 
         $email = strtolower(trim($request->email));
         $password = $request->password;
         $identifier = trim($request->nip);
 
-        // Cari user berdasarkan email
+        // cari data pengguna
         $user = User::whereRaw('LOWER(email) = ?', [$email])->first();
 
         if (!$user) {
@@ -63,13 +61,15 @@ class AuthController extends Controller
         if ($user->status !== 'Aktif') {
             return back()->withErrors(['login' => 'Akun Anda sedang nonaktif. Silakan hubungi administrator.'])->withInput();
         }
+        // akhir cari data pengguna
 
-        // Verifikasi password
+        // verifikasi kata sandi
         if (!Hash::check($password, $user->password)) {
             return back()->withErrors(['login' => 'Password yang Anda masukkan salah.'])->withInput();
         }
+        // akhir verifikasi kata sandi
 
-        // Verifikasi NIP / NISN sesuai Role
+        // verifikasi nomor identitas
         $isIdentifierValid = false;
 
         if ($user->role === 'Admin') {
@@ -84,19 +84,20 @@ class AuthController extends Controller
             $expectedLabel = ($user->role === 'Murid') ? 'NISN' : 'NIP';
             return back()->withErrors(['login' => "$expectedLabel tidak sesuai dengan akun Anda."])->withInput();
         }
+        // akhir verifikasi nomor identitas
 
-        // Login user ke session
+        // proses masuk ke sesi
         Auth::login($user);
         if ($request->hasSession()) {
             $request->session()->regenerate();
         }
 
         return redirect()->route('dashboard');
+        // akhir proses masuk ke sesi
     }
+    // akhir proses autentikasi login
 
-    /**
-     * Logout
-     */
+    // keluar dari sesi akun
     public function logout(Request $request)
     {
         Auth::logout();
@@ -107,4 +108,5 @@ class AuthController extends Controller
 
         return redirect()->route('login');
     }
+    // akhir keluar dari sesi akun
 }

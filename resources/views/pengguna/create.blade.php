@@ -73,6 +73,16 @@
                              class="pg-toggle-pwd" title="Lihat Password" onclick="togglePasswordVisibility('passwordCreate', 'togglePasswordCreate')">
                     </div>
                 </div>
+
+                {{-- No. Handphone / WhatsApp --}}
+                <div class="pg-form-row">
+                    <label class="pg-form-label">No. Handphone</label>
+                    <input type="text" name="no_hp" class="pg-form-input"
+                           inputmode="numeric"
+                           maxlength="15"
+                           oninput="this.value = this.value.replace(/\D/g, '')"
+                           value="{{ old('no_hp') }}" placeholder="Contoh: 08123456789">
+                </div>
             </div>
 
             {{-- Tombol --}}

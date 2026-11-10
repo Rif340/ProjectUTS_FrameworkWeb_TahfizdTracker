@@ -64,7 +64,7 @@
         </table>
     </div>
 
-    {{-- Modal Overlay Form Tambah Hari Kerja (Figma Node 625:3576 / 625:3798) --}}
+    <!-- jendela formulir tambah hari kerja -->
     <div class="hk-overlay">
         <div class="hk-form-modal">
             {{-- Logo --}}
@@ -81,7 +81,7 @@
                 @csrf
 
                 <div class="hk-form-fields">
-                    {{-- Hari (Figma 625:3809) --}}
+                    <!-- pilihan nama hari -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Hari <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    {{-- Jam Masuk (Figma 625:3893) --}}
+                    <!-- masukan jam masuk -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Jam Masuk <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
 
-                    {{-- Jam Pulang (Figma 625:3900) --}}
+                    <!-- masukan jam pulang -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Jam Pulang <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                {{-- Action Buttons (Figma 625:3844) --}}
+                <!-- tombol tindakan formulir -->
                 <div class="hk-form-btns">
                     <a href="{{ route('hari-kerja.index') }}" class="hk-btn-batal">Batal</a>
                     <button type="submit" class="hk-btn-simpan">Simpan</button>

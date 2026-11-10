@@ -93,7 +93,7 @@
             background: #FFFFFF;
         }
 
-        /* --- School Letterhead (Kop Surat - Figma Node 439:3679) --- */
+        /* bagian kop surat */
         .kop-surat {
             position: relative;
             display: flex;
@@ -138,7 +138,7 @@
             text-align: center;
         }
 
-        /* Double Rule (Figma 439:3684 & 439:3686) */
+        /* garis ganda pembatas */
         .kop-rule-thick {
             width: 100%;
             height: 3px;
@@ -152,7 +152,7 @@
             margin-bottom: 12px;
         }
 
-        /* --- Report Heading (Figma Node 439:3687) --- */
+        /* bagian judul laporan */
         .report-header {
             text-align: center;
             margin-bottom: 12px;
@@ -175,7 +175,7 @@
             margin-top: 2px;
         }
 
-        /* --- Report Details Metadata (Figma Node 439:3690) --- */
+        /* rincian metadata laporan */
         .report-meta-grid {
             display: flex;
             justify-content: space-between;
@@ -206,7 +206,7 @@
             font-weight: 400;
         }
 
-        /* --- Table Layout (Figma Node 439:3709) --- */
+        /* tata letak tabel */
         .table-wrap {
             width: 100%;
             margin-bottom: 16px;
@@ -320,7 +320,7 @@
             vertical-align: middle;
         }
 
-        /* Footer Total row (Figma 439:4362) */
+        /* baris total keseluruhan */
         .td-total-label {
             text-align: right;
             padding-right: 10px;
@@ -345,7 +345,7 @@
             vertical-align: middle;
         }
 
-        /* --- Report Authorization / Signatures (Figma Node 439:4441) --- */
+        /* tanda tangan pengesahan */
         .signatures-wrap {
             display: flex;
             justify-content: space-between;
@@ -409,7 +409,7 @@
 
     <div class="rekap-sheet">
 
-        {{-- ---- KOP SURAT (Figma Node 439:3679) ---- --}}
+        <!-- bagian kop surat -->
         <div class="kop-surat">
             <img src="/gambar/logo.png" alt="Logo" class="kop-logo">
             <div class="kop-content">
@@ -424,7 +424,7 @@
         <div class="kop-rule-thick"></div>
         <div class="kop-rule-thin"></div>
 
-        {{-- ---- JUDUL LAPORAN (Figma Node 439:3687) ---- --}}
+        <!-- bagian judul laporan -->
         <div class="report-header">
             <h2 class="report-title">LAPORAN REKAPITULASI SETORAN TAHFIZD</h2>
             @php
@@ -448,7 +448,7 @@
             </p>
         </div>
 
-        {{-- ---- DETAIL LAPORAN METADATA (Figma Node 439:3690) ---- --}}
+        <!-- rincian data laporan -->
         <div class="report-meta-grid">
             <div class="meta-col">
                 <div class="meta-item">
@@ -476,7 +476,7 @@
             </div>
         </div>
 
-        {{-- ---- TABEL REKAPITULASI (Figma Node 439:3709) ---- --}}
+        <!-- tabel rekapitulasi setoran -->
         <div class="table-wrap">
             <table class="rekap-table">
                 <thead>
@@ -550,7 +550,7 @@
             </table>
         </div>
 
-        {{-- ---- PENGESAHAN / TANDA TANGAN (Figma Node 439:4441) ---- --}}
+        <!-- bagian pengesahan dokumen -->
         <div class="signatures-wrap">
             {{-- Guru Pengampu (Left) --}}
             <div class="sig-box">

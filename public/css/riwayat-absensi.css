@@ -1,8 +1,4 @@
-/* ==========================================================================
-   CSS RIWAYAT ABSENSI / DETAIL ABSENSI (Figma Node 638:4162)
-   ========================================================================== */
-
-/* Card Header (Figma Node 638:4200) */
+/* header kartu detail absensi */
 .detail-card-header {
     height: 67px;
     padding: 18px 37px;
@@ -37,7 +33,7 @@
     gap: 14px;
 }
 
-/* Tombol Cetak QR Code (Figma Node 638:4207) */
+/* tombol cetak kartu qr */
 .btn-action-qr {
     background: #FFA800;
     border: 1px solid #FFA800;
@@ -64,7 +60,7 @@
     height: 16px;
 }
 
-/* Tombol Cetak Kehadiran (Figma Node 638:4216) */
+/* tombol cetak kehadiran */
 .btn-action-print {
     background: #0E7651;
     border: 1px solid #E4E6EF;
@@ -89,8 +85,9 @@
     width: 15px;
     height: 14px;
 }
+/* akhir header kartu detail absensi */
 
-/* Card Scrollable Viewport Body */
+/* badan kartu riwayat absensi */
 .detail-card-body {
     flex: 1;
     padding: 30px 46px;
@@ -100,7 +97,7 @@
     overflow-y: auto;
 }
 
-/* Section 1: Statistik Kehadiran (Figma Node 638:4285) */
+/* judul seksi */
 .section-title {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -109,6 +106,7 @@
     margin-bottom: 14px;
 }
 
+/* kartu statistik kehadiran */
 .stats-card-box {
     background: #FFFFFF;
     border: 1px solid #E5E7EB;
@@ -133,7 +131,7 @@
     gap: 24px;
 }
 
-/* Donut SVG Chart */
+/* grafik donat kehadiran */
 .donut-chart-box {
     position: relative;
     width: 190px;
@@ -170,7 +168,22 @@
     pointer-events: none;
 }
 
-/* Google Charts Style Popup / Tooltip */
+.donut-center-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
+}
+
+.donut-center-value {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    line-height: 1.2;
+}
+
+/* popup tooltip statistik */
 .chart-tooltip-popup {
     position: absolute;
     background: #FFFFFF;
@@ -229,22 +242,7 @@
     color: #6B7280;
 }
 
-.donut-center-label {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13px;
-    color: rgba(0, 0, 0, 0.8);
-    line-height: 1.2;
-}
-
-.donut-center-value {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #000000;
-    line-height: 1.2;
-}
-
-/* Chart Legends (Figma Node 638:4300) */
+/* legenda grafik kehadiran */
 .chart-legends-wrapper {
     display: flex;
     flex-direction: column;
@@ -271,8 +269,9 @@
 .legend-dot.blue { background-color: #638CFF; }
 .legend-dot.green { background-color: #5CD096; }
 .legend-dot.orange { background-color: #FFA800; }
+/* akhir kartu statistik kehadiran */
 
-/* Section 2: Riwayat Kehadiran (Figma Node 638:4220) */
+/* tabel riwayat kehadiran */
 .table-container-responsive {
     width: 100%;
     overflow-x: auto;
@@ -337,8 +336,10 @@
 .status-cell.tidak-masuk {
     color: #DC2626;
 }
+/* akhir tabel riwayat kehadiran */
+/* akhir badan kartu riwayat absensi */
 
-/* Print View Styling */
+/* tampilan khusus cetak */
 @media print {
     body {
         background: #FFFFFF !important;
@@ -362,13 +363,21 @@
         border-color: #333333 !important;
     }
 }
+/* akhir tampilan khusus cetak */
 
+/* responsive riwayat absensi */
 @media (max-width: 768px) {
     .detail-card-header {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         height: auto;
         gap: 12px;
         padding: 15px;
+        flex-wrap: wrap;
+    }
+    .detail-header-actions {
+        justify-content: flex-end;
     }
     .detail-card-body {
         padding: 20px 15px;
@@ -376,4 +385,13 @@
     .stats-card-box {
         width: 100%;
     }
+    .chart-container-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .chart-legends-wrapper {
+        width: 100%;
+    }
 }
+/* akhir responsive riwayat absensi */

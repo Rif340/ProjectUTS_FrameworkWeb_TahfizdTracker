@@ -102,7 +102,7 @@
     </div>
 </div>
 
-{{-- Modal Konfirmasi Hapus (sesuai Figma 665:28738 — sama pola dengan tahun-akademik) --}}
+<!-- jendela konfirmasi hapus pengguna -->
 <div id="deleteModalOverlay" class="pg-overlay" style="display:none;">
     <div class="pg-delete-modal">
         {{-- Close Button --}}

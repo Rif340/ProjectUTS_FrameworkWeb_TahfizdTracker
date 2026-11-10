@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TahfizdController extends Controller
 {
-    /**
-     * Helper: Dapatkan Tahun Akademik aktif (dari session atau DB).
-     */
+    // ambil tahun akademik aktif
     private function getActiveTahunAkademik(): ?TahunAkademik
     {
         $activeYearId = session('active_tahun_akademik_id');
@@ -29,16 +27,16 @@ class TahfizdController extends Controller
 
         return TahunAkademik::where('is_aktif', true)->first() ?? TahunAkademik::orderBy('tanggal_mulai', 'desc')->first();
     }
+    // akhir ambil tahun akademik aktif
 
-    /**
-     * Detail Tahfizd / Daftar Kelas (Figma Node 393:4682)
-     */
+    // tampilkan daftar kelas tahfizd
     public function index(Request $request)
     {
         $perPage = (int) $request->get('per_page', 10);
         $tahunAktif = $this->getActiveTahunAkademik();
         $activeYearId = $tahunAktif ? $tahunAktif->id_tahun_akademik : null;
 
+        // query data kelas
         $query = Kelas::with(['guru.user', 'tahunAkademik']);
         if ($activeYearId) {
             $query->where('id_tahun_akademik', $activeYearId);
@@ -47,18 +45,19 @@ class TahfizdController extends Controller
         $kelasList = $query->orderBy('id_kelas', 'asc')
             ->paginate($perPage)
             ->appends($request->except('page'));
+        // akhir query data kelas
 
         $guruList = Guru::with('user')->get();
         $tahunAkademikList = TahunAkademik::orderBy('id_tahun_akademik', 'desc')->get();
 
         return view('tahfizd.index', compact('kelasList', 'guruList', 'tahunAkademikList', 'tahunAktif', 'perPage'));
     }
+    // akhir tampilkan daftar kelas tahfizd
 
-    /**
-     * Simpan kelas tahfizd baru.
-     */
+    // simpan kelas tahfizd baru
     public function store(Request $request)
     {
+        // validasi data kelas
         $request->validate([
             'nama_kelas'         => 'required|string|max:100',
             'id_guru'            => 'nullable|exists:guru,id_guru',
@@ -72,8 +71,10 @@ class TahfizdController extends Controller
             'jam_mulai.required'   => 'Jam mulai wajib diisi.',
             'jam_selesai.required' => 'Jam selesai wajib diisi.',
         ]);
+        // akhir validasi data kelas
 
         try {
+            // periksa tahun akademik aktif
             $tahunAktif = $this->getActiveTahunAkademik();
             $idTahun = $request->id_tahun_akademik ?: ($tahunAktif ? $tahunAktif->id_tahun_akademik : null);
 
@@ -82,7 +83,9 @@ class TahfizdController extends Controller
                 return redirect()->route('tahfizd.gagal')
                     ->with('error', 'Tahun akademik ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
             }
+            // akhir periksa tahun akademik aktif
 
+            // tentukan guru pengajar
             $idGuru = $request->id_guru;
             if (!$idGuru && Auth::check() && Auth::user()->guru) {
                 $idGuru = Auth::user()->guru->id_guru;
@@ -91,8 +94,9 @@ class TahfizdController extends Controller
                 $firstGuru = Guru::first();
                 $idGuru = $firstGuru ? $firstGuru->id_guru : 1;
             }
+            // akhir tentukan guru pengajar
 
-            // Nama kelas handling: if kelas_level is selected
+            // format penamaan kelas
             $namaKelas = $request->nama_kelas;
             if ($request->filled('kelas_level')) {
                 if (trim($namaKelas) === 'Tahfizd' || empty($namaKelas)) {
@@ -101,7 +105,9 @@ class TahfizdController extends Controller
                     $namaKelas = trim($namaKelas . ' ' . $request->kelas_level);
                 }
             }
+            // akhir format penamaan kelas
 
+            // buat record kelas baru
             Kelas::create([
                 'nama_kelas'         => $namaKelas,
                 'id_guru'            => $idGuru,
@@ -111,16 +117,16 @@ class TahfizdController extends Controller
                 'jam_selesai'        => $request->jam_selesai,
                 'status'             => 'Aktif',
             ]);
+            // akhir buat record kelas baru
 
             return redirect()->route('tahfizd.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('tahfizd.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir simpan kelas tahfizd baru
 
-    /**
-     * Perbarui data kelas tahfizd.
-     */
+    // perbarui data kelas tahfizd
     public function update(Request $request, $id)
     {
         $kelas = Kelas::with('tahunAkademik')->findOrFail($id);
@@ -129,6 +135,7 @@ class TahfizdController extends Controller
                 ->with('error', 'Tahun akademik untuk kelas ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
         }
 
+        // validasi data pembaruan kelas
         $request->validate([
             'nama_kelas'  => 'required|string|max:100',
             'id_guru'     => 'required|exists:guru,id_guru',
@@ -136,8 +143,10 @@ class TahfizdController extends Controller
             'jam_mulai'   => 'required',
             'jam_selesai' => 'required',
         ]);
+        // akhir validasi data pembaruan kelas
 
         try {
+            // perbarui record kelas
             $kelas->update([
                 'nama_kelas'  => $request->nama_kelas,
                 'id_guru'     => $request->id_guru,
@@ -145,24 +154,27 @@ class TahfizdController extends Controller
                 'jam_mulai'   => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
             ]);
+            // akhir perbarui record kelas
 
             return redirect()->route('tahfizd.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('tahfizd.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir perbarui data kelas tahfizd
 
-    /**
-     * Hapus kelas tahfizd.
-     */
+    // hapus kelas tahfizd
     public function destroy($id)
     {
         try {
+            // periksa tahun akademik aktif
             $kelas = Kelas::with('tahunAkademik')->findOrFail($id);
             if ($kelas->tahunAkademik && !$kelas->tahunAkademik->is_aktif) {
                 return redirect()->route('tahfizd.gagal')
                     ->with('error', 'Tahun akademik untuk kelas ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
             }
+            // akhir periksa tahun akademik aktif
+
             $kelas->delete();
 
             return redirect()->route('tahfizd.berhasil', ['action' => 'delete']);
@@ -170,31 +182,29 @@ class TahfizdController extends Controller
             return redirect()->route('tahfizd.gagal')->with('error', 'Gagal menghapus kelas tahfizd.');
         }
     }
+    // akhir hapus kelas tahfizd
 
-    /**
-     * Alert berhasil (Figma Node 599:7949)
-     */
+    // tampilkan alert berhasil
     public function berhasil(Request $request)
     {
         $isDelete = $request->query('action') === 'delete';
         return view('tahfizd.berhasil', compact('isDelete'));
     }
+    // akhir tampilkan alert berhasil
 
-    /**
-     * Alert gagal
-     */
+    // tampilkan alert gagal
     public function gagal()
     {
         return view('tahfizd.gagal');
     }
+    // akhir tampilkan alert gagal
 
-    /**
-     * Progres Kelas / Masuk ke kelas (Setoran hafalan) - Figma Node 603:2185
-     */
+    // detail progres hafalan kelas
     public function show($id)
     {
         $kelas = Kelas::with(['guru.user', 'tahunAkademik', 'murid.user'])->findOrFail($id);
 
+        // ambil data murid di kelas
         $muridList = Murid::with('user')
             ->where('id_kelas', $id)
             ->join('users', 'murid.id_user', '=', 'users.id_user')
@@ -203,23 +213,26 @@ class TahfizdController extends Controller
             ->get();
 
         $totalMurid = $muridList->count();
+        // akhir ambil data murid di kelas
 
-        // Target Hafalan kelas ini
+        // ambil target hafalan kelas
         $targetList = TargetHafalan::with('surat')
             ->where('id_kelas', $id)
             ->orderBy('id_surat', 'asc')
             ->get();
         $targetSuratCount = $targetList->count();
+        // akhir ambil target hafalan kelas
 
-        // Riwayat Setoran Murid kelas ini
+        // ambil riwayat setoran seluruh murid
         $riwayatSetoran = SetoranHafalan::with(['murid.user', 'surat'])
             ->where('id_kelas', $id)
             ->orderBy('tanggal', 'desc')
             ->orderBy('id_setoran', 'desc')
             ->get();
         $totalSetoranCount = $riwayatSetoran->count();
+        // akhir ambil riwayat setoran seluruh murid
 
-        // Hitung progress per-target surat
+        // hitung kemajuan kelulusan per surat target
         $suratCards = [];
         $muridTuntasClass = 0;
 
@@ -227,7 +240,6 @@ class TahfizdController extends Controller
             $totalAyatSurat = $target->surat->jumlah_ayat ?? 0;
             $setoranSurat = $riwayatSetoran->where('id_surat', $target->id_surat);
 
-            // Hitung murid yang lulus surat ini (hanya jika seluruh ayat sudah disetor dengan status Lancar/Lulus)
             $lulusCount = 0;
             foreach ($muridList as $murid) {
                 $setoranLancarMurid = $setoranSurat->where('id_murid', $murid->id_murid)
@@ -264,8 +276,9 @@ class TahfizdController extends Controller
                 'status'       => $statusBadge,
             ];
         }
+        // akhir hitung kemajuan kelulusan per surat target
 
-        // Hitung murid yang menyelesaikan semua target
+        // hitung murid yang menuntaskan seluruh target
         if ($targetSuratCount > 0 && $totalMurid > 0) {
             foreach ($muridList as $m) {
                 $allDone = true;
@@ -296,12 +309,13 @@ class TahfizdController extends Controller
             $muridTuntasClass = 0;
             $overallPercent = 0;
         }
+        // akhir hitung murid yang menuntaskan seluruh target
 
-        // Daftar semua surat untuk dropdown Tambah Setoran
+        // daftar surat untuk opsi setoran
         $allSurat = Surat::orderBy('id_surat', 'asc')->get();
+        // akhir daftar surat untuk opsi setoran
 
-        // Pemetaan surat yang sudah lulus untuk tiap murid: [id_murid => [id_surat => true]]
-        // dan pemetaan ayat terakhir yang lulus: [id_murid => [id_surat => last_ayat]]
+        // pemetaan kelulusan dan ayat terakhir tiap murid
         $muridCompletedSurat = [];
         $muridLastPassedAyat = [];
         foreach ($muridList as $m) {
@@ -328,6 +342,7 @@ class TahfizdController extends Controller
                 }
             }
         }
+        // akhir pemetaan kelulusan dan ayat terakhir tiap murid
 
         return view('tahfizd.show', compact(
             'kelas',
@@ -345,12 +360,12 @@ class TahfizdController extends Controller
             'muridLastPassedAyat'
         ));
     }
+    // akhir detail progres hafalan kelas
 
-    /**
-     * Simpan setoran hafalan baru
-     */
+    // simpan setoran hafalan murid baru
     public function storeSetoran(Request $request)
     {
+        // validasi input data setoran
         $request->validate([
             'id_kelas'     => 'required|exists:kelas,id_kelas',
             'id_murid'     => 'required|exists:murid,id_murid',
@@ -362,19 +377,21 @@ class TahfizdController extends Controller
         ], [
             'ayat_selesai.gte' => 'Ayat selesai tidak boleh lebih kecil dari ayat mulai.',
         ]);
+        // akhir validasi input data setoran
 
         $surat = Surat::findOrFail($request->id_surat);
         $murid = Murid::with('user')->findOrFail($request->id_murid);
         $maxAyat = $surat->jumlah_ayat ?? 0;
 
-        // Validasi batas ayat berdasarkan jumlah ayat surat
+        // validasi batas jumlah ayat surat
         if ($maxAyat > 0 && ($request->ayat_mulai > $maxAyat || $request->ayat_selesai > $maxAyat)) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', "Gagal: Surat {$surat->nama_surat} hanya memiliki {$maxAyat} ayat. Rentang ayat yang dimasukkan ({$request->ayat_mulai} - {$request->ayat_selesai}) melebihi batas ayat.");
         }
+        // akhir validasi batas jumlah ayat surat
 
-        // Cek riwayat kelulusan surat ini untuk murid tersebut
+        // riwayat kelulusan surat murid
         $setoranLancar = SetoranHafalan::where('id_murid', $request->id_murid)
             ->where('id_surat', $request->id_surat)
             ->whereIn('status', ['Lancar', 'Lulus', 'Selesai'])
@@ -386,21 +403,22 @@ class TahfizdController extends Controller
                 $ayatLulusMap[$a] = true;
             }
         }
+        // akhir riwayat kelulusan surat murid
 
-        // 1. Jika murid SUDAH LULUS / SELESAI seluruh surat ini
+        // periksa status kelulusan penuh surat
         if ($maxAyat > 0 && count($ayatLulusMap) >= $maxAyat) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', "Gagal: Murid {$murid->user->nama} sudah dinyatakan LULUS (selesai) untuk Surat {$surat->nama_surat} ({$maxAyat} ayat). Tidak dapat menambahkan setoran baru pada surat yang sudah tuntas.");
         }
+        // akhir periksa status kelulusan penuh surat
 
-        // Cari ayat terakhir yang sudah lulus (status Lancar/Lulus/Selesai) untuk surat ini
+        // periksa urutan ayat setoran
         $lastPassedAyat = 0;
         if (!empty($ayatLulusMap)) {
             $lastPassedAyat = max(array_keys($ayatLulusMap));
         }
 
-        // 2. Validasi urutan ayat: setoran harus berurutan, tidak boleh melompati ayat
         $expectedNextAyat = $lastPassedAyat + 1;
         if ($request->ayat_mulai > $expectedNextAyat) {
             $pesanUrutan = $lastPassedAyat > 0
@@ -411,8 +429,9 @@ class TahfizdController extends Controller
                 ->withInput()
                 ->with('error', $pesanUrutan);
         }
+        // akhir periksa urutan ayat setoran
 
-        // 3. Jika rentang ayat yang dimasukkan seluruhnya sudah pernah lulus dengan status Lancar
+        // periksa pengulangan ayat yang telah lulus
         $sudahSemuaLulus = true;
         for ($a = $request->ayat_mulai; $a <= $request->ayat_selesai; $a++) {
             if (!isset($ayatLulusMap[$a])) {
@@ -426,15 +445,19 @@ class TahfizdController extends Controller
                 ->withInput()
                 ->with('error', "Gagal: Ayat {$request->ayat_mulai} – {$request->ayat_selesai} pada Surat {$surat->nama_surat} sudah pernah disetorkan dengan status Lancar oleh {$murid->user->nama}. Silakan lanjutkan ke ayat berikutnya (ayat {$expectedNextAyat}).");
         }
+        // akhir periksa pengulangan ayat yang telah lulus
 
+        // periksa status tahun akademik kelas
         $kelas = Kelas::with('tahunAkademik')->findOrFail($request->id_kelas);
         if ($kelas->tahunAkademik && !$kelas->tahunAkademik->is_aktif) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Tahun akademik kelas ini belum aktif. Setoran hafalan hanya dapat diubah pada tahun akademik yang aktif.');
         }
+        // akhir periksa status tahun akademik kelas
 
-        SetoranHafalan::create([
+        // buat data setoran hafalan
+        $setoran = SetoranHafalan::create([
             'id_murid'     => $request->id_murid,
             'id_kelas'     => $request->id_kelas,
             'id_guru'      => $kelas->id_guru ?? (Auth::user()->guru->id_guru ?? 1),
@@ -444,24 +467,34 @@ class TahfizdController extends Controller
             'tanggal'      => $request->tanggal,
             'status'       => $request->status,
         ]);
+        // akhir buat data setoran hafalan
+
+        // kirim notifikasi ke orang tua murid
+        $setoran->load(['murid.user', 'surat']);
+        $notifResult = \App\Services\NotificationService::sendSetoranNotification($setoran);
+        // akhir kirim notifikasi ke orang tua murid
 
         return redirect()->route('tahfizd.show', $request->id_kelas)
             ->with('success', 'Data Berhasil Di Tambahkan Atau Di Perbarui')
+            ->with('fonnte_sent', $notifResult['fonnte_sent'] ?? false)
+            ->with('wa_url', $notifResult['wa_url'] ?? null)
             ->with('action', 'save');
     }
+    // akhir simpan setoran hafalan murid baru
 
-    /**
-     * Update setoran hafalan
-     */
+    // perbarui setoran hafalan murid
     public function updateSetoran(Request $request, $id)
     {
+        // periksa status tahun akademik
         $setoran = SetoranHafalan::with('kelas.tahunAkademik')->findOrFail($id);
         if ($setoran->kelas && $setoran->kelas->tahunAkademik && !$setoran->kelas->tahunAkademik->is_aktif) {
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Tahun akademik kelas ini belum aktif. Setoran hafalan hanya dapat diubah pada tahun akademik yang aktif.');
         }
+        // akhir periksa status tahun akademik
 
+        // validasi input perbaruan setoran
         $request->validate([
             'id_surat'     => 'required|exists:surat,id_surat',
             'ayat_mulai'   => 'required|integer|min:1',
@@ -471,8 +504,9 @@ class TahfizdController extends Controller
         ], [
             'ayat_selesai.gte' => 'Ayat selesai tidak boleh lebih kecil dari ayat mulai.',
         ]);
+        // akhir validasi input perbaruan setoran
 
-        // Validasi batas ayat berdasarkan jumlah ayat surat
+        // validasi batas jumlah ayat surat
         $surat = Surat::findOrFail($request->id_surat);
         $maxAyat = $surat->jumlah_ayat ?? 0;
 
@@ -481,8 +515,9 @@ class TahfizdController extends Controller
                 ->withInput()
                 ->with('error', "Gagal: Surat {$surat->nama_surat} hanya memiliki {$maxAyat} ayat. Rentang ayat yang dimasukkan ({$request->ayat_mulai} - {$request->ayat_selesai}) melebihi batas ayat.");
         }
+        // akhir validasi batas jumlah ayat surat
 
-        // Cek jika surat yang dituju sudah diselesaikan sebelumnya oleh murid ini (di luar record yang diedit)
+        // periksa riwayat tuntas surat
         $setoranLancar = SetoranHafalan::where('id_murid', $setoran->id_murid)
             ->where('id_surat', $request->id_surat)
             ->where('id_setoran', '!=', $id)
@@ -501,7 +536,9 @@ class TahfizdController extends Controller
                 ->withInput()
                 ->with('error', "Gagal: Murid sudah dinyatakan LULUS untuk Surat {$surat->nama_surat}. Tidak dapat mengubah setoran menjadi surat yang sudah tuntas.");
         }
+        // akhir periksa riwayat tuntas surat
 
+        // perbarui record setoran
         $setoran->update([
             'id_surat'     => $request->id_surat,
             'ayat_mulai'   => $request->ayat_mulai,
@@ -509,28 +546,33 @@ class TahfizdController extends Controller
             'tanggal'      => $request->tanggal,
             'status'       => $request->status,
         ]);
+        // akhir perbarui record setoran
 
         return redirect()->route('tahfizd.show', $setoran->id_kelas)
             ->with('success', 'Data Berhasil Di Tambahkan Atau Di Perbarui')
             ->with('action', 'save');
     }
+    // akhir perbarui setoran hafalan murid
 
-    /**
-     * Hapus setoran hafalan
-     */
+    // hapus riwayat setoran hafalan
     public function destroySetoran($id)
     {
+        // periksa tahun akademik aktif
         $setoran = SetoranHafalan::with('kelas.tahunAkademik')->findOrFail($id);
         if ($setoran->kelas && $setoran->kelas->tahunAkademik && !$setoran->kelas->tahunAkademik->is_aktif) {
             return redirect()->back()
                 ->with('error', 'Tahun akademik kelas ini belum aktif. Setoran hafalan hanya dapat diubah pada tahun akademik yang aktif.');
         }
+        // akhir periksa tahun akademik aktif
 
+        // proses hapus setoran
         $idKelas = $setoran->id_kelas;
         $setoran->delete();
+        // akhir proses hapus setoran
 
         return redirect()->route('tahfizd.show', $idKelas)
             ->with('success', 'Data Berhasil Di Hapus')
             ->with('action', 'delete');
     }
+    // akhir hapus riwayat setoran hafalan
 }

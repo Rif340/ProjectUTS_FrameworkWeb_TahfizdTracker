@@ -16,10 +16,10 @@
 
 @section('content')
 
-{{-- ===== CARD HEADER (Figma Node 599:8290) ===== --}}
+<!-- kepala kartu target hafalan -->
 <div class="tz-card-head">
     <div class="tz-card-head-left">
-        {{-- Quran Icon (Figma 599:8293) --}}
+        <!-- ikon mushaf al quran -->
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.4173 6.7288L9.5 12.6669M9.5 12.6669L4.74962 16.2298V12.5117M9.5 12.6669L1.5827 6.7288M9.5 12.6669L14.2504 16.2298V12.5117M15.5552 4.30368L15.0334 3.47788L15.0322 3.47594C14.7448 3.02039 14.6008 2.7922 14.4119 2.77164C14.2235 2.75026 14.0121 2.9672 13.5901 3.40108C12.2267 4.80248 10.8634 4.59504 9.5 7.11518C8.13664 4.59504 6.77328 4.80248 5.40992 3.40108C4.98793 2.9672 4.77654 2.75026 4.58811 2.77164C4.39915 2.7922 4.2552 3.02039 3.96782 3.47594L3.9666 3.47788L3.44564 4.30368C3.24375 4.62196 3.1432 4.78189 3.17091 4.94974C3.19783 5.11759 3.34272 5.2324 3.63328 5.46201L8.52776 9.34C8.99567 9.71053 9.23002 9.8958 9.5 9.8958C9.76998 9.8958 10.0043 9.71053 10.4722 9.34L15.3667 5.46201C15.6573 5.2324 15.8022 5.11759 15.8291 4.94974C15.8568 4.78189 15.7563 4.62196 15.5552 4.30368Z" stroke-width="1.5" stroke-linecap="round" stroke="#0E774F"/>
         </svg>
@@ -41,9 +41,9 @@
     </div>
 </div>
 
-{{-- ===== CONTENT (Figma Node 603:765) ===== --}}
+<!-- konten target hafalan -->
 <div class="tz-tg-container">
-    {{-- Filter Bar (Figma Node 603:897 & 402:7707) --}}
+    <!-- bilah penyaring target hafalan -->
     <form method="GET" action="{{ route('tahfizd.target.index') }}" class="tz-tg-filters" id="form-filter-target">
         <input type="hidden" name="per_page" value="{{ $perPage }}">
 
@@ -74,33 +74,33 @@
         </div>
     </form>
 
-    {{-- Title (Figma 603:766) --}}
+    <!-- judul target hafalan -->
     <h3 class="tz-tg-heading">Daftar Target Hafalan</h3>
 
-    {{-- Table (Figma Node 603:768) --}}
+    <!-- tabel target hafalan -->
     <div class="tz-tg-table-wrap">
         <table class="tz-tg-table">
             <thead>
                 <tr>
-                    <th style="width: 61px;">No</th>
-                    <th style="width: 113px;">Nama Kelas</th>
-                    <th style="width: 123px;">No Surat</th>
-                    <th style="width: 117px;">Nama Surat</th>
-                    <th style="width: 117px;">Juz</th>
-                    <th style="width: 137px;">Jumlah Ayat</th>
-                    <th style="width: 238px;">Aksi</th>
+                    <th style="width: 7%; text-align: center;">No</th>
+                    <th style="width: 15%; text-align: center;">Nama Kelas</th>
+                    <th style="width: 12%; text-align: center;">No Surat</th>
+                    <th style="width: 26%; text-align: center;">Nama Surat</th>
+                    <th style="width: 12%; text-align: center;">Juz</th>
+                    <th style="width: 16%; text-align: center;">Jumlah Ayat</th>
+                    <th style="width: 12%; text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($targetList as $i => $target)
                 <tr>
-                    <td style="font-weight: 600;">{{ $targetList->firstItem() + $i }}</td>
-                    <td style="padding-left: 20px; text-align: left;">{{ $target->kelas->nama_kelas ?? '-' }}</td>
-                    <td>{{ $target->surat->id_surat ?? '-' }}</td>
-                    <td>{{ $target->surat->nama_surat ?? '-' }}</td>
-                    <td>{{ $target->surat->juz ?? '-' }}</td>
-                    <td>{{ $target->surat->jumlah_ayat ? $target->surat->jumlah_ayat . ' Ayat' : '-' }}</td>
-                    <td>
+                    <td style="font-weight: 600; text-align: center;">{{ $targetList->firstItem() + $i }}</td>
+                    <td style="text-align: center;">{{ $target->kelas->nama_kelas ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $target->surat->id_surat ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $target->surat->nama_surat ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $target->surat->juz ?? '-' }}</td>
+                    <td style="text-align: center;">{{ $target->surat->jumlah_ayat ? $target->surat->jumlah_ayat . ' Ayat' : '-' }}</td>
+                    <td style="text-align: center;">
                         @if($isCurrentYearActive)
                         <button type="button" class="tz-tg-btn-hapus" title="Hapus Target"
                             onclick="openDeleteTarget({{ $target->id_target }}, '{{ addslashes($target->surat->nama_surat ?? '') }}')">

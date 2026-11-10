@@ -66,7 +66,7 @@
         </table>
     </div>
 
-    {{-- Modal Overlay Form Tambah Tahun Akademik (Figma Node 625:3214 / 625:4122) --}}
+    <!-- jendela formulir tambah tahun akademik -->
     <div class="ta-overlay">
         <div class="ta-form-modal">
             {{-- Logo --}}
@@ -85,7 +85,7 @@
                 <div class="ta-form-grid">
                     {{-- Kolom Kiri --}}
                     <div class="ta-form-col">
-                        {{-- Tahun Ajaran (Figma 625:4136) --}}
+                        <!-- masukan tahun ajaran -->
                         <div class="ta-field-row">
                             <label class="ta-field-label">Tahun Ajaran <span class="ta-req">*</span></label>
                             <div class="ta-field-input-wrap">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
 
-                        {{-- Semester (Figma 625:4129) --}}
+                        <!-- pilihan semester -->
                         <div class="ta-field-row">
                             <label class="ta-field-label">Semester <span class="ta-req">*</span></label>
                             <div class="ta-field-input-wrap">
@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        {{-- Status (Sesuai Gambar 2) --}}
+                        <!-- status aktif tahun akademik -->
                         <div class="ta-field-row">
                             <label class="ta-field-label">Status <span class="ta-req">*</span></label>
                             <div class="ta-field-input-wrap">
@@ -128,7 +128,7 @@
 
                     {{-- Kolom Kanan --}}
                     <div class="ta-form-col">
-                        {{-- Tanggal Mulai (Figma 625:4148) --}}
+                        <!-- masukan tanggal mulai -->
                         <div class="ta-field-row">
                             <label class="ta-field-label">Tanggal Mulai <span class="ta-req">*</span></label>
                             <div class="ta-field-input-wrap">
@@ -138,7 +138,7 @@
                             </div>
                         </div>
 
-                        {{-- Tanggal Selesai (Figma 625:4154) --}}
+                        <!-- masukan tanggal selesai -->
                         <div class="ta-field-row">
                             <label class="ta-field-label">Tanggal Selesai <span class="ta-req">*</span></label>
                             <div class="ta-field-input-wrap">
@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                {{-- Action Buttons (Figma 625:4160) --}}
+                <!-- tombol aksi simpan -->
                 <div class="ta-form-btns">
                     <a href="{{ route('tahun-akademik.index') }}" class="ta-btn-batal">Batal</a>
                     <button type="submit" class="ta-btn-simpan">Simpan</button>

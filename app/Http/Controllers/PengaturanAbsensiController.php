@@ -7,9 +7,7 @@ use App\Models\PengaturanAbsensi;
 
 class PengaturanAbsensiController extends Controller
 {
-    /**
-     * Tampilkan Pengaturan Absensi / Jarak Batas Absensi (Figma Node 709:72997).
-     */
+    // daftar pengaturan absensi
     public function index(Request $request)
     {
         $perPage = (int) $request->get('per_page', 10);
@@ -17,12 +15,12 @@ class PengaturanAbsensiController extends Controller
 
         return view('absensi.pengaturan.index', compact('lokasiList', 'perPage'));
     }
+    // akhir daftar pengaturan absensi
 
-    /**
-     * Simpan lokasi batas absensi baru.
-     */
+    // simpan lokasi absensi
     public function store(Request $request)
     {
+        // validasi input
         $request->validate([
             'nama_lokasi'  => 'required|string|max:100',
             'latitude'     => 'required|numeric|between:-90,90',
@@ -35,8 +33,10 @@ class PengaturanAbsensiController extends Controller
             'radius_meter.required' => 'Radius meter wajib diisi.',
             'radius_meter.min'      => 'Radius minimal 1 meter.',
         ]);
+        // akhir validasi input
 
         try {
+            // simpan ke database
             PengaturanAbsensi::create([
                 'nama_lokasi'  => $request->nama_lokasi,
                 'latitude'     => $request->latitude,
@@ -44,6 +44,7 @@ class PengaturanAbsensiController extends Controller
                 'radius_meter' => $request->radius_meter,
                 'status'       => 'Aktif',
             ]);
+            // akhir simpan ke database
 
             return redirect()->route('absensi.pengaturan.index')
                 ->with('success', 'Lokasi batas absensi berhasil ditambahkan.')
@@ -53,14 +54,14 @@ class PengaturanAbsensiController extends Controller
                 ->with('error', 'Gagal menambahkan lokasi: ' . $e->getMessage());
         }
     }
+    // akhir simpan lokasi absensi
 
-    /**
-     * Perbarui data lokasi absensi.
-     */
+    // perbarui lokasi absensi
     public function update(Request $request, $id)
     {
         $lokasi = PengaturanAbsensi::findOrFail($id);
 
+        // validasi input
         $request->validate([
             'nama_lokasi'  => 'required|string|max:100',
             'latitude'     => 'required|numeric|between:-90,90',
@@ -73,14 +74,17 @@ class PengaturanAbsensiController extends Controller
             'radius_meter.required' => 'Radius meter wajib diisi.',
             'radius_meter.min'      => 'Radius minimal 1 meter.',
         ]);
+        // akhir validasi input
 
         try {
+            // perbarui ke database
             $lokasi->update([
                 'nama_lokasi'  => $request->nama_lokasi,
                 'latitude'     => $request->latitude,
                 'longitude'    => $request->longitude,
                 'radius_meter' => $request->radius_meter,
             ]);
+            // akhir perbarui ke database
 
             return redirect()->route('absensi.pengaturan.index')
                 ->with('success', 'Lokasi batas absensi berhasil diperbarui.')
@@ -90,10 +94,9 @@ class PengaturanAbsensiController extends Controller
                 ->with('error', 'Gagal memperbarui lokasi: ' . $e->getMessage());
         }
     }
+    // akhir perbarui lokasi absensi
 
-    /**
-     * Hapus lokasi absensi.
-     */
+    // hapus lokasi absensi
     public function destroy($id)
     {
         try {
@@ -108,4 +111,5 @@ class PengaturanAbsensiController extends Controller
                 ->with('error', 'Gagal menghapus lokasi: ' . $e->getMessage());
         }
     }
+    // akhir hapus lokasi absensi
 }

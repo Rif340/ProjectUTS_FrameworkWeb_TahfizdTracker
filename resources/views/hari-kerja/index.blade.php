@@ -16,7 +16,7 @@
         <div class="hk-flash hk-flash-error">{{ session('error') }}</div>
     @endif
 
-    {{-- Card Header (Figma Node 618:1003 / 620:1704) --}}
+    <!-- kepala kartu data hari kerja -->
     <div class="hk-card-head">
         <div class="hk-card-head-left">
             <img src="{{ asset('icon/figma_calendar_alt.svg') }}" alt="Calendar" class="hk-head-icon">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    {{-- Table (Figma Node 620:1796) --}}
+    <!-- tabel data hari kerja -->
     <div class="hk-table-wrap">
         <table class="hk-tbl">
             <thead>
@@ -56,7 +56,7 @@
                         <td class="hk-td">{{ \Carbon\Carbon::parse($item->jam_pulang)->format('H:i') }}</td>
                         <td class="hk-td hk-td-aksi">
                             <div class="hk-aksi-cell-grid">
-                                {{-- Hapus (Figma at-icons:trash-can - Trigger Modal Figma 657:9841) --}}
+                                <!-- tombol hapus data -->
                                 <button type="button" class="hk-aksi-btn" title="Hapus"
                                         onclick="openDeleteModal('{{ route('hari-kerja.destroy', $item->id_hari_kerja) }}')">
                                     <svg width="13" height="15" viewBox="42.5 10.5 13 15" fill="none" class="hk-icon-trash">
@@ -64,7 +64,7 @@
                                     </svg>
                                 </button>
 
-                                {{-- Edit (Figma fa-regular:edit - Figma Node 625:4612) --}}
+                                <!-- tombol ubah data -->
                                 <a href="{{ route('hari-kerja.edit', $item->id_hari_kerja) }}" class="hk-aksi-btn" title="Edit">
                                     <svg width="18" height="16" viewBox="40 10 18 16" fill="none" class="hk-icon-edit">
                                         <path d="M52.5719 20.7805L53.5719 19.7805C53.7281 19.6242 54 19.7336 54 19.9586V24.5023C54 25.3305 53.3281 26.0023 52.5 26.0023H41.5C40.6719 26.0023 40 25.3305 40 24.5023V13.5023C40 12.6742 40.6719 12.0023 41.5 12.0023H50.0469C50.2688 12.0023 50.3813 12.2711 50.225 12.4305L49.225 13.4305C49.1781 13.4773 49.1156 13.5023 49.0469 13.5023H41.5V24.5023H52.5V20.9555C52.5 20.8898 52.525 20.8273 52.5719 20.7805ZM57.4656 14.4742L49.2594 22.6805L46.4344 22.993C45.6156 23.0836 44.9188 22.393 45.0094 21.568L45.3219 18.743L53.5281 10.5367C54.2437 9.82109 55.4 9.82109 56.1125 10.5367L57.4625 11.8867C58.1781 12.6023 58.1781 13.7617 57.4656 14.4742ZM54.3781 15.4398L52.5625 13.6242L46.7562 19.4336L46.5281 21.4742L48.5688 21.2461L54.3781 15.4398ZM56.4031 12.9492L55.0531 11.5992C54.925 11.4711 54.7156 11.4711 54.5906 11.5992L53.625 12.5648L55.4406 14.3805L56.4062 13.4148C56.5312 13.2836 56.5312 13.0773 56.4031 12.9492Z" fill="#0E7651"/>
@@ -82,10 +82,10 @@
         </table>
     </div>
 
-    {{-- Modal Konfirmasi Hapus (Figma Node 657:9841) --}}
+    <!-- jendela konfirmasi hapus data -->
     <div id="deleteModalOverlay" class="hk-overlay" style="display: none;">
         <div class="hk-alert-modal berhasil">
-            {{-- Close Button (Figma ci:close-lg) --}}
+            <!-- tombol tutup jendela -->
             <button type="button" class="hk-alert-close" onclick="closeDeleteModal()" title="Tutup">
                 <img src="{{ asset('icon/figma_close_lg.svg') }}" alt="Tutup">
             </button>

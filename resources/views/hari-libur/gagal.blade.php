@@ -69,7 +69,7 @@
     {{-- Alert Modal Overlay Gagal --}}
     <div class="hl-overlay">
         <div class="hl-alert-modal gagal">
-            {{-- Close Button (Figma ci:close-lg) --}}
+            <!-- tombol tutup jendela -->
             <a href="{{ route('hari-libur.index') }}" class="hl-alert-close" title="Tutup">
                 <img src="{{ asset('icon/figma_close_lg.svg') }}" alt="Tutup">
             </a>

@@ -50,7 +50,7 @@
 @endsection
 
 @section('content')
-    <!-- Card Header (Figma Node 638:4200) -->
+    <!-- bagian kepala kartu -->
     <div class="detail-card-header">
         <div class="detail-header-left">
             <img src="/icon/icon_account_school.svg" alt="Riwayat Absensi">
@@ -75,7 +75,7 @@
     <!-- Scrollable Content Body -->
     <div class="detail-card-body">
 
-        <!-- ==================== BAGIAN 1: STATISTIK KEHADIRAN ==================== -->
+        <!-- bagian statistik kehadiran -->
         <div>
             <h3 class="section-title">Statistik Kehadiran</h3>
 
@@ -83,7 +83,7 @@
                 <div class="stats-user-name">{{ $user->nama }}</div>
 
                 <div class="chart-container-flex">
-                    <!-- Donut Chart -->
+                    <!-- grafik donat persentase -->
                     @php
                         $tepat = $chartStats['tepat_waktu'];
                         $telat = $chartStats['terlambat'];
@@ -120,21 +120,21 @@
                                 @endphp
 
                                 @if($tepat > 0)
-                                <!-- Slice 1: Tepat Waktu (Blue) -->
+                                
                                 <circle class="donut-slice" cx="95" cy="95" r="75" fill="none" stroke="#638CFF" stroke-width="26"
                                     stroke-dasharray="{{ $strokeTepat }} {{ $circumference }}" stroke-dashoffset="0"
                                     data-title="Tepat Waktu" data-value="{{ $tepat }}" data-percent="{{ $pctTepat }}%" data-color="#638CFF" />
                                 @endif
 
                                 @if($telat > 0)
-                                <!-- Slice 2: Terlambat (Green) -->
+                                
                                 <circle class="donut-slice" cx="95" cy="95" r="75" fill="none" stroke="#5CD096" stroke-width="26"
                                     stroke-dasharray="{{ $strokeTelat }} {{ $circumference }}" stroke-dashoffset="{{ $offsetTelat }}"
                                     data-title="Terlambat" data-value="{{ $telat }}" data-percent="{{ $pctTelat }}%" data-color="#5CD096" />
                                 @endif
 
                                 @if($alpa > 0)
-                                <!-- Slice 3: Tidak Masuk (Orange) -->
+                                
                                 <circle class="donut-slice" cx="95" cy="95" r="75" fill="none" stroke="#FFA800" stroke-width="26"
                                     stroke-dasharray="{{ $strokeAlpa }} {{ $circumference }}" stroke-dashoffset="{{ $offsetAlpa }}"
                                     data-title="Tidak Masuk" data-value="{{ $alpa }}" data-percent="{{ $pctAlpa }}%" data-color="#FFA800" />
@@ -142,13 +142,13 @@
                             @endif
                         </svg>
 
-                        <!-- Center Total Badge -->
+                        <!-- label total tengah -->
                         <div class="donut-center-text">
                             <span class="donut-center-label">Total</span>
                             <span class="donut-center-value">{{ $total > 0 ? $total : '-' }}</span>
                         </div>
 
-                        <!-- Tooltip Popup (Google Looker Style) -->
+                        <!-- keterangan sembulan grafik -->
                         <div class="chart-tooltip-popup" id="chartTooltip">
                             <div class="tooltip-header">
                                 <span class="tooltip-dot" id="tooltipDot"></span>
@@ -160,7 +160,7 @@
                         </div>
                     </div>
 
-                    <!-- Chart Legends -->
+                    <!-- legenda grafik -->
                     <div class="chart-legends-wrapper">
                         <div class="legend-item">
                             <span class="legend-dot blue"></span>
@@ -179,7 +179,7 @@
             </div>
         </div>
 
-        <!-- ==================== BAGIAN 2: RIWAYAT KEHADIRAN MURID ==================== -->
+        <!-- bagian riwayat kehadiran -->
         <div>
             <h3 class="section-title">Riwayat Kehadiran</h3>
 
@@ -225,7 +225,7 @@
 
     </div>
 
-    <!-- ==================== MODAL CETAK QR CODE ==================== -->
+    <!-- modal cetak qr code -->
     <div class="modal-overlay" id="qrModal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(2px);">
         <div style="background: #FFFFFF; border-radius: 12px; border: 1px solid #6FBE8E; padding: 28px; width: 420px; max-width: 90vw; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;">
             <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
@@ -266,7 +266,7 @@
         document.getElementById('qrModal').style.display = 'none';
     }
 
-    // Interactive Donut Chart Hover Tooltip (Google Looker Style)
+    // sembulan interaktif grafik
     document.addEventListener('DOMContentLoaded', function () {
         const donutBox = document.getElementById('donutChartBox');
         const tooltip  = document.getElementById('chartTooltip');

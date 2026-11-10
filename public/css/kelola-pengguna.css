@@ -1,14 +1,4 @@
-/* =============================================================
-   kelola-pengguna.css — Halaman Kelola Pengguna (Sesuai Figma)
-   Figma Nodes:
-   - 620:2600 (Detail/Index Kelola Pengguna)
-   - 625:3040 (Form Tambah Pengguna)
-   - 625:4901 (Form Edit Pengguna)
-   - 665:28738 (Delete Confirm Modal)
-   - 666:29983 (Alert Berhasil)
-   ============================================================= */
-
-/* ── Flash Messages ── */
+/* flash message sukses dan error */
 .pg-flash {
     margin: 16px 36px 0;
     padding: 12px 18px;
@@ -18,8 +8,10 @@
 }
 .pg-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .pg-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+/* akhir flash message sukses dan error */
 
-/* ── Card Header (Figma ~79px) ── */
+
+/* header kartu */
 .pg-card-head {
     display: flex;
     align-items: center;
@@ -46,8 +38,10 @@
     align-items: center;
     gap: 20px;
 }
+/* akhir header kartu */
 
-/* ── Dropdown "Tampilkan 10" (Disamakan persis dengan modul lain) ── */
+
+/* dropdown jumlah tampil */
 .pg-select-show {
     background: #e4e6ef;
     border: 1px solid #e4e6ef;
@@ -70,8 +64,10 @@
     display: inline-flex;
     align-items: center;
 }
+/* akhir dropdown jumlah tampil */
 
-/* ── Tombol Tambah ── */
+
+/* tombol tambah pengguna */
 .pg-btn-tambah {
     display: inline-flex;
     align-items: center;
@@ -93,13 +89,17 @@
     transition: background 0.2s;
 }
 .pg-btn-tambah:hover { background: #0a5c3e; color: #fff; text-decoration: none; }
+/* akhir tombol tambah pengguna */
 
-/* ── Content Area ── */
+
+/* area konten */
 .pg-content {
     padding: 30px 36px;
 }
+/* akhir area konten */
 
-/* ── Table Wrapper ── */
+
+/* tabel data pengguna */
 .pg-table-wrap {
     border: 1px solid #808080;
     border-radius: 10px;
@@ -107,7 +107,6 @@
     overflow-x: auto;
 }
 
-/* ── Table ── */
 .pg-table {
     width: 100%;
     border-collapse: collapse;
@@ -138,8 +137,10 @@
 }
 .pg-table tbody tr td:last-child { border-right: none; }
 .pg-table tbody tr:last-child td { border-bottom: none; }
+/* akhir tabel data pengguna */
 
-/* ── Aksi Cell ── */
+
+/* tombol aksi edit dan hapus */
 .pg-aksi-cell {
     display: flex;
     align-items: center;
@@ -162,8 +163,10 @@
     text-decoration: none;
 }
 .pg-aksi-btn:hover { opacity: 0.7; }
+/* akhir tombol aksi edit dan hapus */
 
-/* ── Empty State ── */
+
+/* tampilan kosong saat tidak ada data */
 .pg-empty {
     padding: 40px;
     text-align: center;
@@ -171,10 +174,10 @@
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
 }
+/* akhir tampilan kosong saat tidak ada data */
 
-/* =============================================================
-   OVERLAY (dipakai di delete modal & form overlay)
-   ============================================================= */
+
+/* overlay latar modal */
 .pg-overlay {
     position: fixed;
     inset: 0;
@@ -185,11 +188,10 @@
     justify-content: center;
     padding: 20px;
 }
+/* akhir overlay latar modal */
 
-/* =============================================================
-   MODAL KONFIRMASI HAPUS (Figma 665:28738 — sama pola ta-alert-modal)
-   Width: 356px, border hijau, logo, judul, batal+hapus
-   ============================================================= */
+
+/* modal konfirmasi hapus */
 .pg-delete-modal {
     background: #ffffff;
     border: 1px solid #6fbe8e;
@@ -279,10 +281,10 @@
     transition: opacity 0.18s;
 }
 .pg-delete-btn-hapus:hover { opacity: 0.85; }
+/* akhir modal konfirmasi hapus */
 
-/* =============================================================
-   ALERT BERHASIL / GAGAL (Figma 666:29983 — sama pola ta-alert-modal)
-   ============================================================= */
+
+/* modal notifikasi berhasil dan gagal */
 .pg-alert-overlay {
     position: fixed;
     inset: 0;
@@ -352,10 +354,10 @@
 .pg-alert-btn-wrap a:hover { opacity: 0.88; color: #fff; text-decoration: none; }
 .pg-alert-btn-wrap.berhasil a { background: #0e7651; }
 .pg-alert-btn-wrap.gagal    a { background: #ef4444; }
+/* akhir modal notifikasi berhasil dan gagal */
 
-/* =============================================================
-   MODAL FORM (Figma 625:3040 & 625:4901) — overlay
-   ============================================================= */
+
+/* modal form tambah dan edit pengguna */
 .pg-form-overlay {
     position: fixed;
     inset: 0;
@@ -408,7 +410,6 @@
     margin: 0;
 }
 
-/* ── Form Grid (2 kolom) ── */
 .pg-form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -450,7 +451,6 @@
 }
 .pg-form-input:focus, .pg-form-select:focus { border-color: #0e7651; }
 
-/* ── Password Container with Eye Icon ── */
 .pg-password-wrap {
     flex: 1;
     position: relative;
@@ -475,7 +475,6 @@
     user-select: none;
 }
 
-/* ── Tombol Batal & Simpan ── */
 .pg-modal-actions {
     display: flex;
     gap: 20px;
@@ -515,3 +514,49 @@
     transition: opacity 0.18s;
 }
 .pg-btn-simpan:hover { opacity: 0.85; }
+/* akhir modal form tambah dan edit pengguna */
+
+/* responsive kelola pengguna */
+@media (max-width: 768px) {
+    .pg-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: auto;
+        flex-wrap: wrap;
+    }
+    .pg-content {
+        padding: 16px 14px;
+    }
+    .pg-modal {
+        width: 92vw;
+        max-width: 500px;
+        padding: 24px 16px;
+    }
+    .pg-form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .pg-form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .pg-form-label {
+        width: 100%;
+    }
+    .pg-delete-modal,
+    .pg-alert-modal {
+        width: 92vw;
+        max-width: 420px;
+        padding: 24px 16px;
+    }
+    .pg-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+}
+/* akhir responsive kelola pengguna */

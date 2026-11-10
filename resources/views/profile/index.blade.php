@@ -17,7 +17,7 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="/css/profile.css?v={{ file_exists(public_path('css/profile.css')) ? filemtime(public_path('css/profile.css')) : time() }}">
 <style>
 @media print {
     body * {
@@ -104,7 +104,7 @@
     </div>
     @endif
 
-    {{-- Card Header (Figma Node 621:2897) --}}
+    <!-- kepala kartu profil pengguna -->
     <div class="pf-card-head">
         <div class="pf-card-head-left">
             {{-- Icon Profile Green --}}
@@ -158,7 +158,7 @@
 
     <div class="pf-content">
 
-        {{-- Top Bar: Avatar Bulat + Ucapan Selamat Datang + Tombol Edit (Figma 621:2905) --}}
+        <!-- bilah atas profil pengguna -->
         <div class="pf-top-bar">
             <div class="pf-user-summary">
                 <div id="topAvatarWrapper">
@@ -185,16 +185,16 @@
             </button>
         </div>
 
-        {{-- ==================== VIEW 1: DATA PROFILE (Figma Node 621:2785) ==================== --}}
+        <!-- tampilan data profil pengguna -->
         <div class="pf-detail-card" id="profileViewCard">
             <div class="pf-info-grid">
-                {{-- 1. Nama Lengkap --}}
+                <!-- informasi nama lengkap -->
                 <div class="pf-info-item">
                     <span class="pf-info-label">Nama Lengkap</span>
                     <span class="pf-info-value">{{ $user->nama }}</span>
                 </div>
 
-                {{-- 2. NIP / NISN --}}
+                <!-- informasi nomor induk -->
                 <div class="pf-info-item">
                     <span class="pf-info-label">{{ $roleLower === 'murid' ? 'NISN' : 'NIP' }}</span>
                     <span class="pf-info-value">{{ $nipNisnValue }}</span>
@@ -218,7 +218,7 @@
                     <span class="pf-info-value">{{ $noHpValue }}</span>
                 </div>
 
-                {{-- 6. Status --}}
+                <!-- informasi status akun -->
                 <div class="pf-info-item">
                     <span class="pf-info-label">Status</span>
                     <div class="pf-status-badge">
@@ -229,7 +229,7 @@
             </div>
         </div>
 
-        {{-- ==================== VIEW 2: FORM PERBARUI PROFILE (Figma Node 621:2862) ==================== --}}
+        <!-- formulir pembaruan profil pengguna -->
         <div class="pf-edit-card" id="profileEditCard" style="display: none;">
             {{-- Header Form Edit (Data Pribadi + Close X) --}}
             <div class="pf-edit-header">
@@ -312,7 +312,7 @@
                     </div>
                 </div>
 
-                {{-- Action Buttons: BATAL & SIMPAN (Figma Node 621:2942) --}}
+                <!-- tombol tindakan batal dan simpan -->
                 <div class="pf-form-actions">
                     <button type="button" class="pf-btn-batal-form" onclick="showProfileView()">
                         BATAL

@@ -5,24 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard') - Tahfizd Tracker</title>
 
-    <link rel="stylesheet" href="/css/app-layout.css">
+    <link rel="stylesheet" href="{{ asset('css/app-layout.css') }}?v={{ file_exists(public_path('css/app-layout.css')) ? filemtime(public_path('css/app-layout.css')) : time() }}">
     @yield('styles')
     @stack('styles')
 </head>
 <body>
 
-    <!-- ==================== SIDEBAR (Figma Node 618:960) ==================== -->
+    <!-- tirai latar menu seluler -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleMobileSidebar()"></div>
+    <!-- akhir tirai latar menu seluler -->
+
+    <!-- bagian sidebar -->
     <aside class="sidebar">
-        <!-- Sidebar Header (Figma Node 618:961) -->
+        <!-- bagian header sidebar -->
         <div class="sidebar-header">
             <img src="/gambar/logo.png" alt="Logo" class="sidebar-logo">
             <div class="sidebar-header-text">
                 <span class="sidebar-title">Tahfizd Tracker</span>
                 <span class="sidebar-subtitle">At-Taubah Karawang</span>
             </div>
+            <button type="button" class="btn-close-sidebar-mobile" onclick="toggleMobileSidebar()" aria-label="Tutup Menu">
+                &times;
+            </button>
         </div>
+        <!-- akhir bagian header sidebar -->
 
-        <!-- Sidebar Navigation Menu Items (Figma Node 618:1591 & 393:4769) -->
+        <!-- bagian menu navigasi sidebar -->
         <ul class="sidebar-menu">
             @php 
                 $role = strtolower(Auth::user()->role); 
@@ -32,9 +40,7 @@
             @endphp
 
             @if($role === 'guru')
-                {{-- ==================== SIDEBAR GURU (Figma Node 393:4769, 393:4525, 393:6988) ==================== --}}
-                
-                <!-- 1. Dashboard -->
+                <!-- menu navigasi guru -->
                 <li>
                     <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -44,7 +50,6 @@
                     </a>
                 </li>
 
-                <!-- 2. Absensi (Submenu: Absensi Kehadiran, Riwayat Absensi) -->
                 <li>
                     <button type="button" class="menu-item {{ $isAbsensiActive ? 'active' : '' }}" id="btnToggleAbsensi" onclick="toggleAbsensiMenu()">
                         <div class="menu-icon">
@@ -66,7 +71,6 @@
                     </div>
                 </li>
 
-                <!-- 3. Siswa (Figma Node 393:4561) -->
                 <li>
                     <a href="{{ route('siswa.index') }}" class="menu-item {{ $isSiswaActive ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -76,7 +80,6 @@
                     </a>
                 </li>
 
-                <!-- 4. Tahfizd (Accordion Submenu: Daftar Tahfizd, Target Hafalan) (Figma Node 393:6988) -->
                 <li>
                     <button type="button" class="menu-item {{ $isTahfizdActive ? 'active' : '' }}" id="btnToggleTahfizd" onclick="toggleTahfizdMenu()">
                         <div class="menu-icon">
@@ -98,7 +101,6 @@
                     </div>
                 </li>
 
-                <!-- 5. Profile (Figma Node 393:4573) -->
                 <li>
                     <a href="{{ route('profile.index') }}" class="menu-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -107,11 +109,10 @@
                         <span>Profile</span>
                     </a>
                 </li>
+                <!-- akhir menu navigasi guru -->
 
             @elseif($role === 'murid')
-                {{-- ==================== SIDEBAR MURID ==================== --}}
-                
-                <!-- 1. Dashboard -->
+                <!-- menu navigasi murid -->
                 <li>
                     <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -121,7 +122,6 @@
                     </a>
                 </li>
 
-                <!-- 2. Absensi (Submenu: Absensi Kehadiran, Riwayat Absensi) -->
                 <li>
                     <button type="button" class="menu-item {{ $isAbsensiActive ? 'active' : '' }}" id="btnToggleAbsensi" onclick="toggleAbsensiMenu()">
                         <div class="menu-icon">
@@ -143,7 +143,6 @@
                     </div>
                 </li>
 
-                <!-- 3. Tahfizd (Single menu item tanpa submenu sesuai instruksi user) -->
                 <li>
                     <a href="{{ Auth::user()->murid ? route('siswa.show', Auth::user()->murid->id_murid) : '#' }}" class="menu-item {{ request()->routeIs('siswa.show') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -153,7 +152,6 @@
                     </a>
                 </li>
 
-                <!-- 4. Profile -->
                 <li>
                     <a href="{{ route('profile.index') }}" class="menu-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -162,11 +160,10 @@
                         <span>Profile</span>
                     </a>
                 </li>
+                <!-- akhir menu navigasi murid -->
 
             @else
-                {{-- ==================== SIDEBAR ADMIN (Figma Node 618:1591) ==================== --}}
-                
-                <!-- 1. Dashboard -->
+                <!-- menu navigasi admin -->
                 <li>
                     <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -176,7 +173,6 @@
                     </a>
                 </li>
 
-                <!-- 2. Absensi (Accordion Toggle: Terbuka / Tertutup) -->
                 <li>
                     <button type="button" class="menu-item {{ $isAbsensiActive ? 'active' : '' }}" id="btnToggleAbsensi" onclick="toggleAbsensiMenu()">
                         <div class="menu-icon">
@@ -188,7 +184,6 @@
                         </div>
                     </button>
 
-                    <!-- Submenu Absensi (Figma Node 618:1321 & 618:1591) -->
                     <div class="submenu-container {{ $isAbsensiActive ? 'open' : '' }}" id="submenuAbsensi">
                         <a href="{{ route('absensi.kehadiran') }}" class="submenu-item {{ request()->routeIs('absensi.kehadiran') ? 'active' : '' }}">
                             <span>Absensi Kehadiran</span>
@@ -205,7 +200,6 @@
                     </div>
                 </li>
 
-                <!-- 3. Hari Libur -->
                 <li>
                     <a href="{{ route('hari-libur.index') }}" class="menu-item {{ request()->routeIs('hari-libur.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -215,7 +209,6 @@
                     </a>
                 </li>
 
-                <!-- 4. Hari Kerja -->
                 <li>
                     <a href="{{ route('hari-kerja.index') }}" class="menu-item {{ request()->routeIs('hari-kerja.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -225,7 +218,6 @@
                     </a>
                 </li>
 
-                <!-- 5. Tahun Akademik -->
                 <li>
                     <a href="{{ route('tahun-akademik.index') }}" class="menu-item {{ request()->routeIs('tahun-akademik.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -235,7 +227,6 @@
                     </a>
                 </li>
 
-                <!-- 6. Kelola Pengguna -->
                 <li>
                     <a href="{{ route('pengguna.index') }}" class="menu-item {{ request()->routeIs('pengguna.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -245,7 +236,6 @@
                     </a>
                 </li>
 
-                <!-- 7. Profile -->
                 <li>
                     <a href="{{ route('profile.index') }}" class="menu-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
                         <div class="menu-icon">
@@ -254,25 +244,39 @@
                         <span>Profile</span>
                     </a>
                 </li>
+                <!-- akhir menu navigasi admin -->
             @endif
         </ul>
+        <!-- akhir bagian menu navigasi sidebar -->
     </aside>
+    <!-- akhir bagian sidebar -->
 
-    <!-- ==================== MAIN SECTION (Top Header + Breadcrumb + Content) ==================== -->
+    <!-- bagian pembungkus utama -->
     <div class="main-container">
         
-        <!-- Top Header (Figma Node 618:939) -->
+        <!-- bagian bilah atas -->
         <header class="topbar">
-            <!-- Left: Identitas Sekolah -->
+            <!-- tombol menu seluler -->
+            <button type="button" class="btn-hamburger" id="btnHamburgerSidebar" onclick="toggleMobileSidebar()" aria-label="Buka Menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E7651" stroke-width="2.5" stroke-linecap="round">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <!-- akhir tombol menu seluler -->
+
+            <!-- info sekolah -->
             <div class="school-info">
                 Sekolah Islam ATTAUBAH Karawang<br>
                 Jl.KH.Ahmad Dahlan No.E/4 Kaum 1<br>
                 Hj.R.Rina Noor'aeni, SE
             </div>
+            <!-- akhir info sekolah -->
 
-            <!-- Right Controls: Badge Tahun Akademik, Profil Pengguna, Tombol Keluar -->
+            <!-- kontrol bilah atas -->
             <div class="topbar-right">
-                <!-- Dropdown Tahun Akademik (Figma Node 393:4826 & 393:4827) -->
+                <!-- menu pilihan tahun akademik -->
                 @php
                     $navTahunList = \App\Models\TahunAkademik::orderBy('tanggal_mulai', 'desc')->get();
                     $activeYearId = session('active_tahun_akademik_id');
@@ -309,8 +313,9 @@
                         </div>
                     @endif
                 </div>
+                <!-- akhir menu pilihan tahun akademik -->
 
-                <!-- Profil Pengguna (Figma Node 618:941) -->
+                <!-- profil pengguna -->
                 <div class="user-profile-badge">
                     <div class="user-avatar-circle">
                         {{ strtoupper(substr(Auth::user()->nama ?? 'U', 0, 2)) }}
@@ -320,8 +325,9 @@
                         <span class="user-role-label">{{ Auth::user()->role ?? 'Guru SD' }}</span>
                     </div>
                 </div>
+                <!-- akhir profil pengguna -->
 
-                <!-- Tombol Keluar (Figma Node 618:947) -->
+                <!-- tombol keluar -->
                 <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                     @csrf
                     <button type="submit" class="btn-logout">
@@ -329,10 +335,13 @@
                         <span>Keluar</span>
                     </button>
                 </form>
+                <!-- akhir tombol keluar -->
             </div>
+            <!-- akhir kontrol bilah atas -->
         </header>
+        <!-- akhir bagian bilah atas -->
 
-        <!-- Sub-Header / Breadcrumb Bar (Figma Node 618:955 & 635:1757) -->
+        <!-- bagian navigasi rekam jejak -->
         <div class="breadcrumb-bar">
             @hasSection('breadcrumb')
                 @yield('breadcrumb')
@@ -343,89 +352,31 @@
                 {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('l, d F Y H:i') }}
             </span>
         </div>
+        <!-- akhir bagian navigasi rekam jejak -->
 
-        <!-- Main Viewport Content Card (Figma Node 618:938) -->
+        <!-- bagian konten halaman -->
         <main class="content-body">
             <div class="content-card">
                 @yield('content')
             </div>
         </main>
+        <!-- akhir bagian konten halaman -->
 
     </div>
+    <!-- akhir bagian pembungkus utama -->
 
-    <!-- SCRIPT REAL-TIME CLOCK & ACCORDION TOGGLE (Figma Node 618:955 & 618:1591) -->
+    <!-- skrip pendukung aplikasi -->
     <script>
-        function updateLiveDateTime() {
-            const now = new Date();
-            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            
-            const dayName = days[now.getDay()];
-            const date = now.getDate();
-            const monthName = months[now.getMonth()];
-            const year = now.getFullYear();
-            
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            
-            const liveEl = document.getElementById('liveDateTime');
-            if (liveEl) {
-                liveEl.textContent = `${dayName}, ${date} ${monthName} ${year} ${hours}:${minutes}`;
-            }
+        // kendali navigasi seluler
+        function toggleMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            if (sidebar) sidebar.classList.toggle('mobile-open');
+            if (backdrop) backdrop.classList.toggle('active');
         }
+        // akhir kendali navigasi seluler
 
-        // Jalankan saat pertama kali dimuat & perbarui berkala
-        updateLiveDateTime();
-        setInterval(updateLiveDateTime, 1000);
-
-        function toggleAbsensiMenu() {
-            const submenu = document.getElementById('submenuAbsensi');
-            const arrowIcon = document.getElementById('arrowAbsensiIcon');
-
-            if (submenu) {
-                if (submenu.classList.contains('open')) {
-                    submenu.classList.remove('open');
-                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_tertutup_sidebar.png';
-                } else {
-                    submenu.classList.add('open');
-                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_terbuka_sidebar.png';
-                }
-            }
-        }
-
-        function toggleTahfizdMenu() {
-            const submenu = document.getElementById('submenuTahfizd');
-            const arrowIcon = document.getElementById('arrowTahfizdIcon');
-
-            if (submenu) {
-                if (submenu.classList.contains('open')) {
-                    submenu.classList.remove('open');
-                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_tertutup_sidebar.png';
-                } else {
-                    submenu.classList.add('open');
-                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_terbuka_sidebar.png';
-                }
-            }
-        }
-
-        // Toggle Dropdown Tahun Akademik di Navbar (Figma 393:4826 & 393:4827)
-        function toggleAcademicYearDropdown(event) {
-            event.stopPropagation();
-            const menu = document.getElementById('academicYearMenu');
-            if (menu) {
-                menu.classList.toggle('show');
-            }
-        }
-
-        document.addEventListener('click', function(event) {
-            const wrap = document.getElementById('academicYearDropdownWrap');
-            const menu = document.getElementById('academicYearMenu');
-            if (wrap && menu && !wrap.contains(event.target)) {
-                menu.classList.remove('show');
-            }
-        });
-
-        // Live Jam Digital Format Bahasa Indonesia (WIB)
+        // penunjuk waktu digital
         function updateLiveDateTime() {
             const el = document.getElementById('liveDateTime');
             if (!el) return;
@@ -445,8 +396,61 @@
         }
         updateLiveDateTime();
         setInterval(updateLiveDateTime, 1000);
+        // akhir penunjuk waktu digital
 
-        // ==================== GLOBAL INPUT SANITIZATION & LIMITATION ====================
+        // kendali menu absensi
+        function toggleAbsensiMenu() {
+            const submenu = document.getElementById('submenuAbsensi');
+            const arrowIcon = document.getElementById('arrowAbsensiIcon');
+
+            if (submenu) {
+                if (submenu.classList.contains('open')) {
+                    submenu.classList.remove('open');
+                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_tertutup_sidebar.png';
+                } else {
+                    submenu.classList.add('open');
+                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_terbuka_sidebar.png';
+                }
+            }
+        }
+        // akhir kendali menu absensi
+
+        // kendali menu tahfizd
+        function toggleTahfizdMenu() {
+            const submenu = document.getElementById('submenuTahfizd');
+            const arrowIcon = document.getElementById('arrowTahfizdIcon');
+
+            if (submenu) {
+                if (submenu.classList.contains('open')) {
+                    submenu.classList.remove('open');
+                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_tertutup_sidebar.png';
+                } else {
+                    submenu.classList.add('open');
+                    if (arrowIcon) arrowIcon.src = '/icon/icon_arrow_terbuka_sidebar.png';
+                }
+            }
+        }
+        // akhir kendali menu tahfizd
+
+        // kendali pilihan tahun akademik
+        function toggleAcademicYearDropdown(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('academicYearMenu');
+            if (menu) {
+                menu.classList.toggle('show');
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const wrap = document.getElementById('academicYearDropdownWrap');
+            const menu = document.getElementById('academicYearMenu');
+            if (wrap && menu && !wrap.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+        // akhir kendali pilihan tahun akademik
+
+        // pembatasan karakter input
         document.addEventListener('input', function(e) {
             const target = e.target;
             if (!target || target.tagName !== 'INPUT') return;
@@ -454,31 +458,29 @@
             const name = (target.name || '').toLowerCase();
             const id = (target.id || '').toLowerCase();
 
-            // 1. Input Nama (Hanya Huruf, Spasi, Titik, Koma, Apostrof, Strip - TIDAK BOLEH ANGKA)
             if (name === 'nama' || id.includes('nama') || target.dataset.type === 'nama') {
                 target.value = target.value.replace(/[^a-zA-Z\s.,'’\-]/g, '');
                 if (target.maxLength <= 0 || target.maxLength > 100) target.maxLength = 100;
             }
 
-            // 2. Input NIP / NISN (Hanya Angka, maksimal 18 digit)
             if (name === 'nip' || name === 'nisn' || name === 'nip_nisn' || id.includes('nip') || id.includes('nisn')) {
                 target.value = target.value.replace(/\D/g, '');
                 if (target.maxLength <= 0 || target.maxLength > 18) target.maxLength = 18;
             }
 
-            // 3. Input No Handphone (Hanya Angka, bisa diawali 0 atau 62, maksimal 15 digit)
             if (name === 'no_hp' || id.includes('nohp') || id.includes('no_hp') || name.includes('phone') || name.includes('telepon')) {
                 target.value = target.value.replace(/\D/g, '');
                 if (target.maxLength <= 0 || target.maxLength > 15) target.maxLength = 15;
             }
 
-            // 4. Input Tahun Akademik (Hanya Angka dan garis miring '/', maks 9 digit: 2026/2027)
             if (name === 'nama_tahun') {
                 target.value = target.value.replace(/[^0-9\/]/g, '');
                 if (target.maxLength <= 0 || target.maxLength > 9) target.maxLength = 9;
             }
         });
+        // akhir pembatasan karakter input
     </script>
+    <!-- akhir skrip pendukung aplikasi -->
 
     @yield('scripts')
 </body>

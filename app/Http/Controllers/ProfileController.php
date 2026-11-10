@@ -12,10 +12,7 @@ use App\Models\Murid;
 
 class ProfileController extends Controller
 {
-    /**
-     * Tampilkan halaman Profile pengguna (Figma Node 621:2785 & 621:2862).
-     * Dapat diakses oleh semua role (Admin, Guru, Murid).
-     */
+    // halaman data profil
     public function index()
     {
         $user = Auth::user();
@@ -23,7 +20,7 @@ class ProfileController extends Controller
             return redirect()->route('login');
         }
 
-        // Load relasi role terkait
+        // ambil rincian peran pengguna
         $detail = null;
         $roleLower = strtolower($user->role);
 
@@ -34,15 +31,15 @@ class ProfileController extends Controller
         } elseif ($roleLower === 'murid') {
             $detail = Murid::where('id_user', $user->id_user)->first();
         }
+        // akhir ambil rincian peran pengguna
 
         $qrData = \App\Services\QRCodeService::getOrGenerateUserQR($user, $detail);
 
         return view('profile.index', compact('user', 'detail', 'qrData'));
     }
+    // akhir halaman data profil
 
-    /**
-     * Perbarui data profil pengguna (Figma Node 621:2862).
-     */
+    // perbarui profil pengguna
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -50,6 +47,7 @@ class ProfileController extends Controller
             return redirect()->route('login');
         }
 
+        // validasi form profil
         $request->validate([
             'nama'     => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s.,\'’\-]+$/'],
             'email'    => 'required|email|max:100|unique:users,email,' . $user->id_user . ',id_user',
@@ -61,14 +59,16 @@ class ProfileController extends Controller
             'nip_nisn.regex' => 'NIP / NISN hanya boleh berisi angka.',
             'no_hp.regex'    => 'Nomor handphone hanya boleh berisi angka.',
         ]);
+        // akhir validasi form profil
 
         try {
-            // Update data user utama
+            // perbarui akun pengguna
             $user->nama = $request->nama;
             $user->email = $request->email;
             $user->save();
+            // akhir perbarui akun pengguna
 
-            // Role specific detail
+            // simpan data rincian peran
             $roleLower = strtolower($user->role);
             $detail = null;
 
@@ -97,12 +97,11 @@ class ProfileController extends Controller
                     $detail->no_hp = $request->no_hp;
                 }
 
-                // Upload Foto Formal jika ada (disimpan di storage/app/public/profile)
+                // proses unggah foto profil
                 if ($request->hasFile('foto')) {
                     $file = $request->file('foto');
                     $filename = 'foto_' . $user->id_user . '_' . time() . '.' . $file->getClientOriginalExtension();
                     
-                    // Hapus foto lama jika tersimpan di storage
                     if (!empty($detail->foto) && str_starts_with($detail->foto, 'storage/')) {
                         $oldStoragePath = str_replace('storage/', '', $detail->foto);
                         Storage::disk('public')->delete($oldStoragePath);
@@ -111,16 +110,18 @@ class ProfileController extends Controller
                     $path = Storage::disk('public')->putFileAs('profile', $file, $filename);
                     $detail->foto = 'storage/' . $path;
                 }
+                // akhir proses unggah foto profil
 
                 $detail->save();
 
-                // Generate / perbarui QR code di storage sesuai NIP/NISN terbaru
                 \App\Services\QRCodeService::getOrGenerateUserQR($user, $detail);
             }
+            // akhir simpan data rincian peran
 
             return redirect()->route('profile.index')->with('success_modal', 'Data Profile Berhasil Di Perbarui');
         } catch (\Exception $e) {
             return redirect()->route('profile.index')->with('error_modal', 'Gagal memperbarui profil: ' . $e->getMessage());
         }
     }
+    // akhir perbarui profil pengguna
 }

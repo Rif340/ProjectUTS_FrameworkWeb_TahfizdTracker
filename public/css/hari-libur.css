@@ -1,12 +1,4 @@
-/* =============================================================
-   hari-libur.css  — Halaman Hari Libur & Modals (100% Sesuai Figma)
-   Figma Nodes:
-   - 618:1133 (Detail Hari Libur)
-   - 625:3386 (Form Hari Libur Modal)
-   - 654:7404 (Alert Tambah Berhasil)
-   ============================================================= */
-
-/* ── Flash Messages ── */
+/* flash message sukses dan error */
 .hl-flash {
     margin: 16px 36px 0;
     padding: 12px 18px;
@@ -16,8 +8,10 @@
 }
 .hl-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .hl-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+/* akhir flash message sukses dan error */
 
-/* ── Card Header (Figma Frame 620:1954, Height: ~79px) ── */
+
+/* header kartu */
 .hl-card-head {
     display: flex;
     align-items: center;
@@ -27,20 +21,17 @@
     min-height: 70px;
     box-sizing: border-box;
 }
-
 .hl-card-head-left {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
 .hl-head-icon {
     width: 19px;
     height: 22px;
     object-fit: contain;
     flex-shrink: 0;
 }
-
 .hl-head-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -48,14 +39,15 @@
     color: #0e774f;
     white-space: nowrap;
 }
-
 .hl-card-head-right {
     display: flex;
     align-items: center;
     gap: 16px;
 }
+/* akhir header kartu */
 
-/* Dropdown "Tampilkan 10" (Figma 620:1961 - Icon ep:arrow-down-bold) */
+
+/* dropdown jumlah tampil */
 .hl-select-show {
     background: #e4e6ef;
     border: 1px solid #e4e6ef;
@@ -78,8 +70,10 @@
     display: inline-flex;
     align-items: center;
 }
+/* akhir dropdown jumlah tampil */
 
-/* Tombol + Tambah (Figma 620:1965) */
+
+/* tombol tambah hari libur */
 .hl-btn-add {
     display: inline-flex;
     align-items: center;
@@ -105,23 +99,21 @@
     color: #ffffff;
     text-decoration: none;
 }
+/* akhir tombol tambah hari libur */
 
-/* ── Table Wrap (Figma 620:1967, x: 37, y: 123, width: 896, height: 288) ── */
+
+/* tabel data hari libur */
 .hl-table-wrap {
     margin: 36px 36px 36px;
     border: 1px solid #808080;
     border-radius: 10px;
     overflow: auto;
 }
-
-/* ── Table ── */
 .hl-tbl {
     width: 100%;
     border-collapse: collapse;
     min-width: 720px;
 }
-
-/* Header row (Height: 48px, bg: #e8e7f2) */
 .hl-th {
     background: #e8e7f2;
     border-bottom: 1px solid #808080;
@@ -141,8 +133,6 @@
 .hl-th-tgl1 { width: 169px; }
 .hl-th-tgl2 { width: 156px; }
 .hl-th-aksi { width: 225px; }
-
-/* Body rows (Height: 48px, bg: #ffffff) */
 .hl-td {
     background: #ffffff;
     border-bottom: 1px solid #808080;
@@ -158,11 +148,7 @@
 .hl-td:last-child { border-right: none; }
 .hl-tbl tbody tr:last-child .hl-td { border-bottom: none; }
 .hl-td-no { font-weight: 600; }
-
-.hl-td-aksi {
-    padding: 0 15px;
-}
-
+.hl-td-aksi { padding: 0 15px; }
 .hl-aksi-cell-grid {
     display: flex;
     align-items: center;
@@ -170,7 +156,6 @@
     gap: 20px;
     width: 100%;
 }
-
 .hl-aksi-btn {
     background: none;
     border: none;
@@ -181,32 +166,19 @@
     justify-content: center;
     transition: opacity 0.18s;
 }
-.hl-aksi-btn:hover {
-    opacity: 0.75;
-}
-
-.hl-icon-trash {
-    width: 13px;
-    height: 15px;
-    display: block;
-}
-
-.hl-icon-edit {
-    width: 18px;
-    height: 16px;
-    display: block;
-}
-
+.hl-aksi-btn:hover { opacity: 0.75; }
+.hl-icon-trash { width: 13px; height: 15px; display: block; }
+.hl-icon-edit { width: 18px; height: 16px; display: block; }
 .hl-empty {
     color: #b5b5c3;
     font-style: italic;
     padding: 24px;
     text-align: center;
 }
+/* akhir tabel data hari libur */
 
-/* =============================================================
-   MODAL OVERLAY (Backdrop Dimmed: rgba(0,0,0,0.25))
-   ============================================================= */
+
+/* overlay latar modal */
 .hl-overlay {
     position: fixed;
     inset: 0;
@@ -218,10 +190,10 @@
     padding: 20px;
     box-sizing: border-box;
 }
+/* akhir overlay latar modal */
 
-/* =============================================================
-   FORM MODAL (Figma Node 625:3386 / 625:4016)
-   ============================================================= */
+
+/* modal form tambah dan edit hari libur */
 .hl-form-modal {
     background: #ffffff;
     border: 1px solid #6fbe8e;
@@ -239,18 +211,13 @@
     position: relative;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
-
 .hl-form-logo {
     width: 95px;
     height: 95px;
     object-fit: cover;
     flex-shrink: 0;
 }
-
-.hl-form-header {
-    text-align: center;
-    width: 100%;
-}
+.hl-form-header { text-align: center; width: 100%; }
 .hl-form-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -265,8 +232,6 @@
     color: #91919c;
     margin: 0;
 }
-
-/* Grid input 2 kolom (Figma 625:4021) */
 .hl-form-grid {
     display: flex;
     gap: 60px;
@@ -274,15 +239,12 @@
     margin-top: 10px;
     box-sizing: border-box;
 }
-
 .hl-form-col {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-
-/* Row Form Field */
 .hl-field-row {
     display: flex;
     align-items: center;
@@ -290,7 +252,6 @@
     gap: 16px;
     width: 100%;
 }
-
 .hl-field-label {
     font-family: Arial, sans-serif;
     font-size: 16px;
@@ -304,14 +265,12 @@
     line-height: 0;
     vertical-align: middle;
 }
-
 .hl-field-input-wrap {
     flex: 1;
     position: relative;
     display: flex;
     align-items: center;
 }
-
 .hl-input {
     width: 100%;
     height: 42px;
@@ -326,13 +285,8 @@
     box-sizing: border-box;
     transition: border-color 0.18s;
 }
-.hl-input:focus {
-    border-color: #0e7651;
-}
-
-.hl-input-date {
-}
-
+.hl-input:focus { border-color: #0e7651; }
+.hl-input-date {}
 .hl-date-icon-box {
     position: absolute;
     right: 12px;
@@ -345,12 +299,7 @@
     align-items: center;
     justify-content: center;
 }
-.hl-date-icon-box img {
-    width: 20px;
-    height: 20px;
-}
-
-/* Select dengan ikon ep:arrow-down-bold (Figma 625:4046 / 625:4032) */
+.hl-date-icon-box img { width: 20px; height: 20px; }
 .hl-select {
     width: 100%;
     height: 42px;
@@ -370,64 +319,31 @@
     background-repeat: no-repeat;
     background-position: right 14px center;
 }
-.hl-select:focus {
-    border-color: #0e7651;
-}
-
-/* Action Buttons (Batal & Simpan, Figma 625:4062) */
+.hl-select:focus { border-color: #0e7651; }
 .hl-form-btns {
     display: flex;
     gap: 20px;
     width: 100%;
     margin-top: 15px;
 }
-
 .hl-btn-batal {
-    flex: 1;
-    height: 44px;
-    background: red;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.18s;
+    flex: 1; height: 44px; background: red; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 16px;
+    color: #ffffff; text-decoration: none; border: none; cursor: pointer; transition: opacity 0.18s;
 }
-.hl-btn-batal:hover {
-    opacity: 0.88;
-    color: #ffffff;
-    text-decoration: none;
-}
-
+.hl-btn-batal:hover { opacity: 0.88; color: #ffffff; text-decoration: none; }
 .hl-btn-simpan {
-    flex: 1;
-    height: 44px;
-    background: #0e7651;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.18s;
+    flex: 1; height: 44px; background: #0e7651; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 16px;
+    color: #ffffff; border: none; cursor: pointer; transition: opacity 0.18s;
 }
-.hl-btn-simpan:hover {
-    opacity: 0.88;
-}
+.hl-btn-simpan:hover { opacity: 0.88; }
+/* akhir modal form tambah dan edit hari libur */
 
-/* =============================================================
-   ALERT MODAL (Figma Node 654:7404 / 654:7640)
-   ============================================================= */
+
+/* modal notifikasi dan konfirmasi hapus */
 .hl-alert-modal {
     background: #ffffff;
     border-radius: 10px;
@@ -444,107 +360,87 @@
 }
 .hl-alert-modal.berhasil { border: 1px solid #6fbe8e; }
 .hl-alert-modal.gagal    { border: 1px solid #f87171; }
-
-.hl-alert-logo {
-    width: 95px;
-    height: 95px;
-    object-fit: cover;
-}
-
+.hl-alert-logo { width: 95px; height: 95px; object-fit: cover; }
 .hl-alert-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 36px;
-    color: #000000;
-    margin: 0 0 5px;
-    line-height: 1.2;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 36px;
+    color: #000000; margin: 0 0 5px; line-height: 1.2;
 }
-.hl-alert-subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    color: #91919c;
-    margin: 0;
-}
-
-.hl-alert-btn-wrap {
-    width: 100%;
-}
+.hl-alert-subtitle { font-family: 'Poppins', sans-serif; font-size: 15px; color: #91919c; margin: 0; }
+.hl-alert-btn-wrap { width: 100%; }
 .hl-alert-btn-wrap a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 44px;
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-    text-decoration: none;
-    transition: opacity 0.18s;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 44px; border-radius: 10px;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 16px;
+    color: #ffffff; text-decoration: none; transition: opacity 0.18s;
 }
 .hl-alert-btn-wrap a:hover { opacity: 0.88; color: #ffffff; text-decoration: none; }
 .hl-alert-btn-wrap.berhasil a { background: #0e7651; }
 .hl-alert-btn-wrap.gagal    a { background: #ef4444; }
-
 .hl-alert-close {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; top: 14px; right: 16px;
+    width: 32px; height: 32px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
     transition: opacity 0.18s;
 }
 .hl-alert-close:hover { opacity: 0.7; }
 .hl-alert-close img { width: 32px; height: 32px; object-fit: contain; }
-
-/* ── Delete Confirmation Modal (Figma Node 657:12673) ── */
-.hl-confirm-btns {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-}
+.hl-confirm-btns { display: flex; gap: 20px; width: 100%; }
 .hl-btn-confirm-batal {
-    flex: 1;
-    height: 44px;
-    background: red;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.18s;
+    flex: 1; height: 44px; background: red; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 16px;
+    color: #ffffff; border: none; cursor: pointer; transition: opacity 0.18s;
 }
-.hl-btn-confirm-batal:hover {
-    opacity: 0.88;
-}
-
+.hl-btn-confirm-batal:hover { opacity: 0.88; }
 .hl-btn-confirm-setujui {
-    flex: 1;
-    height: 44px;
-    background: #0e7651;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.18s;
+    flex: 1; height: 44px; background: #0e7651; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 16px;
+    color: #ffffff; border: none; cursor: pointer; transition: opacity 0.18s;
 }
-.hl-btn-confirm-setujui:hover {
-    opacity: 0.88;
-}
+.hl-btn-confirm-setujui:hover { opacity: 0.88; }
+/* akhir modal notifikasi dan konfirmasi hapus */
 
+/* responsive hari libur */
+@media (max-width: 768px) {
+    .hl-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: auto;
+        flex-wrap: wrap;
+    }
+    .hl-form-modal {
+        width: 92vw;
+        max-width: 500px;
+        padding: 24px 16px;
+    }
+    .hl-form-grid {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .hl-field-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .hl-field-label {
+        width: 100%;
+    }
+    .hl-field-input-wrap {
+        width: 100%;
+    }
+    .hl-alert-modal {
+        width: 92vw;
+        max-width: 420px;
+        padding: 24px 16px;
+    }
+    .hl-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+}
+/* akhir responsive hari libur */

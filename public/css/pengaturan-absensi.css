@@ -1,9 +1,4 @@
-/* =============================================================
-   pengaturan-absensi.css — Halaman Pengaturan Batas Absensi
-   Figma Node: 709:72997 (Radius Absensi / Detail Absensi)
-   ============================================================= */
-
-/* ── Flash Messages ── */
+/* pesan notifikasi flash */
 .pa-flash {
     margin: 16px 36px 0;
     padding: 12px 18px;
@@ -13,8 +8,9 @@
 }
 .pa-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .pa-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+/* akhir pesan notifikasi flash */
 
-/* ── Card Main Container ── */
+/* wadah kartu pengaturan absensi */
 .pa-card-container {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -23,8 +19,9 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     min-height: 600px;
 }
+/* akhir wadah kartu pengaturan absensi */
 
-/* ── Card Header (Figma: Detail Absensi + Gear Icon + Tambah) ── */
+/* header kartu pengaturan absensi */
 .pa-card-head {
     display: flex;
     align-items: center;
@@ -102,8 +99,9 @@
 .pa-btn-add:hover {
     background: #0b5c3e;
 }
+/* akhir header kartu pengaturan absensi */
 
-/* ── Content Body ── */
+/* badan konten pengaturan absensi */
 .pa-body {
     padding: 24px 36px 36px;
 }
@@ -115,8 +113,9 @@
     color: #000000;
     margin-bottom: 16px;
 }
+/* akhir badan konten pengaturan absensi */
 
-/* ── Proportional Table Wrap ── */
+/* tabel data pengaturan lokasi absensi */
 .pa-table-wrap {
     border: 1px solid #808080;
     border-radius: 10px;
@@ -149,7 +148,7 @@
     border-right: none;
 }
 
-/* Kolom Proporsional */
+/* lebar kolom tabel */
 .pa-col-no     { width: 60px; }
 .pa-col-nama   { width: 28%; }
 .pa-col-lat    { width: 20%; }
@@ -175,7 +174,7 @@
 }
 
 .pa-td-nama {
-    text-align: left;
+    text-align: center;
     font-weight: 500;
 }
 
@@ -189,8 +188,9 @@
     padding: 30px;
     font-style: italic;
 }
+/* akhir tabel data pengaturan lokasi absensi */
 
-/* ── Tombol Aksi (Trash & Edit) ── */
+/* tombol aksi tabel pengaturan */
 .pa-aksi-container {
     display: flex;
     align-items: center;
@@ -211,8 +211,9 @@
 .pa-btn-icon:hover {
     transform: scale(1.15);
 }
+/* akhir tombol aksi tabel pengaturan */
 
-/* ── Modal Overlays ── */
+/* modal form pengaturan lokasi */
 .pa-overlay {
     position: fixed;
     top: 0;
@@ -271,7 +272,7 @@
     color: #374151;
 }
 
-/* ── Form Row: 2 Kolom (Label Kiri, Input Kanan) ── */
+/* bidang input formulir pengaturan */
 .pa-form-row {
     display: flex;
     align-items: center;
@@ -314,7 +315,7 @@
     font-weight: 300;
 }
 
-/* ── Kontainer Peta Leaflet + Floating Button Lokasi ── */
+/* peta dan tombol deteksi lokasi */
 .pa-map-box {
     position: relative;
     width: 100%;
@@ -332,7 +333,6 @@
     z-index: 1;
 }
 
-/* Floating Button "📍 Lokasi Saya" di pojok kanan atas peta */
 .pa-btn-locate-float {
     position: absolute;
     top: 10px;
@@ -360,7 +360,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ── Modal Footer Action Buttons (Persis Screenshot) ── */
+/* tombol aksi modal pengaturan */
 .pa-modal-actions {
     display: flex;
     justify-content: flex-end;
@@ -371,7 +371,6 @@
     border-top: 1px solid #f0f0f0;
 }
 
-/* Tombol Batal (Pink Muda Soft) */
 .pa-btn-cancel {
     background: #fed7d7;
     color: #e53e3e;
@@ -389,7 +388,6 @@
     color: #c53030;
 }
 
-/* Tombol Simpan (Toska Muda Soft) */
 .pa-btn-submit {
     background: #b2f5ea;
     color: #234e52;
@@ -406,8 +404,9 @@
     background: #81e6d9;
     color: #1d4044;
 }
+/* akhir modal form pengaturan lokasi */
 
-/* ── Modal Konfirmasi Hapus (Exact Match Tahfizd Tracker) ── */
+/* modal konfirmasi hapus lokasi */
 .pa-alert-modal {
     background: #ffffff;
     border-radius: 12px;
@@ -492,3 +491,48 @@
 .pa-btn-confirm-setujui:hover {
     background: #0b5c3e;
 }
+/* akhir modal konfirmasi hapus lokasi */
+
+/* responsive pengaturan absensi */
+@media (max-width: 768px) {
+    .pa-card-container {
+        margin: 10px 0;
+        min-height: auto;
+    }
+    .pa-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: auto;
+        flex-wrap: wrap;
+    }
+    .pa-modal-card {
+        width: 92vw;
+        max-width: 500px;
+        padding: 20px 16px;
+    }
+    .pa-form-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .pa-label-col {
+        width: 100%;
+    }
+    .pa-input-col {
+        width: 100%;
+    }
+    .pa-alert-modal {
+        width: 92vw;
+        max-width: 420px;
+        padding: 24px 16px;
+    }
+    .pa-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+}
+/* akhir responsive pengaturan absensi */

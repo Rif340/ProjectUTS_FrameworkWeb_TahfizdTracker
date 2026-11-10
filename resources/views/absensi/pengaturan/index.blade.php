@@ -18,7 +18,7 @@
     @endif
 
     <div class="pa-card-container">
-        {{-- Card Header (Figma Node 709:73030) --}}
+        <!-- kepala kartu pengaturan -->
         <div class="pa-card-head">
             <div class="pa-card-head-left">
                 {{-- Akar Icons Gear --}}
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        {{-- Content Body (Figma Node 709:73050) --}}
+        <!-- badan konten pengaturan -->
         <div class="pa-body">
             <h2 class="pa-section-title">Jarak Batas Absensi</h2>
 
@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    {{-- ==================== MODAL TAMBAH (Form Lokasi GPS) ==================== --}}
+    <!-- jendela formulir tambah lokasi -->
     <div id="modalTambah" class="pa-overlay" style="display: none;">
         <div class="pa-modal-card">
             <div class="pa-modal-header">
@@ -161,7 +161,7 @@
         </div>
     </div>
 
-    {{-- ==================== MODAL EDIT (Form Lokasi GPS) ==================== --}}
+    <!-- jendela formulir ubah lokasi -->
     <div id="modalEdit" class="pa-overlay" style="display: none;">
         <div class="pa-modal-card">
             <div class="pa-modal-header">
@@ -224,7 +224,7 @@
         </div>
     </div>
 
-    {{-- ==================== MODAL KONFIRMASI HAPUS ==================== --}}
+    <!-- jendela konfirmasi hapus lokasi -->
     <div id="deleteModalOverlay" class="pa-overlay" style="display: none;">
         <div class="pa-alert-modal">
             <button type="button" class="pa-alert-close" onclick="closeDeleteModal()" title="Tutup">

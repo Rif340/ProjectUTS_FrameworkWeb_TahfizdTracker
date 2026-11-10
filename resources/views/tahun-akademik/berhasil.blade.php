@@ -69,7 +69,7 @@
     {{-- Alert Modal Overlay Berhasil --}}
     <div class="ta-overlay">
         <div class="ta-alert-modal berhasil">
-            {{-- Close Button (Figma ci:close-lg) --}}
+            <!-- tombol tutup jendela -->
             <a href="{{ route('tahun-akademik.index') }}" class="ta-alert-close" title="Tutup">
                 <img src="{{ asset('icon/figma_close_lg.svg') }}" alt="Tutup">
             </a>

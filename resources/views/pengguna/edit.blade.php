@@ -27,12 +27,16 @@
 
             @php
                 $nipNisn = '';
+                $noHp = '';
                 if ($pengguna->role === 'Admin' && $pengguna->admin) {
                     $nipNisn = $pengguna->admin->nip ?? '';
+                    $noHp = $pengguna->admin->no_hp ?? '';
                 } elseif ($pengguna->role === 'Guru' && $pengguna->guru) {
                     $nipNisn = $pengguna->guru->nip ?? '';
+                    $noHp = $pengguna->guru->no_hp ?? '';
                 } elseif ($pengguna->role === 'Murid' && $pengguna->murid) {
                     $nipNisn = $pengguna->murid->nisn ?? '';
+                    $noHp = $pengguna->murid->no_hp ?? '';
                 }
             @endphp
 
@@ -84,6 +88,16 @@
                         <img src="/icon/icon_mata_disable.png" alt="Toggle Password" id="togglePasswordEdit"
                              class="pg-toggle-pwd" title="Lihat Password" onclick="togglePasswordVisibility('passwordEdit', 'togglePasswordEdit')">
                     </div>
+                </div>
+
+                {{-- No. Handphone / WhatsApp --}}
+                <div class="pg-form-row">
+                    <label class="pg-form-label">No. Handphone</label>
+                    <input type="text" name="no_hp" class="pg-form-input"
+                           inputmode="numeric"
+                           maxlength="15"
+                           oninput="this.value = this.value.replace(/\D/g, '')"
+                           value="{{ old('no_hp', $noHp) }}" placeholder="Contoh: 08123456789">
                 </div>
             </div>
 

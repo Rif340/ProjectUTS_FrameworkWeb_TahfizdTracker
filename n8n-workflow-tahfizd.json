@@ -1,0 +1,94 @@
+{
+  "name": "TahfizdTracker - WhatsApp Notifikasi Setoran",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "setoran-hafalan",
+        "responseMode": "onReceived",
+        "responseData": "allEntries",
+        "options": {}
+      },
+      "id": "1c7a268b-59d9-4b68-b78b-d7d8e87adbf1",
+      "name": "Webhook Laravel",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "setoran-hafalan"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "target_hp",
+              "value": "={{ $json.body.no_hp }}"
+            },
+            {
+              "name": "nama_murid",
+              "value": "={{ $json.body.nama_murid }}"
+            },
+            {
+              "name": "surat",
+              "value": "={{ $json.body.surat }}"
+            },
+            {
+              "name": "status",
+              "value": "={{ $json.body.status }}"
+            },
+            {
+              "name": "pesan_lengkap",
+              "value": "={{ $json.body.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2f6c91a0-4351-4e76-88a2-ea8f7d9a5b32",
+      "name": "Format Data Setoran",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        470,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Alur Otomasi Notifikasi Tahfizd Tracker\n\n1. Node **Webhook Laravel** menerima notifikasi instan saat guru klik Simpan Setoran di web.\n2. Node **Format Data Setoran** menyaring nomor HP orang tua dan pesan.\n3. Anda dapat menyambungkan node ini ke:\n   - **WhatsApp Business / Gateway** (Fonnte, Wablas, atau WhatsApp Cloud API)\n   - **Telegram Bot / Google Sheets** sebagai backup data.",
+        "height": 260,
+        "width": 380
+      },
+      "id": "3d9a102b-1111-4444-8888-000000000001",
+      "name": "Catatan Workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        80
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Laravel": {
+      "main": [
+        [
+          {
+            "node": "Format Data Setoran",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1"
+}

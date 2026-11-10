@@ -64,7 +64,7 @@
         </table>
     </div>
 
-    {{-- Modal Overlay Form Edit Hari Kerja (Figma Node 625:4612 / 625:4739) --}}
+    <!-- jendela formulir ubah hari kerja -->
     <div class="hk-overlay">
         <div class="hk-form-modal">
             {{-- Logo --}}
@@ -82,7 +82,7 @@
                 @method('PUT')
 
                 <div class="hk-form-fields">
-                    {{-- Hari (Figma 625:4746) --}}
+                    <!-- pilihan nama hari -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Hari <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">
@@ -95,7 +95,7 @@
                         </div>
                     </div>
 
-                    {{-- Jam Masuk (Figma 625:4753) --}}
+                    <!-- masukan jam masuk -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Jam Masuk <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">
@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    {{-- Jam Pulang (Figma 625:4759) --}}
+                    <!-- masukan jam pulang -->
                     <div class="hk-field-row">
                         <label class="hk-field-label">Jam Pulang <span class="hk-req">*</span></label>
                         <div class="hk-field-input-wrap">

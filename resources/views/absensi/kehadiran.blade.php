@@ -21,24 +21,24 @@
 @endsection
 
 @section('content')
-    <!-- Card Header (Figma Node 635:1746) -->
+    <!-- bagian kepala kartu absensi -->
     <div class="absensi-card-header">
         <div class="absensi-header-title">
             <img src="/icon/icon_absensi.png" alt="Absensi Kehadiran">
             <span>Absensi Kehadiran</span>
         </div>
 
-        <!-- Tombol Detail Absensi Oranye (Figma) -->
+        <!-- tombol rincian absensi -->
         <a href="{{ route('absensi.detail') }}" class="btn-detail-absensi">
             <img src="/icon/icon_detail_absensi.svg" alt="List">
             <span>Detail Absensi</span>
         </a>
     </div>
 
-    <!-- Card Main Body (Figma Node 635:1717) -->
+    <!-- bagian badan kartu absensi -->
     <div class="absensi-card-body">
         
-        <!-- Flash Alert Messages -->
+        <!-- pesan pemberitahuan -->
         @if(session('success'))
             <div style="background: #E8FFF3; border: 1px solid #1BC5BD; color: #0E7651; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; font-family: 'Poppins', sans-serif; font-size: 14px; width: 100%; max-width: 820px; display: flex; justify-content: space-between;">
                 <span>{{ session('success') }}</span>
@@ -60,17 +60,17 @@
 
         <div class="absensi-columns-wrapper">
             
-            <!-- ==================== KOLOM 1: ABSENSI MASUK ==================== -->
+            <!-- kolom absensi masuk -->
             <div class="absensi-col">
-                <!-- Icon (Figma Node 635:1726) -->
+                <!-- ikon tombol absensi masuk -->
                 <div class="absensi-icon-box" style="cursor: pointer;" onclick="openScanModal('masuk')">
                     <img src="/icon/icon_login_masuk.svg" alt="Absensi Masuk">
                 </div>
 
-                <!-- Judul (Figma Node 635:1724) -->
+                <!-- judul absensi masuk -->
                 <h3 class="absensi-col-title">Absensi Masuk</h3>
 
-                <!-- Status Text (Figma Node 635:1722 / Sesuai Screenshot User) -->
+                <!-- status teks absensi masuk -->
                 <div class="absensi-status-badge {{ $sudahMasuk ? 'scanned-date' : '' }}">
                     @if(!$sudahMasuk)
                         [Kamu belum melakukan absensi masuk]
@@ -79,28 +79,28 @@
                     @endif
                 </div>
 
-                <!-- Tombol Action (Figma Node 635:1720) -->
+                <!-- tombol aksi absensi masuk -->
                 <button type="button" class="btn-absen-action btn-absen-masuk" onclick="openScanModal('masuk')">
                     MASUK
                 </button>
 
-                <!-- Jadwal Resmi (Figma Node 635:1731) -->
+                <!-- informasi jadwal absensi masuk -->
                 <p class="absensi-footer-info">
                     Absensi Masuk : {{ $jamMasukDefault }}
                 </p>
             </div>
 
-            <!-- ==================== KOLOM 2: ABSENSI PULANG ==================== -->
+            <!-- kolom absensi pulang -->
             <div class="absensi-col">
-                <!-- Icon (Figma Node 635:1740) -->
+                <!-- ikon tombol absensi masuk -->
                 <div class="absensi-icon-box" style="cursor: pointer;" onclick="openScanModal('pulang')">
                     <img src="/icon/icon_logout_keluar.svg" alt="Absensi Pulang">
                 </div>
 
-                <!-- Judul (Figma Node 635:1738) -->
+                <!-- judul absensi masuk -->
                 <h3 class="absensi-col-title">Absensi Pulang</h3>
 
-                <!-- Status Text (Figma Node 635:1736 / Sesuai Screenshot User) -->
+                <!-- status teks absensi masuk -->
                 <div class="absensi-status-badge {{ $sudahPulang ? 'scanned-date' : '' }}">
                     @if(!$sudahPulang)
                         [Kamu belum melakukan absensi keluar]
@@ -109,12 +109,12 @@
                     @endif
                 </div>
 
-                <!-- Tombol Action (Figma Node 635:1734) -->
+                <!-- tombol aksi absensi masuk -->
                 <button type="button" class="btn-absen-action btn-absen-pulang" onclick="openScanModal('pulang')">
                     KELUAR
                 </button>
 
-                <!-- Jadwal Resmi (Figma Node 635:1745) -->
+                <!-- informasi jadwal absensi masuk -->
                 <p class="absensi-footer-info">
                     Absensi Keluar : {{ $jamPulangDefault }}
                 </p>
@@ -124,11 +124,11 @@
 
     </div>
 
-    <!-- ==================== SCANNER MODAL POPUP (Figma Node 637:2471) ==================== -->
+    <!-- jendela sembulan pemindai kode qr -->
     <div class="modal-overlay" id="formAbsensiModal">
         <div class="modal-card">
             
-            <!-- Modal Header -->
+            <!-- kepala jendela sembulan pemindai -->
             <div class="modal-header">
                 <span class="modal-title" id="modalTitleText">Form Absensi</span>
                 <button type="button" class="modal-close-btn" onclick="closeScanModal()">
@@ -136,12 +136,12 @@
                 </button>
             </div>
 
-            <!-- 1. VIEWPORT SCANNER KAMERA (STATE SCANNING) -->
+            <!-- tampilan area kamera pemindai -->
             <div id="scannerSection" style="display: flex; flex-direction: column; align-items: center;">
                 <div class="scanner-viewport-box">
                     <div id="reader"></div>
 
-                    <!-- Target Corner Overlay (Figma Node 637:2606) -->
+                    <!-- bingkai pembidik kode qr -->
                     <div class="scan-target-overlay">
                         <div class="corner-bracket corner-top-left"></div>
                         <div class="corner-bracket corner-top-right"></div>
@@ -191,7 +191,7 @@
                     </div>
                 </div>
 
-                <!-- Tombol Hijau: Selesai (Figma Done Button) -->
+                <!-- tombol konfirmasi selesai -->
                 <button type="button" class="btn-result-action success" onclick="finishAndReload()">
                     Selesai
                 </button>
@@ -507,7 +507,7 @@
             document.getElementById('scannerSection').style.display = 'none';
 
             if (data.success) {
-                // Tampilkan Tampilan Berhasil (Figma Node 637:2616)
+                // tampilkan status berhasil
                 document.getElementById('successTitle').textContent = data.message || 'Absensi Berhasil!';
                 document.getElementById('successNama').textContent = data.user.nama;
                 document.getElementById('successRole').textContent = data.user.role + ' (' + (data.user.nomor_induk || '-') + ')';

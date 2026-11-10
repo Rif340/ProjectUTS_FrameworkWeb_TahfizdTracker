@@ -66,7 +66,7 @@
         </table>
     </div>
 
-    {{-- Modal Overlay Form Edit (Figma Node 625:4377 / 625:4517) --}}
+    <!-- jendela formulir ubah hari libur -->
     <div class="hl-overlay">
         <div class="hl-form-modal">
             {{-- Logo --}}
@@ -86,7 +86,7 @@
                 <div class="hl-form-grid">
                     {{-- Kolom Kiri --}}
                     <div class="hl-form-col">
-                        {{-- Tahun Akademik (Figma 625:4524) --}}
+                        <!-- pilihan tahun akademik -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tahun Akademik <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
 
-                        {{-- Keterangan Libur (Figma 625:4530) --}}
+                        <!-- masukan keterangan libur -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Keterangan Libur <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -111,7 +111,7 @@
                             </div>
                         </div>
 
-                        {{-- Tipe Libur (Figma 625:4536) --}}
+                        <!-- pilihan jenis libur -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tipe Libur <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -127,7 +127,7 @@
 
                     {{-- Kolom Kanan --}}
                     <div class="hl-form-col">
-                        {{-- Tanggal Mulai (Figma 625:4542) --}}
+                        <!-- masukan tanggal mulai -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tanggal Mulai <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">
@@ -136,7 +136,7 @@
                             </div>
                         </div>
 
-                        {{-- Tanggal Selesai (Figma 625:4548) --}}
+                        <!-- masukan tanggal selesai -->
                         <div class="hl-field-row">
                             <label class="hl-field-label">Tanggal Selesai <span class="hl-req">*</span></label>
                             <div class="hl-field-input-wrap">

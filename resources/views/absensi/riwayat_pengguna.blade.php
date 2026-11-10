@@ -68,7 +68,7 @@
                             @endphp
                             <tr>
                                 <td style="font-weight: 600;">{{ $index + 1 }}</td>
-                                <td style="text-align: left; padding-left: 14px; font-weight: 600;">{{ $row['nama'] }}</td>
+                                <td style="text-align: center; font-weight: 600;">{{ $row['nama'] }}</td>
                                 <td>
                                     <span class="role-badge {{ $roleLower }}">{{ $row['role'] }}</span>
                                 </td>

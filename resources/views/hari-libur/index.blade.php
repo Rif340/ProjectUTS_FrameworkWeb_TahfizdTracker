@@ -16,7 +16,7 @@
         <div class="hl-flash hl-flash-error">{{ session('error') }}</div>
     @endif
 
-    {{-- Card Header (Figma Node 618:1133 / 620:1954) --}}
+    <!-- kepala kartu data hari libur -->
     <div class="hl-card-head">
         <div class="hl-card-head-left">
             <img src="{{ asset('icon/figma_calendar_alt.svg') }}" alt="Calendar" class="hl-head-icon">
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    {{-- Table (Figma Node 620:1967) --}}
+    <!-- tabel data hari libur -->
     <div class="hl-table-wrap">
         <table class="hl-tbl">
             <thead>
@@ -62,7 +62,7 @@
                         <td class="hl-td">{{ \Carbon\Carbon::parse($item->tanggal_selesai)->format('Y-m-d') }}</td>
                         <td class="hl-td hl-td-aksi">
                             <div class="hl-aksi-cell-grid">
-                                {{-- Hapus (Figma at-icons:trash-can - Trigger Modal Figma 657:12673) --}}
+                                <!-- tombol hapus data -->
                                 @if($isCurrentYearActive)
                                     <button type="button" class="hl-aksi-btn" title="Hapus"
                                             onclick="openDeleteModal('{{ route('hari-libur.destroy', $item->id_hari_libur) }}')">
@@ -78,7 +78,7 @@
                                     </button>
                                 @endif
 
-                                {{-- Edit (Figma fa-regular:edit - Figma Node 625:4377) --}}
+                                <!-- tombol ubah data -->
                                 @if($isCurrentYearActive)
                                     <a href="{{ route('hari-libur.edit', $item->id_hari_libur) }}" class="hl-aksi-btn" title="Edit">
                                         <svg width="18" height="16" viewBox="40 10 18 16" fill="none" class="hl-icon-edit">
@@ -104,10 +104,10 @@
         </table>
     </div>
 
-    {{-- Modal Konfirmasi Hapus (Figma Node 657:12673) --}}
+    <!-- jendela konfirmasi hapus data -->
     <div id="deleteModalOverlay" class="hl-overlay" style="display: none;">
         <div class="hl-alert-modal berhasil">
-            {{-- Close Button (Figma ci:close-lg) --}}
+            <!-- tombol tutup jendela -->
             <button type="button" class="hl-alert-close" onclick="closeDeleteModal()" title="Tutup" style="background: none; border: none;">
                 <img src="{{ asset('icon/figma_close_lg.svg') }}" alt="Tutup">
             </button>

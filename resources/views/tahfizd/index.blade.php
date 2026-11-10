@@ -16,23 +16,23 @@
 
 @section('content')
 
-{{-- ===== CARD HEADER (Figma Node 595:6242) ===== --}}
+<!-- kepala kartu daftar kelas tahfizd -->
 <div class="tz-card-head">
     <div class="tz-card-head-left">
-        {{-- Exact hugeicons:quran-01 from Figma (Node 595:6257) --}}
+        <!-- ikon mushaf al quran -->
         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.4173 6.7288L9.5 12.6669M9.5 12.6669L4.74962 16.2298V12.5117M9.5 12.6669L1.5827 6.7288M9.5 12.6669L14.2504 16.2298V12.5117M15.5552 4.30368L15.0334 3.47788L15.0322 3.47594C14.7448 3.02039 14.6008 2.7922 14.4119 2.77164C14.2235 2.75026 14.0121 2.9672 13.5901 3.40108C12.2267 4.80248 10.8634 4.59504 9.5 7.11518C8.13664 4.59504 6.77328 4.80248 5.40992 3.40108C4.98793 2.9672 4.77654 2.75026 4.58811 2.77164C4.39915 2.7922 4.2552 3.02039 3.96782 3.47594L3.9666 3.47788L3.44564 4.30368C3.24375 4.62196 3.1432 4.78189 3.17091 4.94974C3.19783 5.11759 3.34272 5.2324 3.63328 5.46201L8.52776 9.34C8.99567 9.71053 9.23002 9.8958 9.5 9.8958C9.76998 9.8958 10.0043 9.71053 10.4722 9.34L15.3667 5.46201C15.6573 5.2324 15.8022 5.11759 15.8291 4.94974C15.8568 4.78189 15.7563 4.62196 15.5552 4.30368Z" stroke-width="1.5" stroke-linecap="round" stroke="#0E774F"/>
         </svg>
         <span class="tz-head-title">Daftar Kelas</span>
     </div>
     <div class="tz-card-head-right">
-        {{-- Tampilkan dropdown (Figma 595:6249) --}}
+        <!-- menu jumlah baris per halaman -->
         <select class="tz-select-show" id="select-per-page-kelas" data-base-url="{{ route('tahfizd.index') }}">
             @foreach([10, 25, 50, 100] as $n)
                 <option value="{{ $n }}" {{ $perPage == $n ? 'selected' : '' }}>Tampilkan {{ $n }}</option>
             @endforeach
         </select>
-        {{-- Tombol + Tambah (Figma 595:6253) --}}
+        <!-- tombol tambah kelas -->
         @if($isCurrentYearActive)
             <button type="button" class="tz-btn-tambah" onclick="openModal('modal-tambah-kelas')">+ Tambah</button>
         @else
@@ -41,26 +41,26 @@
     </div>
 </div>
 
-{{-- ===== LIST CARD KELAS TAHFIZD (Figma Node 616:949 & 597:6528) ===== --}}
+<!-- daftar kartu kelas tahfizd -->
 <div class="tz-content">
     @forelse($kelasList as $kelas)
     <div class="tz-card">
-        {{-- Bagian Atas Hijau (Figma 597:6530) --}}
+        <!-- bagian atas kartu kelas -->
         <div class="tz-card-top">
             <div class="tz-card-top-info">
                 <p class="tz-card-title">Tahfizd</p>
                 <p class="tz-card-kelas">{{ str_starts_with(strtolower($kelas->nama_kelas), 'kelas') ? $kelas->nama_kelas : 'Kelas ' . $kelas->nama_kelas }}</p>
                 <p class="tz-card-jadwal">{{ $kelas->hari }}, {{ date('H.i', strtotime($kelas->jam_mulai)) }} – {{ date('H.i', strtotime($kelas->jam_selesai)) }}</p>
             </div>
-            {{-- Topi Toga Wisuda / Graduation Cap (Figma 597:6531) --}}
+            <!-- ikon kelulusan -->
             <div class="tz-card-cap">
                 <img src="{{ asset('gambar/gambar_untuk_card_kelas.png') }}" alt="Icon Kelas" class="tz-card-cap-img">
             </div>
         </div>
 
-        {{-- Bagian Bawah Putih (Figma 597:6547) --}}
+        <!-- bagian bawah kartu kelas -->
         <div class="tz-card-bottom">
-            {{-- Info Guru Pengampu (Figma 597:6548) --}}
+            <!-- info guru pengampu -->
             <div class="tz-teacher">
                 @php
                     $fotoGuru = null;
@@ -84,10 +84,10 @@
                 </div>
             </div>
 
-            {{-- Action Buttons (Figma 597:6553) --}}
+            <!-- tombol tindakan kelas -->
             <div class="tz-card-actions">
                 @if($isCurrentYearActive)
-                    {{-- Tombol Hapus: Exact Figma Node 599:7284 (at-icons:trash-can) --}}
+                    <!-- tombol hapus kelas -->
                     <button type="button" class="tz-btn-icon btn-hapus-kelas" title="Hapus Kelas"
                         data-id="{{ $kelas->id_kelas }}"
                         data-nama="{{ $kelas->nama_kelas }}">
@@ -97,7 +97,7 @@
                         </svg>
                     </button>
 
-                    {{-- Tombol Edit: Exact Figma Node 599:7286 (fa-regular:edit) --}}
+                    <!-- tombol ubah kelas -->
                     <button type="button" class="tz-btn-icon btn-edit-kelas" title="Perbarui Kelas"
                         data-id="{{ $kelas->id_kelas }}"
                         data-nama="{{ $kelas->nama_kelas }}"
@@ -128,7 +128,7 @@
                     </button>
                 @endif
 
-                {{-- Tombol Pergi: Exact Figma Node 599:7278 (Masuk ke Kelas / Progres Kelas Figma 603:2185) --}}
+                <!-- tombol masuk kelas -->
                 <a href="{{ route('tahfizd.show', $kelas->id_kelas) }}" class="tz-btn-pergi" title="Masuk ke Kelas">
                     Pergi
                 </a>
@@ -228,7 +228,7 @@
                     </div>
                 </div>
 
-                {{-- RIGHT COLUMN (Figma 597:6825) --}}
+                <!-- kolom masukan kanan -->
                 <div class="tz-fm-col">
                     <input type="hidden" name="id_guru" value="{{ Auth::user()->guru->id_guru ?? ($guruList->first()->id_guru ?? 1) }}">
 

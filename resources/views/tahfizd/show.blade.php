@@ -44,7 +44,12 @@
             </p>
         </div>
 
-        <div style="width: 100%; margin-top: 15px;">
+        <div style="width: 100%; margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+            @if(session('wa_url') || session('fonnte_sent'))
+                <div style="width: 100%; background: #E8F8F0; border: 1px solid #A3E0C0; border-radius: 10px; padding: 11px 16px; color: #0E774F; font-size: 14px; font-weight: 600; text-align: center; font-family: 'Poppins', sans-serif; box-sizing: border-box;">
+                    Notifikasi Berhasil Terkirim
+                </div>
+            @endif
             <button type="button" class="tz-del-btn-setujui" onclick="closeAlertBerhasil()" style="width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; height: 44px; font-weight: 500; font-size: 16px;">Terima</button>
         </div>
     </div>
@@ -87,10 +92,10 @@ function closeAlertGagal(e) {
 </script>
 @endif
 
-{{-- ===== CARD PROGRES KELAS (Figma 607:7363) ===== --}}
+<!-- kartu kemajuan hafalan kelas -->
 <div class="tz-pk-wrap">
 
-    {{-- ---- Header Bar (Figma 607:7364) ---- --}}
+    <!-- kepala kartu kelas tahfizd -->
     <div class="tz-pk-header">
         <div class="tz-pk-header-left">
             {{-- mdi:account-school icon --}}
@@ -100,12 +105,12 @@ function closeAlertGagal(e) {
             <span class="tz-pk-title">Progres Kelas</span>
         </div>
         <div class="tz-pk-header-right">
-            {{-- Cetak Hafalan (Figma 607:7371) --}}
+            <!-- tombol cetak hafalan -->
             <a href="{{ route('tahfizd.cetak.kelas', $kelas->id_kelas) }}" class="tz-pk-btn-cetak" target="_blank" title="Cetak Rekap Kelas">
                 <span>Cetak Hafalan</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 3H6V7H18V3ZM19 12C18.4477 12 18 11.5523 18 11C18 10.4477 18.4477 10 19 10C19.5523 10 20 10.4477 20 11C20 11.5523 19.5523 12 19 12ZM16 19H8V14H16V19ZM19 8H5C3.34 8 2 9.34 2 11V17H6V21H18V17H22V11C22 9.34 20.66 8 19 8Z" fill="white"/></svg>
             </a>
-            {{-- + Setoran (Figma 607:7375) --}}
+            <!-- tombol tambah setoran -->
             @if($isKelasYearActive)
                 <button type="button" class="tz-pk-btn-setoran" onclick="openSetoranModal()">+ Setoran</button>
             @else
@@ -114,9 +119,9 @@ function closeAlertGagal(e) {
         </div>
     </div>
 
-    {{-- ---- Info Kelas + Stats (Figma 607:7377) ---- --}}
+    <!-- info ringkasan kelas -->
     <div class="tz-pk-info-row">
-        {{-- Metadata (Figma 607:7379) --}}
+        <!-- rincian data guru dan jadwal -->
         <div class="tz-pk-meta">
             <div class="tz-pk-meta-item">
                 <span class="tz-pk-meta-label">Mata Pelajaran</span>
@@ -139,7 +144,7 @@ function closeAlertGagal(e) {
         {{-- V-Divider --}}
         <div class="tz-pk-vdivider"></div>
 
-        {{-- Stat: Total Setoran (Figma 607:7393) — bi:patch-check-fill --}}
+        <!-- statistik total setoran -->
         <div class="tz-pk-stat-card">
             <div class="tz-pk-stat-icon">
                 <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +160,7 @@ function closeAlertGagal(e) {
             </div>
         </div>
 
-        {{-- Stat: Target (Figma 607:7400) — fluent:target-arrow-20-filled --}}
+        <!-- statistik target hafalan -->
         <div class="tz-pk-stat-card">
             <div class="tz-pk-stat-icon">
                 <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +176,7 @@ function closeAlertGagal(e) {
         {{-- V-Divider --}}
         <div class="tz-pk-vdivider"></div>
 
-        {{-- Circular Progress (Figma 607:7408) --}}
+        <!-- grafik lingkaran progres -->
         <div class="tz-pk-circle-wrap">
             <div class="tz-pk-circle-chart">
                 <svg viewBox="0 0 100 100" class="tz-pk-circle-svg">
@@ -193,7 +198,7 @@ function closeAlertGagal(e) {
         </div>
     </div>
 
-    {{-- ---- Daftar Surat Target Grid (Figma 607:7415) ---- --}}
+    <!-- kisi kartu target surat -->
     @if($suratCards)
     <div class="tz-pk-section">
         <p class="tz-pk-section-title">Daftar Surat Target</p>
@@ -267,7 +272,7 @@ function closeAlertGagal(e) {
     </div>
     @endif
 
-    {{-- ---- Riwayat Setoran Murid Table (Figma 607:7486) ---- --}}
+    <!-- tabel riwayat setoran murid -->
     <div class="tz-pk-section">
         <p class="tz-pk-section-title">Riwayat Setoran Murid</p>
         <div class="tz-pk-table-wrap">
@@ -287,7 +292,7 @@ function closeAlertGagal(e) {
                     @forelse($riwayatSetoran as $i => $setoran)
                     <tr>
                         <td>{{ $i + 1 }}</td>
-                        <td style="text-align:left;padding-left:16px;">{{ $setoran->murid->user->nama ?? '-' }}</td>
+                        <td style="text-align:center;">{{ $setoran->murid->user->nama ?? '-' }}</td>
                         <td>{{ $setoran->surat->nama_surat ?? '-' }}</td>
                         <td>{{ $setoran->ayat_mulai }} – {{ $setoran->ayat_selesai }}</td>
                         <td>{{ $setoran->tanggal ? $setoran->tanggal->format('d/m/Y') : '-' }}</td>
@@ -341,7 +346,7 @@ function closeAlertGagal(e) {
         </div>
     </div>
 
-    {{-- ---- Daftar Murid Table (Figma 607:7559) ---- --}}
+    <!-- tabel daftar murid -->
     <div class="tz-pk-section">
         <p class="tz-pk-section-title">Daftar Murid</p>
         <div class="tz-pk-table-wrap">

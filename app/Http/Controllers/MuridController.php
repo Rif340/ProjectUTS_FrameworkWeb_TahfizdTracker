@@ -15,9 +15,7 @@ use Illuminate\Support\Str;
 
 class MuridController extends Controller
 {
-    /**
-     * Helper: Dapatkan Tahun Akademik aktif (dari session atau DB).
-     */
+    // ambil tahun akademik aktif
     private function getActiveTahunAkademik(): ?\App\Models\TahunAkademik
     {
         $activeYearId = session('active_tahun_akademik_id');
@@ -30,10 +28,9 @@ class MuridController extends Controller
 
         return \App\Models\TahunAkademik::where('is_aktif', true)->first() ?? \App\Models\TahunAkademik::orderBy('tanggal_mulai', 'desc')->first();
     }
+    // akhir ambil tahun akademik aktif
 
-    /**
-     * Daftar Murid (Figma Node 393:4622)
-     */
+    // tampilkan daftar murid
     public function index(Request $request)
     {
         $perPage  = (int) $request->get('per_page', 10);
@@ -44,7 +41,7 @@ class MuridController extends Controller
         $activeTahun = $this->getActiveTahunAkademik();
         $activeYearId = $activeTahun ? $activeTahun->id_tahun_akademik : null;
 
-        // Pastikan setiap user dengan role Murid memiliki record di tabel murid
+        // sinkronisasi akun murid
         $orphanMuridUsers = User::where('role', 'Murid')->whereDoesntHave('murid')->get();
         foreach ($orphanMuridUsers as $orphan) {
             Murid::create([
@@ -52,18 +49,20 @@ class MuridController extends Controller
                 'status'  => 'Aktif',
             ]);
         }
+        // akhir sinkronisasi akun murid
 
-        // Ambil kelas hanya untuk tahun akademik aktif
+        // ambil daftar kelas tahun akademik aktif
         $kelasList = Kelas::when($activeYearId, fn($q) => $q->where('id_tahun_akademik', $activeYearId))
             ->orderBy('nama_kelas')
             ->get();
         $kelasIds = $kelasList->pluck('id_kelas')->toArray();
+        // akhir ambil daftar kelas tahun akademik aktif
 
+        // query data murid
         $query = Murid::with(['user', 'kelas'])
             ->join('users', 'murid.id_user', '=', 'users.id_user')
             ->select('murid.*');
 
-        // Filter murid: kelas tahun akademik aktif atau yang belum memiliki kelas (dibuat admin)
         if ($searchKelas) {
             if ($searchKelas === 'belum') {
                 $query->whereNull('murid.id_kelas');
@@ -84,8 +83,9 @@ class MuridController extends Controller
         $muridList = $query->orderBy('users.nama', 'asc')
             ->paginate($perPage)
             ->appends($request->except('page'));
+        // akhir query data murid
 
-        // Ambil semua pengguna murid (yang dibuat oleh admin) untuk pencarian live / autocomplete
+        // ambil data pengguna murid untuk pencarian
         $availableMuridList = User::where('role', 'Murid')
             ->with(['murid.kelas'])
             ->orderBy('nama', 'asc')
@@ -102,17 +102,18 @@ class MuridController extends Controller
                     'nama_kelas' => $u->murid->kelas->nama_kelas ?? null,
                 ];
             });
+        // akhir ambil data pengguna murid untuk pencarian
 
         return view('siswa.index', compact('muridList', 'kelasList', 'perPage', 'availableMuridList'));
     }
+    // akhir tampilkan daftar murid
 
-    /**
-     * Simpan murid baru (bisa pilih dari pengguna admin atau buat baru).
-     */
+    // simpan data murid baru
     public function store(Request $request)
     {
         $idUser = $request->input('id_user');
 
+        // validasi data murid baru
         $rules = [
             'nama'     => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s.,\'\-]+$/'],
             'email'    => 'required|email|max:100|unique:users,email' . ($idUser ? (',' . $idUser . ',id_user') : ''),
@@ -130,7 +131,9 @@ class MuridController extends Controller
             'email.unique'      => 'Email sudah terdaftar.',
             'id_kelas.required' => 'Pilih kelas terlebih dahulu.',
         ]);
+        // akhir validasi data murid baru
 
+        // periksa status tahun akademik
         $tahunAktif = $this->getActiveTahunAkademik();
         if (!$tahunAktif || !$tahunAktif->is_aktif) {
             return redirect()->route('siswa.gagal')
@@ -142,8 +145,10 @@ class MuridController extends Controller
             return redirect()->route('siswa.gagal')
                 ->with('error', 'Tahun akademik kelas ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
         }
+        // akhir periksa status tahun akademik
 
         try {
+            // periksa keunikan nomor induk
             if ($request->filled('nisn')) {
                 $nisnExists = Murid::where('nisn', $request->nisn)
                     ->when($idUser, fn($q) => $q->where('id_user', '!=', $idUser))
@@ -152,14 +157,17 @@ class MuridController extends Controller
                     return redirect()->route('siswa.gagal')->with('error', 'NISN ' . $request->nisn . ' sudah terdaftar pada murid lain.');
                 }
             }
+            // akhir periksa keunikan nomor induk
 
+            // unggah berkas foto murid
             $fotoPath = null;
             if ($request->hasFile('foto')) {
                 $fotoPath = $request->file('foto')->store('murid', 'public');
             }
+            // akhir unggah berkas foto murid
 
+            // proses simpan pengguna dan profil murid
             if ($idUser) {
-                // User sudah ada dari Pengguna yang dibuat Admin
                 $user = User::findOrFail($idUser);
                 $userData = [
                     'nama'  => $request->nama,
@@ -204,7 +212,6 @@ class MuridController extends Controller
                     \App\Services\QRCodeService::getOrGenerateUserQR($user, $newMurid);
                 }
             } else {
-                // User murid baru sepenuhnya
                 $user = User::create([
                     'nama'     => $request->nama,
                     'email'    => $request->email,
@@ -224,18 +231,21 @@ class MuridController extends Controller
                 ]);
                 \App\Services\QRCodeService::getOrGenerateUserQR($user, $newMurid);
             }
+            // akhir proses simpan pengguna dan profil murid
 
             return redirect()->route('siswa.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('siswa.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir simpan data murid baru
 
-    /**
-     * Perbarui data murid.
-     */
+    // perbarui data murid
     public function update(Request $request, $id)
     {
+        $murid = Murid::with('user')->findOrFail($id);
+
+        // periksa status tahun akademik aktif
         $tahunAktif = $this->getActiveTahunAkademik();
         if (!$tahunAktif || !$tahunAktif->is_aktif) {
             return redirect()->route('siswa.gagal')
@@ -249,7 +259,9 @@ class MuridController extends Controller
                     ->with('error', 'Tahun akademik kelas ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
             }
         }
+        // akhir periksa status tahun akademik aktif
 
+        // validasi pembaruan data murid
         $request->validate([
             'nama'     => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s.,\'\-]+$/'],
             'email'    => 'required|email|max:100|unique:users,email,' . $murid->id_user . ',id_user',
@@ -263,8 +275,10 @@ class MuridController extends Controller
             'nisn.regex'  => 'NISN hanya boleh berisi angka.',
             'no_hp.regex' => 'No. HP hanya boleh berisi angka.',
         ]);
+        // akhir validasi pembaruan data murid
 
         try {
+            // perbarui akun pengguna
             $userData = [
                 'nama'  => $request->nama,
                 'email' => $request->email,
@@ -273,7 +287,9 @@ class MuridController extends Controller
                 $userData['password'] = Hash::make($request->password);
             }
             $murid->user->update($userData);
+            // akhir perbarui akun pengguna
 
+            // perbarui profil murid dan foto
             $muridData = [
                 'id_kelas' => $request->id_kelas ?: null,
                 'nisn'     => $request->nisn ?: null,
@@ -290,65 +306,70 @@ class MuridController extends Controller
 
             $murid->update($muridData);
             \App\Services\QRCodeService::getOrGenerateUserQR($murid->user, $murid);
+            // akhir perbarui profil murid dan foto
 
             return redirect()->route('siswa.berhasil');
         } catch (\Exception $e) {
             return redirect()->route('siswa.gagal')->with('error', $e->getMessage());
         }
     }
+    // akhir perbarui data murid
 
-    /**
-     * Hapus murid.
-     */
+    // hapus data murid
     public function destroy($id)
     {
         try {
+            // periksa tahun akademik aktif
             $tahunAktif = $this->getActiveTahunAkademik();
             if (!$tahunAktif || !$tahunAktif->is_aktif) {
                 return redirect()->route('siswa.gagal')
                     ->with('error', 'Tahun akademik ini belum aktif. Aktifkan tahun akademik terlebih dahulu melalui menu Tahun Akademik.');
             }
+            // akhir periksa tahun akademik aktif
 
+            // proses hapus data murid
             $murid = Murid::with('user')->findOrFail($id);
             if ($murid->foto) {
                 Storage::disk('public')->delete($murid->foto);
             }
-            $murid->user->delete(); // cascade ke murid
+            $murid->user->delete();
+            // akhir proses hapus data murid
+
             return redirect()->route('siswa.berhasil', ['action' => 'delete']);
         } catch (\Exception $e) {
             return redirect()->route('siswa.gagal')->with('error', 'Gagal menghapus data murid.');
         }
     }
+    // akhir hapus data murid
 
-    /**
-     * Progress Setoran Murid (Figma Node 412:4268)
-     */
+    // tampilkan kemajuan hafalan murid
     public function show($id)
     {
         $murid = Murid::with(['user', 'kelas.guru.user'])->findOrFail($id);
 
-        // Target hafalan dari kelas murid
+        // ambil target hafalan kelas
         $targetList = $murid->id_kelas
             ? TargetHafalan::with('surat')
                 ->where('id_kelas', $murid->id_kelas)
                 ->orderBy('id_surat', 'asc')
                 ->get()
             : collect();
+        // akhir ambil target hafalan kelas
 
-        // Setoran hafalan murid ini
+        // ambil riwayat setoran hafalan murid
         $setoranList = SetoranHafalan::with(['surat', 'murid.user'])
             ->where('id_murid', $murid->id_murid)
             ->orderBy('tanggal', 'desc')
             ->orderBy('id_setoran', 'desc')
             ->get();
+        // akhir ambil riwayat setoran hafalan murid
 
-        // Hitung progress per surat
+        // hitung kemajuan per surat
         $suratProgress = [];
         foreach ($targetList as $target) {
             $setoranSurat = $setoranList->where('id_surat', $target->id_surat);
             $totalAyat = $target->surat->jumlah_ayat ?? 0;
 
-            // Ayat yang lulus (status Lancar/Lulus/Selesai)
             $lulusSetoran = $setoranSurat->filter(function($s) {
                 return in_array(strtolower(trim($s->status ?? '')), ['lancar', 'lulus', 'selesai', 'tuntas']);
             });
@@ -380,6 +401,7 @@ class MuridController extends Controller
                 'terakhir'      => $setoranTerakhir,
             ];
         }
+        // akhir hitung kemajuan per surat
 
         $totalSurat   = count($suratProgress);
         $selesaiCount = collect($suratProgress)->where('status', 'Selesai')->count();
@@ -387,31 +409,30 @@ class MuridController extends Controller
 
         return view('siswa.show', compact('murid', 'targetList', 'setoranList', 'suratProgress', 'totalSurat', 'selesaiCount', 'persen'));
     }
+    // akhir tampilkan kemajuan hafalan murid
 
-    /**
-     * Cetak Setoran Murid (per satu murid) - Figma Node 439:3678
-     */
+    // cetak setoran perorangan murid
     public function cetak($id)
     {
         $murid = Murid::with(['user', 'kelas.guru.user', 'kelas.tahunAkademik'])->findOrFail($id);
         $kelas = $murid->kelas;
 
-        // Target hafalan kelas murid jika ada
+        // ambil target hafalan kelas
         $targetIds = $murid->id_kelas
             ? TargetHafalan::where('id_kelas', $murid->id_kelas)->pluck('id_surat')->toArray()
             : [];
 
-        // Cocokkan surat dengan yang menjadi target kelas (jika ada target, tampilkan target saja; jika belum ada target, tampilkan semua)
         if (!empty($targetIds)) {
             $suratList = Surat::whereIn('id_surat', $targetIds)->orderBy('id_surat', 'asc')->get();
         } else {
             $suratList = Surat::orderBy('id_surat', 'asc')->get();
         }
+        // akhir ambil target hafalan kelas
 
-        // Setoran murid ini
+        // ambil data setoran murid
         $setoranList = SetoranHafalan::where('id_murid', $murid->id_murid)->get();
 
-        // Format data rekap untuk murid ini
+        // susun rekap status surat murid
         $suratStatus = [];
         $totalSuratSelesai = 0;
         foreach ($suratList as $s) {
@@ -438,8 +459,8 @@ class MuridController extends Controller
                 $suratStatus[$s->id_surat] = ['symbol' => '—', 'status' => 'belum'];
             }
         }
+        // akhir susun rekap status surat murid
 
-        // Single murid row
         $rows = [
             [
                 'murid' => $murid,
@@ -448,14 +469,15 @@ class MuridController extends Controller
             ]
         ];
 
-        // Total per surat
+        // hitung total per surat
         $totalPerSurat = [];
         foreach ($suratList as $s) {
             $totalPerSurat[$s->id_surat] = ($suratStatus[$s->id_surat]['symbol'] === '✓') ? 1 : 0;
         }
         $grandTotalSelesai = $totalSuratSelesai;
+        // akhir hitung total per surat
 
-        // Jumlah murid mencapai target di kelasnya
+        // hitung jumlah murid tuntas target kelas
         $jumlahTargetTuntas = 0;
         if ($murid->id_kelas) {
             $kelasMurid = Murid::where('id_kelas', $murid->id_kelas)->get();
@@ -477,6 +499,7 @@ class MuridController extends Controller
                 }
             }
         }
+        // akhir hitung jumlah murid tuntas target kelas
 
         return view('siswa.cetak', compact(
             'kelas',
@@ -488,10 +511,9 @@ class MuridController extends Controller
             'jumlahTargetTuntas'
         ));
     }
+    // akhir cetak setoran perorangan murid
 
-    /**
-     * Cetak Setoran Per Kelas - Figma Node 439:3678
-     */
+    // cetak setoran seluruh murid per kelas
     public function cetakKelas($kelasId)
     {
         $kelas = Kelas::with(['guru.user', 'tahunAkademik'])->findOrFail($kelasId);
@@ -513,6 +535,7 @@ class MuridController extends Controller
         $grandTotalSelesai = 0;
         $jumlahTargetTuntas = 0;
 
+        // olah rekap kemajuan setiap murid di kelas
         foreach ($muridList as $m) {
             $setoranMurid = SetoranHafalan::where('id_murid', $m->id_murid)->get();
             $suratStatus = [];
@@ -559,6 +582,7 @@ class MuridController extends Controller
                 'totalSuratSelesai' => $totalSuratSelesai,
             ];
         }
+        // akhir olah rekap kemajuan setiap murid di kelas
 
         $murid = $muridList->first();
 
@@ -572,21 +596,20 @@ class MuridController extends Controller
             'jumlahTargetTuntas'
         ));
     }
+    // akhir cetak setoran seluruh murid per kelas
 
-    /**
-     * Alert berhasil.
-     */
+    // tampilkan halaman status berhasil
     public function berhasil(Request $request)
     {
         $isDelete = $request->query('action') === 'delete';
         return view('siswa.berhasil', compact('isDelete'));
     }
+    // akhir tampilkan halaman status berhasil
 
-    /**
-     * Alert gagal.
-     */
+    // tampilkan halaman status gagal
     public function gagal()
     {
         return view('siswa.gagal');
     }
+    // akhir tampilkan halaman status gagal
 }

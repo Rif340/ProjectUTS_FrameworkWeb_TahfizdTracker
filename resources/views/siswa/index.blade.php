@@ -4,12 +4,12 @@
 @section('page_title', 'Data Murid')
 
 @push('styles')
-<link rel="stylesheet" href="/css/murid.css">
+<link rel="stylesheet" href="{{ asset('css/murid.css') }}?v={{ file_exists(public_path('css/murid.css')) ? filemtime(public_path('css/murid.css')) : time() }}">
 @endpush
 
 @section('content')
 
-{{-- ===== CARD HEADER (Figma Node 393:4965) ===== --}}
+<!-- kepala kartu data murid -->
 <div class="mu-card-head">
     <div class="mu-card-head-left">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="#0E774F" xmlns="http://www.w3.org/2000/svg">
@@ -18,13 +18,13 @@
         <span class="mu-head-title">Daftar Murid</span>
     </div>
     <div class="mu-card-head-right">
-        {{-- Tampilkan dropdown (Figma 393:4976) --}}
+        <!-- menu jumlah baris per halaman -->
         <select class="mu-select-show" onchange="location.href='{{ route('siswa.index') }}?per_page='+this.value+'&search={{ request('search') }}&nisn={{ request('nisn') }}&kelas={{ request('kelas') }}'">
             @foreach([10, 25, 50, 100] as $n)
                 <option value="{{ $n }}" {{ $perPage == $n ? 'selected' : '' }}>Tampilkan {{ $n }}</option>
             @endforeach
         </select>
-        {{-- Tombol Tambah (Figma 393:4975) --}}
+        <!-- tombol tambah murid -->
         @if($isCurrentYearActive)
             <button type="button" class="mu-btn-tambah" onclick="openTambahModal()">Tambah</button>
         @else
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-{{-- ===== FILTER BAR (Figma Node 393:4993, 393:5005, 402:7707) ===== --}}
+<!-- bilah penyaring data murid -->
 <form method="GET" action="{{ route('siswa.index') }}" class="mu-filter-bar" id="filterMuridForm">
     <div class="mu-filter-group">
         <label class="mu-filter-label">Nama Siswa</label>
@@ -57,17 +57,18 @@
     <button type="submit" style="display:none;"></button>
 </form>
 
-{{-- ===== TABLE (Figma Node 393:6663) ===== --}}
+<!-- tabel data murid -->
 <div class="mu-content">
     <div class="mu-table-wrap">
         <table class="mu-table">
             <thead>
                 <tr>
-                    <th style="width: 6.8%; text-align: center;">No</th>
-                    <th style="width: 31.8%; text-align: center;">Nama Lengkap</th>
-                    <th style="width: 18.8%; text-align: center;">NISN</th>
-                    <th style="width: 17.4%; text-align: center;">Kelas</th>
-                    <th style="width: 25.2%; text-align: center;">Aksi</th>
+                    <th style="width: 6%; text-align: center;">No</th>
+                    <th style="width: 26%; text-align: center;">Nama Lengkap</th>
+                    <th style="width: 16%; text-align: center;">NISN</th>
+                    <th style="width: 14%; text-align: center;">Kelas</th>
+                    <th style="width: 20%; text-align: center;">No. Telepon</th>
+                    <th style="width: 18%; text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +78,7 @@
                     <td class="mu-td-nama">{{ $murid->user->nama ?? '-' }}</td>
                     <td class="mu-td-nisn">{{ $murid->nisn ?? '-' }}</td>
                     <td class="mu-td-kelas">{{ $murid->kelas->nama_kelas ?? '-' }}</td>
+                    <td class="mu-td-nohp" style="text-align: center;">{{ $murid->no_hp ?? '-' }}</td>
                     <td class="mu-td-aksi">
                         <div class="mu-table-actions">
                             {{-- Hapus (Red Trash Can) --}}
@@ -131,7 +133,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="mu-empty">Belum ada data murid.</td>
+                    <td colspan="6" class="mu-empty">Belum ada data murid.</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -232,6 +234,13 @@
                             @endforeach
                         </select>
                     </div>
+
+                    {{-- No. Handphone / WhatsApp (Orang Tua / Murid) --}}
+                    <div class="mu-form-row">
+                        <label class="mu-form-row-label">No. Handphone / WA</label>
+                        <input type="text" name="no_hp" id="tambah-no-hp" class="mu-form-input" placeholder="08xxxxxxxxxx"
+                            inputmode="numeric" maxlength="15" oninput="this.value=this.value.replace(/\D/g,'')">
+                    </div>
                 </div>
             </div>
 
@@ -294,6 +303,12 @@
                                 <option value="{{ $kls->id_kelas }}">{{ $kls->nama_kelas }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="mu-form-row">
+                        <label class="mu-form-row-label">No. Handphone / WA</label>
+                        <input type="text" name="no_hp" id="edit-no-hp" class="mu-form-input" placeholder="08xxxxxxxxxx"
+                            inputmode="numeric" maxlength="15" oninput="this.value=this.value.replace(/\D/g,'')">
                     </div>
                 </div>
             </div>
@@ -440,6 +455,7 @@
         document.getElementById('tambah-id-murid').value = m.id_murid || '';
         document.getElementById('tambah-email').value = m.email;
         document.getElementById('tambah-nisn').value = m.nisn || '';
+        document.getElementById('tambah-no-hp').value = m.no_hp || '';
 
         // Preselect kelas jika sudah terdaftar
         if (m.id_kelas) {
@@ -462,6 +478,7 @@
         document.getElementById('tambah-id-murid').value = '';
         document.getElementById('tambah-email').value = '';
         document.getElementById('tambah-nisn').value = '';
+        document.getElementById('tambah-no-hp').value = '';
         document.getElementById('tambah-kelas').value = '';
 
         const passInput = document.getElementById('pass-tambah');
@@ -502,6 +519,7 @@
         document.getElementById('edit-nama').value  = nama;
         document.getElementById('edit-email').value = email;
         document.getElementById('edit-nisn').value  = nisn;
+        document.getElementById('edit-no-hp').value = nohp || '';
         document.getElementById('pass-edit').value  = '';
 
         // Kelas select
@@ -516,7 +534,7 @@
         openModal('modal-edit');
     }
 
-    // Open Delete modal (Figma Node 408:3611)
+    // buka jendela konfirmasi hapus
     function openDeleteModal(id, nama) {
         document.getElementById('delete-msg').textContent = 'Apakah Anda Yakin Ingin Menghapus Murid "' + nama + '"?';
         document.getElementById('form-hapus').action = '/siswa/' + id;

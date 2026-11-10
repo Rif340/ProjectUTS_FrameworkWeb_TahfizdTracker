@@ -1,8 +1,4 @@
-/* ==========================================================================
-   CSS RIWAYAT ABSENSI PENGGUNA (ALL USERS ATTENDANCE)
-   ========================================================================== */
-
-/* Card Header */
+/* header kartu riwayat pengguna */
 .detail-card-header {
     height: 67px;
     padding: 18px 37px;
@@ -37,7 +33,7 @@
     gap: 14px;
 }
 
-/* Tombol Cetak Kehadiran */
+/* tombol cetak kehadiran pengguna */
 .btn-action-print {
     background: #0E7651;
     border: 1px solid #E4E6EF;
@@ -63,8 +59,9 @@
     width: 15px;
     height: 14px;
 }
+/* akhir header kartu riwayat pengguna */
 
-/* Card Scrollable Viewport Body */
+/* badan kartu riwayat pengguna */
 .detail-card-body {
     flex: 1;
     padding: 30px 46px;
@@ -89,7 +86,7 @@
     margin-bottom: 16px;
 }
 
-/* Table Container Responsive */
+/* tabel riwayat kehadiran pengguna */
 .table-container-responsive {
     width: 100%;
     overflow-x: auto;
@@ -139,6 +136,7 @@
     border-bottom: none;
 }
 
+/* lencana peran pengguna */
 .role-badge {
     display: inline-block;
     padding: 3px 8px;
@@ -150,6 +148,7 @@
 .role-badge.admin { background-color: #FEF3C7; color: #B45309; }
 .role-badge.murid { background-color: #DCFCE7; color: #15803D; }
 
+/* warna status kehadiran */
 .status-cell {
     font-weight: 500;
 }
@@ -162,15 +161,25 @@
 .status-cell.tidak-masuk {
     color: #DC2626;
 }
+/* akhir tabel riwayat kehadiran pengguna */
+/* akhir badan kartu riwayat pengguna */
 
+/* responsive riwayat pengguna */
 @media (max-width: 768px) {
     .detail-card-header {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         height: auto;
         gap: 12px;
         padding: 15px;
+        flex-wrap: wrap;
+    }
+    .detail-header-actions {
+        justify-content: flex-end;
     }
     .detail-card-body {
         padding: 20px 15px;
     }
 }
+/* akhir responsive riwayat pengguna */

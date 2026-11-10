@@ -13,9 +13,7 @@ use App\Models\PengaturanAbsensi;
 
 class AbsensiController extends Controller
 {
-    /**
-     * Helper: Dapatkan Tahun Akademik yang sedang aktif (dari session atau DB).
-     */
+    // ambil tahun akademik aktif
     private function getActiveTahunAkademik(): ?TahunAkademik
     {
         $activeYearId = session('active_tahun_akademik_id');
@@ -28,24 +26,22 @@ class AbsensiController extends Controller
 
         return TahunAkademik::where('is_aktif', true)->first() ?? TahunAkademik::orderBy('tanggal_mulai', 'desc')->first();
     }
+    // akhir ambil tahun akademik aktif
 
-    /**
-     * Helper: terjemahkan role DB (kapital) ke lowercase yang konsisten.
-     */
+    // periksa peranan pengguna
     private function roleIs(string $userRole, string $check): bool
     {
         return strtolower($userRole) === strtolower($check);
     }
+    // akhir periksa peranan pengguna
 
-    /**
-     * Menampilkan halaman Absensi Kehadiran sesuai rancangan Figma (Node 635:1687)
-     */
+    // tampilkan halaman absensi kehadiran
     public function kehadiran()
     {
         $user = Auth::user();
         $today = Carbon::today()->toDateString();
 
-        // Terjemahkan nama hari ke bahasa Indonesia
+        // pemetaan nama hari indonesia
         $dayMap = [
             'Sunday'    => 'Minggu',
             'Monday'    => 'Senin',
@@ -56,13 +52,15 @@ class AbsensiController extends Controller
             'Saturday'  => 'Sabtu',
         ];
         $currentDayName = $dayMap[Carbon::now()->format('l')] ?? 'Senin';
+        // akhir pemetaan nama hari indonesia
 
-        // Ambil aturan jam kerja hari ini (default 07:00:00 & 14:00:00 jika belum diset)
+        // ambil jam kerja aktif
         $hariKerja       = HariKerja::where('hari', $currentDayName)->first();
         $jamMasukDefault = $hariKerja->jam_masuk ?? '07:00:00';
         $jamPulangDefault = $hariKerja->jam_pulang ?? '14:00:00';
+        // akhir ambil jam kerja aktif
 
-        // Cek data absensi hari ini sesuai role user (case-insensitive)
+        // ambil absensi hari ini sesuai peranan
         $absensi = null;
         if ($this->roleIs($user->role, 'admin') && $user->admin) {
             $absensi = AbsensiAdmin::where('id_admin', $user->admin->id_admin)
@@ -77,8 +75,9 @@ class AbsensiController extends Controller
                 ->where('tanggal', $today)
                 ->first();
         }
+        // akhir ambil absensi hari ini sesuai peranan
 
-        // Format: "Senin, 18 Oktober 2026 07:30:37" (tanggal + jam:menit:detik)
+        // format tanggal dan waktu absensi
         $tanggalMasukFormatted = null;
         $tanggalPulangFormatted = null;
 
@@ -99,6 +98,7 @@ class AbsensiController extends Controller
                 ->locale('id')
                 ->translatedFormat('l, d F Y H:i:s');
         }
+        // akhir format tanggal dan waktu absensi
 
         $bukaMasukDefault = Carbon::parse($jamMasukDefault)->subHours(2)->format('H:i:s');
         $isHariLibur      = \App\Http\Controllers\HariLiburController::isTodayHoliday();
@@ -118,19 +118,17 @@ class AbsensiController extends Controller
             'tanggalPulangFormatted'
         ));
     }
+    // akhir tampilkan halaman absensi kehadiran
 
-    /**
-     * Riwayat Absensi Pengguna — tampilkan rekap semua user (hanya Admin)
-     */
+    // tampilkan riwayat absensi seluruh pengguna
     public function riwayatPengguna()
     {
         $user = Auth::user();
         $activeTahun = $this->getActiveTahunAkademik();
 
-        // Kumpulkan semua data absensi dari semua tipe user
         $semuaRiwayat = collect();
 
-        // Guru
+        // kumpulkan riwayat absensi guru
         $guruList = \App\Models\Guru::with('user')->get();
         foreach ($guruList as $guru) {
             $query = AbsensiGuru::with('kelas')
@@ -155,8 +153,9 @@ class AbsensiController extends Controller
                 ]);
             }
         }
+        // akhir kumpulkan riwayat absensi guru
 
-        // Admin
+        // kumpulkan riwayat absensi admin
         $adminList = \App\Models\Admin::with('user')->get();
         foreach ($adminList as $adm) {
             $query = AbsensiAdmin::where('id_admin', $adm->id_admin);
@@ -180,8 +179,9 @@ class AbsensiController extends Controller
                 ]);
             }
         }
+        // akhir kumpulkan riwayat absensi admin
 
-        // Murid
+        // kumpulkan riwayat absensi murid
         $muridList = \App\Models\Murid::with('user', 'kelas')->get();
         foreach ($muridList as $murid) {
             $query = \App\Models\AbsensiMurid::with('kelas')
@@ -206,16 +206,17 @@ class AbsensiController extends Controller
                 ]);
             }
         }
+        // akhir kumpulkan riwayat absensi murid
 
-        // Urutkan: terbaru dulu
+        // pengurutan data riwayat
         $semuaRiwayat = $semuaRiwayat->sortByDesc('tanggal')->values();
+        // akhir pengurutan data riwayat
 
         return view('absensi.riwayat_pengguna', compact('user', 'semuaRiwayat'));
     }
+    // akhir tampilkan riwayat absensi seluruh pengguna
 
-    /**
-     * Menampilkan halaman Detail Absensi sesuai rancangan Figma (Node 638:4162)
-     */
+    // tampilkan rincian absensi pribadi
     public function detail()
     {
         $user = Auth::user();
@@ -227,6 +228,7 @@ class AbsensiController extends Controller
 
         $activeTahun = $this->getActiveTahunAkademik();
 
+        // hitung statistik kehadiran pengguna
         if ($this->roleIs($user->role, 'guru') && $user->guru) {
             $query = AbsensiGuru::with('kelas')
                 ->where('id_guru', $user->guru->id_guru);
@@ -283,10 +285,10 @@ class AbsensiController extends Controller
             $totalTerlambat  = (clone $baseCount)->where('status', 'terlambat')->count();
             $totalTidakHadir = (clone $baseCount)->where('status', 'tidak hadir')->count();
         }
+        // akhir hitung statistik kehadiran pengguna
 
         $totalSemua = $totalTepatWaktu + $totalTerlambat + $totalTidakHadir;
 
-        // Gunakan data real dari database (bukan fallback dummy)
         $chartStats = [
             'tepat_waktu' => $totalTepatWaktu,
             'terlambat'   => $totalTerlambat,
@@ -319,16 +321,15 @@ class AbsensiController extends Controller
             return view('absensi.riwayat_admin', $compactData);
         }
     }
+    // akhir tampilkan rincian absensi pribadi
 
-    /**
-     * Cetak Laporan Kehadiran INDIVIDU (sesuai akun user yang login)
-     * Ditampilkan saat klik Cetak Kehadiran di halaman Detail Absensi pribadi
-     */
+    // cetak laporan kehadiran perorangan
     public function cetakIndividu(Request $request)
     {
         $user        = Auth::user();
         $activeTahun = $this->getActiveTahunAkademik();
 
+        // penentuan periode bulan dan tahun
         if ($activeTahun && $activeTahun->tanggal_mulai && $activeTahun->tanggal_selesai) {
             $start = Carbon::parse($activeTahun->tanggal_mulai)->locale('id');
             $end   = Carbon::parse($activeTahun->tanggal_selesai)->locale('id');
@@ -342,9 +343,9 @@ class AbsensiController extends Controller
         } else {
             $bulanTahun = Carbon::now()->locale('id')->translatedFormat('F Y');
         }
+        // akhir penentuan periode bulan dan tahun
 
         $tanggalCetak = Carbon::now()->locale('id')->translatedFormat('d F Y');
-
         $jumlahHariKerja = HariKerja::where('status', 'Aktif')->count() * 4;
 
         $hadir      = 0;
@@ -352,6 +353,7 @@ class AbsensiController extends Controller
         $tidakHadir = 0;
         $jabatan    = 'Staf';
 
+        // hitung rekap peranan perorangan
         if ($this->roleIs($user->role, 'guru') && $user->guru) {
             $base = AbsensiGuru::where('id_guru', $user->guru->id_guru);
             if ($activeTahun) {
@@ -379,8 +381,9 @@ class AbsensiController extends Controller
             $terlambat  = (clone $base)->where('status', 'terlambat')->count();
             $tidakHadir = (clone $base)->where('status', 'tidak hadir')->count();
             $kelasName  = $user->murid->kelas->nama_kelas ?? 'Murid';
-            $jabatan    = 'Murid (' . $kelasName . ')';
+            $jabatan    = 'Murid ' . $kelasName;
         }
+        // akhir hitung rekap peranan perorangan
 
         $laporan = [
             [
@@ -411,16 +414,15 @@ class AbsensiController extends Controller
             'isIndividu'
         ));
     }
+    // akhir cetak laporan kehadiran perorangan
 
-    /**
-     * Cetak Laporan Kehadiran SELURUH PENGGUNA (hanya Guru & Admin, murid tidak dimasukkan)
-     * Ditampilkan saat klik Cetak Kehadiran di halaman Riwayat Absensi Pengguna
-     */
+    // cetak laporan kehadiran seluruh guru dan staf
     public function cetakSemua(Request $request)
     {
         $user        = Auth::user();
         $activeTahun = $this->getActiveTahunAkademik();
 
+        // tentukan teks rentang waktu
         if ($activeTahun && $activeTahun->tanggal_mulai && $activeTahun->tanggal_selesai) {
             $start = Carbon::parse($activeTahun->tanggal_mulai)->locale('id');
             $end   = Carbon::parse($activeTahun->tanggal_selesai)->locale('id');
@@ -434,15 +436,15 @@ class AbsensiController extends Controller
         } else {
             $bulanTahun = Carbon::now()->locale('id')->translatedFormat('F Y');
         }
+        // akhir tentukan teks rentang waktu
 
         $tanggalCetak = Carbon::now()->locale('id')->translatedFormat('d F Y');
-
         $jumlahHariKerja = HariKerja::where('status', 'Aktif')->count() * 4;
 
         $laporan = [];
         $no = 1;
 
-        // 1. Guru
+        // kumpulkan rekap guru
         $gurus = \App\Models\Guru::with('user')->get();
         foreach ($gurus as $guru) {
             $base = AbsensiGuru::where('id_guru', $guru->id_guru);
@@ -463,8 +465,9 @@ class AbsensiController extends Controller
                 'hari_kerja'  => $hadir + $terlambat,
             ];
         }
+        // akhir kumpulkan rekap guru
 
-        // 2. Admin
+        // kumpulkan rekap admin
         $admins = \App\Models\Admin::with('user')->get();
         foreach ($admins as $adm) {
             $base = AbsensiAdmin::where('id_admin', $adm->id_admin);
@@ -485,9 +488,7 @@ class AbsensiController extends Controller
                 'hari_kerja'  => $hadir + $terlambat,
             ];
         }
-
-        // CATATAN: Murid TIDAK dimasukkan sesuai permintaan user:
-        // "untuk murid gausah di masukin di cetak laporan yang seluruh pengguna yang di admin"
+        // akhir kumpulkan rekap admin
 
         $judulLaporan  = 'LAPORAN REKAPITULASI KEHADIRAN GURU & STAF';
         $backUrl       = route('absensi.riwayat-pengguna');
@@ -506,10 +507,9 @@ class AbsensiController extends Controller
             'isIndividu'
         ));
     }
+    // akhir cetak laporan kehadiran seluruh guru dan staf
 
-    /**
-     * Export Excel/CSV Kehadiran Pribadi
-     */
+    // ekspor berkas csv kehadiran perorangan
     public function exportExcelIndividu(Request $request)
     {
         $user       = Auth::user();
@@ -521,6 +521,7 @@ class AbsensiController extends Controller
         $tidakHadir = 0;
         $jabatan    = 'Staf';
 
+        // hitung statistik ekspor perorangan
         if ($this->roleIs($user->role, 'guru') && $user->guru) {
             $hadir      = AbsensiGuru::where('id_guru', $user->guru->id_guru)->where('status', 'tepat waktu')->count();
             $terlambat  = AbsensiGuru::where('id_guru', $user->guru->id_guru)->where('status', 'terlambat')->count();
@@ -537,6 +538,7 @@ class AbsensiController extends Controller
             $tidakHadir = \App\Models\AbsensiMurid::where('id_murid', $user->murid->id_murid)->where('status', 'tidak hadir')->count();
             $jabatan    = 'Murid';
         }
+        // akhir hitung statistik ekspor perorangan
 
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',
@@ -546,6 +548,7 @@ class AbsensiController extends Controller
             'Expires'             => '0',
         ];
 
+        // susun aliran baris csv
         $callback = function () use ($user, $jabatan, $hadir, $terlambat, $tidakHadir, $bulanTahun) {
             $handle = fopen('php://output', 'w');
             fputs($handle, "\xEF\xBB\xBF");
@@ -560,13 +563,13 @@ class AbsensiController extends Controller
 
             fclose($handle);
         };
+        // akhir susun aliran baris csv
 
         return response()->stream($callback, 200, $headers);
     }
+    // akhir ekspor berkas csv kehadiran perorangan
 
-    /**
-     * Export Excel/CSV Kehadiran Seluruh Pengguna (Guru & Admin tanpa Murid)
-     */
+    // ekspor berkas csv seluruh kehadiran staf
     public function exportExcelSemua(Request $request)
     {
         $bulanTahun = Carbon::now()->locale('id')->translatedFormat('F Y');
@@ -580,6 +583,7 @@ class AbsensiController extends Controller
             'Expires'             => '0',
         ];
 
+        // susun berkas csv rekapitulasi
         $callback = function () use ($bulanTahun) {
             $handle = fopen('php://output', 'w');
             fputs($handle, "\xEF\xBB\xBF");
@@ -596,7 +600,6 @@ class AbsensiController extends Controller
 
             $no = 1;
 
-            // 1. Guru
             $gurus = \App\Models\Guru::with('user')->get();
             foreach ($gurus as $guru) {
                 $hadir      = AbsensiGuru::where('id_guru', $guru->id_guru)->where('status', 'tepat waktu')->count();
@@ -615,7 +618,6 @@ class AbsensiController extends Controller
                 ]);
             }
 
-            // 2. Admin
             $admins = \App\Models\Admin::with('user')->get();
             foreach ($admins as $adm) {
                 $hadir      = AbsensiAdmin::where('id_admin', $adm->id_admin)->where('status', 'tepat waktu')->count();
@@ -636,13 +638,13 @@ class AbsensiController extends Controller
 
             fclose($handle);
         };
+        // akhir susun berkas csv rekapitulasi
 
         return response()->stream($callback, 200, $headers);
     }
+    // akhir ekspor berkas csv seluruh kehadiran staf
 
-    /**
-     * Proses Absensi Masuk (Sesuai Sequence Diagram)
-     */
+    // proses absensi masuk
     public function absenMasuk(Request $request)
     {
         $user          = Auth::user();
@@ -650,11 +652,13 @@ class AbsensiController extends Controller
         $now           = Carbon::now();
         $waktuSekarang = $now->toTimeString();
 
-        // ── Cek Hari Libur ─────────────────────────────────────────
+        // periksa hari libur
         if (\App\Http\Controllers\HariLiburController::isTodayHoliday()) {
             return back()->with('error', 'Hari ini adalah hari libur. Absensi tidak dapat dilakukan.');
         }
+        // akhir periksa hari libur
 
+        // periksa status aktif hari kerja
         $dayMap = [
             'Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa',
             'Wednesday' => 'Rabu', 'Thursday' => 'Kamis',
@@ -666,7 +670,9 @@ class AbsensiController extends Controller
         if (!$hariKerja || strtolower($hariKerja->status) !== 'aktif') {
             return back()->with('error', "Hari ini ({$currentDayName}) bukan hari kerja aktif atau sekolah sedang libur.");
         }
+        // akhir periksa status aktif hari kerja
 
+        // validasi jam masuk absensi
         $jamMasukResmi  = $hariKerja->jam_masuk ?? '07:00:00';
         $jamPulangResmi = $hariKerja->jam_pulang ?? '14:00:00';
         $bukaAbsenMasuk = Carbon::parse($jamMasukResmi)->subHours(2)->format('H:i:s');
@@ -684,19 +690,19 @@ class AbsensiController extends Controller
             }
             $status = ($waktuSekarang >= $bukaAbsenMasuk && $waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
         } else {
-            // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
             if ($waktuSekarang < $bukaAbsenMasuk) {
                 return back()->with('error', "Absensi masuk belum dibuka! Absensi baru dapat dilakukan mulai pukul " . substr($bukaAbsenMasuk, 0, 5) . " WIB (2 jam sebelum jam masuk resmi " . substr($jamMasukResmi, 0, 5) . " WIB).");
             }
 
-            // Validasi batas akhir absensi masuk (lewat jam pulang)
             if ($waktuSekarang > $jamPulangResmi) {
                 return back()->with('error', "Waktu absensi masuk sudah berakhir karena sudah melewati jam pulang sekolah (" . substr($jamPulangResmi, 0, 5) . " WIB).");
             }
 
             $status = ($waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
         }
+        // akhir validasi jam masuk absensi
 
+        // simpan rekam absensi masuk
         if ($this->roleIs($user->role, 'admin') && $user->admin) {
             $absensi = AbsensiAdmin::firstOrNew([
                 'id_admin' => $user->admin->id_admin,
@@ -743,13 +749,13 @@ class AbsensiController extends Controller
             $absensi->status      = $status;
             $absensi->save();
         }
+        // akhir simpan rekam absensi masuk
 
         return back()->with('success', 'Absensi masuk berhasil dicatat (' . ucfirst($status) . ')');
     }
+    // akhir proses absensi masuk
 
-    /**
-     * Proses Absensi Pulang (Sesuai Sequence Diagram)
-     */
+    // proses absensi pulang
     public function absenPulang(Request $request)
     {
         $user          = Auth::user();
@@ -757,11 +763,13 @@ class AbsensiController extends Controller
         $now           = Carbon::now();
         $waktuSekarang = $now->toTimeString();
 
-        // ── Cek Hari Libur ─────────────────────────────────────────
+        // periksa hari libur
         if (\App\Http\Controllers\HariLiburController::isTodayHoliday()) {
             return back()->with('error', 'Hari ini adalah hari libur. Absensi tidak dapat dilakukan.');
         }
+        // akhir periksa hari libur
 
+        // periksa status aktif hari kerja
         $dayMap = [
             'Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa',
             'Wednesday' => 'Rabu', 'Thursday' => 'Kamis',
@@ -773,7 +781,9 @@ class AbsensiController extends Controller
         if (!$hariKerja || strtolower($hariKerja->status) !== 'aktif') {
             return back()->with('error', "Hari ini ({$currentDayName}) bukan hari kerja aktif atau sekolah sedang libur.");
         }
+        // akhir periksa status aktif hari kerja
 
+        // validasi jam pulang absensi
         $jamMasukResmi  = $hariKerja->jam_masuk ?? '07:00:00';
         $jamPulangResmi = $hariKerja->jam_pulang ?? '14:00:00';
         $isOvernight    = $jamPulangResmi < $jamMasukResmi;
@@ -788,7 +798,9 @@ class AbsensiController extends Controller
                 return back()->with('error', "Belum waktunya absensi pulang! Absensi pulang baru dibuka mulai pukul " . substr($jamPulangResmi, 0, 5) . " WIB.");
             }
         }
+        // akhir validasi jam pulang absensi
 
+        // simpan rekam absensi pulang
         if ($this->roleIs($user->role, 'admin') && $user->admin) {
             $absensi = AbsensiAdmin::where('id_admin', $user->admin->id_admin)
                 ->where('tanggal', $today)
@@ -834,13 +846,13 @@ class AbsensiController extends Controller
             $absensi->waktu_pulang = $waktuSekarang;
             $absensi->save();
         }
+        // akhir simpan rekam absensi pulang
 
         return back()->with('success', 'Absensi keluar berhasil dicatat. Selamat beristirahat!');
     }
+    // akhir proses absensi pulang
 
-    /**
-     * Verifikasi QR Code saat discan (Real-time Ajax)
-     */
+    // verifikasi pemindaian kode qr
     public function scanVerify(Request $request)
     {
         $qrData        = trim($request->input('qr_data', ''));
@@ -853,7 +865,7 @@ class AbsensiController extends Controller
             return response()->json(['success' => false, 'message' => 'QR Code kosong atau tidak terbaca.'], 400);
         }
 
-        // ── Cek Hari Libur ─────────────────────────────────────────
+        // periksa hari libur
         if (\App\Http\Controllers\HariLiburController::isTodayHoliday()) {
             return response()->json([
                 'success'      => false,
@@ -861,8 +873,9 @@ class AbsensiController extends Controller
                 'scanned_code' => $qrData,
             ], 422);
         }
+        // akhir periksa hari libur
 
-        // ── Cek Radius Batas Lokasi Absensi ────────────────────────
+        // periksa radius lokasi absensi gps
         $lokasiAktif = PengaturanAbsensi::where('status', 'Aktif')->get();
         if ($lokasiAktif->isNotEmpty()) {
             $userLat = $request->input('latitude');
@@ -906,6 +919,7 @@ class AbsensiController extends Controller
                 ], 422);
             }
         }
+        // akhir periksa radius lokasi absensi gps
 
         $foundUser  = null;
         $role       = null;
@@ -913,7 +927,7 @@ class AbsensiController extends Controller
         $nomorInduk = '';
         $idEntity   = null;
 
-        // 1. Cek Guru
+        // pencarian data pengguna berdasarkan qr code
         $guru = \App\Models\Guru::with('user', 'kelas')
             ->where('qr_code', $qrData)
             ->orWhere('nip', $qrData)
@@ -926,7 +940,6 @@ class AbsensiController extends Controller
             $idKelas    = $guru->kelas->first()->id_kelas ?? null;
         }
 
-        // 2. Cek Admin
         if (!$foundUser) {
             $admin = \App\Models\Admin::with('user')
                 ->where('qr_code', $qrData)
@@ -940,7 +953,6 @@ class AbsensiController extends Controller
             }
         }
 
-        // 3. Cek Murid
         if (!$foundUser) {
             $murid = \App\Models\Murid::with('user', 'kelas')
                 ->where('qr_code', $qrData)
@@ -954,6 +966,7 @@ class AbsensiController extends Controller
                 $idKelas    = $murid->id_kelas;
             }
         }
+        // akhir pencarian data pengguna berdasarkan qr code
 
         if (!$foundUser) {
             return response()->json([
@@ -963,8 +976,7 @@ class AbsensiController extends Controller
             ], 404);
         }
 
-        // Validasi kecocokan akun: SEMUA PENGGUNA (Admin, Guru, maupun Murid)
-        // HANYA BOLEH melakukan absensi untuk akun miliknya sendiri!
+        // validasi kepemilikan akun pengguna
         $currentUser = Auth::user();
         if ($currentUser && (int) $foundUser->id_user !== (int) $currentUser->id_user) {
             return response()->json([
@@ -973,8 +985,9 @@ class AbsensiController extends Controller
                 'scanned_code' => $qrData,
             ], 422);
         }
+        // akhir validasi kepemilikan akun pengguna
 
-        // Aturan Hari Kerja
+        // validasi status hari kerja
         $dayMap = [
             'Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa',
             'Wednesday' => 'Rabu', 'Thursday' => 'Kamis',
@@ -990,12 +1003,13 @@ class AbsensiController extends Controller
                 'scanned_code' => $qrData,
             ], 422);
         }
+        // akhir validasi status hari kerja
 
         $jamMasukResmi  = $hariKerja->jam_masuk ?? '07:00:00';
         $jamPulangResmi = $hariKerja->jam_pulang ?? '14:00:00';
         $bukaAbsenMasuk = Carbon::parse($jamMasukResmi)->subHours(2)->format('H:i:s');
 
-        // Tentukan Model Absensi sesuai role
+        // tentukan entitas absensi
         $absensi = null;
         if ($role === 'Guru') {
             $absensi = \App\Models\AbsensiGuru::firstOrNew([
@@ -1019,9 +1033,11 @@ class AbsensiController extends Controller
                 $absensi->id_kelas = $idKelas;
             }
         }
+        // akhir tentukan entitas absensi
 
-        $isOvernight    = $jamPulangResmi < $jamMasukResmi;
+        $isOvernight = $jamPulangResmi < $jamMasukResmi;
 
+        // eksekusi absensi masuk atau pulang
         if ($tipe === 'masuk') {
             if ($isOvernight) {
                 $isValidMasuk = ($waktuSekarang >= $bukaAbsenMasuk || $waktuSekarang <= $jamPulangResmi);
@@ -1042,7 +1058,6 @@ class AbsensiController extends Controller
                 }
                 $status = ($waktuSekarang >= $bukaAbsenMasuk && $waktuSekarang <= $jamMasukResmi) ? 'tepat waktu' : 'terlambat';
             } else {
-                // Validasi jam buka absensi masuk (2 jam sebelum jam masuk)
                 if ($waktuSekarang < $bukaAbsenMasuk) {
                     return response()->json([
                         'success'      => false,
@@ -1051,7 +1066,6 @@ class AbsensiController extends Controller
                     ], 422);
                 }
 
-                // Validasi batas akhir absensi masuk (sudah lewat jam pulang sekolah)
                 if ($waktuSekarang > $jamPulangResmi) {
                     return response()->json([
                         'success'      => false,
@@ -1094,7 +1108,6 @@ class AbsensiController extends Controller
                 ],
             ]);
         } else {
-            // Absensi Pulang
             if (!$absensi->waktu_masuk) {
                 return response()->json([
                     'success'      => false,
@@ -1122,7 +1135,6 @@ class AbsensiController extends Controller
                 ], 422);
             }
 
-            // Validasi waktu absensi pulang (belum waktunya jam pulang)
             if ($isOvernight) {
                 $isBelumPulang = ($waktuSekarang >= $jamMasukResmi || $waktuSekarang < $jamPulangResmi);
                 if ($isBelumPulang) {
@@ -1157,14 +1169,14 @@ class AbsensiController extends Controller
                 ],
             ]);
         }
+        // akhir eksekusi absensi masuk atau pulang
     }
+    // akhir verifikasi pemindaian kode qr
 
-    /**
-     * Hitung jarak dua titik koordinat GPS menggunakan formula Haversine (hasil dalam meter).
-     */
+    // hitung jarak koordinat gps
     private function hitungJarak(float $lat1, float $lon1, float $lat2, float $lon2): float
     {
-        $earthRadius = 6371000; // meter
+        $earthRadius = 6371000;
         $latFrom = deg2rad($lat1);
         $lonFrom = deg2rad($lon1);
         $latTo   = deg2rad($lat2);
@@ -1178,4 +1190,5 @@ class AbsensiController extends Controller
 
         return $angle * $earthRadius;
     }
+    // akhir hitung jarak koordinat gps
 }

@@ -89,13 +89,13 @@
 
                 <!-- Field 3: NIP (461 x ~70) -->
                 <div class="form-group">
-                    <label for="nip" class="form-label">NIP :</label>
+                    <label for="nip" class="form-label">NIP/NISN :</label>
                     <input 
                         type="text" 
                         name="nip" 
                         id="nip" 
                         class="form-input" 
-                        placeholder="1234567890" 
+                        placeholder="Masukan NIP/NISN" 
                         value="{{ old('nip') }}" 
                         required
                     >

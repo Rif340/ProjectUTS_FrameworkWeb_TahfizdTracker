@@ -1,15 +1,11 @@
-/* =============================================================
-   profile.css — Halaman Profile & Perbarui Profile (Figma 621:2785 & 621:2862)
-   ============================================================= */
-
-/* ── Container Profile ── */
+/* pembungkus halaman profil */
 .pf-container {
     padding: 0;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* ── Flash Messages ── */
+/* pesan notifikasi flash */
 .pf-flash {
     margin: 16px 36px 0;
     padding: 12px 18px;
@@ -19,8 +15,9 @@
 }
 .pf-flash-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
 .pf-flash-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+/* akhir pesan notifikasi flash */
 
-/* ── Card Header (Figma 621:2897 - Height 79px) ── */
+/* header kartu profil */
 .pf-card-head {
     display: flex;
     align-items: center;
@@ -50,7 +47,7 @@
     align-items: center;
 }
 
-/* Tombol Cetak QR Code (Figma 621:2903) */
+/* tombol cetak kartu qr */
 .pf-btn-qr {
     display: inline-flex;
     align-items: center;
@@ -72,13 +69,14 @@
     background: #0a5e3f;
     color: #ffffff;
 }
+/* akhir header kartu profil */
 
-/* ── Content Body (Figma 667:31368) ── */
+/* area isi konten profil */
 .pf-content {
     padding: 20px 36px 40px;
 }
 
-/* ── Top Header Profile: Avatar + Welcome + Edit Button (Figma 621:2905) ── */
+/* ringkasan pengguna bagian atas */
 .pf-top-bar {
     display: flex;
     align-items: center;
@@ -103,7 +101,6 @@
     background: #e4e6ef;
 }
 
-/* Inisial avatar jika belum ada foto profil (seperti di navbar) */
 .pf-avatar-initials {
     width: 80px;
     height: 80px;
@@ -159,7 +156,7 @@
     margin: 2px 0 0;
 }
 
-/* Tombol Edit Oval (Figma 621:2911) */
+/* tombol ubah profil */
 .pf-btn-edit-badge {
     display: inline-flex;
     align-items: center;
@@ -184,10 +181,9 @@
 .pf-btn-edit-badge:hover svg path {
     fill: #ffffff;
 }
+/* akhir ringkasan pengguna bagian atas */
 
-/* =============================================================
-   VIEW 1: TAMPILAN PROFILE (Figma 621:2785)
-   ============================================================= */
+/* kartu rincian data profil */
 .pf-detail-card {
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 20px;
@@ -224,7 +220,7 @@
     word-break: break-word;
 }
 
-/* Badge Status Aktif (Figma Hijau Centang) */
+/* status keaktifan akun */
 .pf-status-badge {
     display: inline-flex;
     align-items: center;
@@ -246,10 +242,9 @@
     color: #fff;
     font-size: 11px;
 }
+/* akhir kartu rincian data profil */
 
-/* =============================================================
-   VIEW 2: FORM PERBARUI PROFILE (Figma 621:2862)
-   ============================================================= */
+/* formulir perbarui profil */
 .pf-edit-card {
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 20px;
@@ -287,7 +282,7 @@
     opacity: 0.6;
 }
 
-/* Foto Formal Section di Tengah Form (Figma 621:2921) */
+/* unggah foto profil */
 .pf-edit-photo-wrap {
     display: flex;
     flex-direction: column;
@@ -321,7 +316,7 @@
     background: #0a5e3f;
 }
 
-/* Input Fields 2 Kolom (Figma 621:2925) */
+/* bidang input data profil */
 .pf-form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -368,19 +363,23 @@
     border-color: #0e7651;
 }
 
-/* Action Buttons (Figma 621:2942) */
+/* tombol aksi formulir profil */
 .pf-form-actions {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     width: 100%;
+    margin-top: 30px;
+    box-sizing: border-box;
 }
 
 .pf-btn-batal-form {
     flex: 1;
+    width: 100%;
     max-width: 380px;
     height: 48px;
+    padding: 0 32px;
     border: 1px solid #0e7651;
     background: transparent;
     color: #0e7651;
@@ -391,6 +390,10 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: all 0.18s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 .pf-btn-batal-form:hover {
     background: #ecfdf5;
@@ -398,8 +401,10 @@
 
 .pf-btn-simpan-form {
     flex: 1;
+    width: 100%;
     max-width: 380px;
     height: 48px;
+    padding: 0 32px;
     background: #0e7651;
     border: 1px solid #0e7651;
     color: #ffffff;
@@ -410,12 +415,17 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     transition: background 0.18s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 .pf-btn-simpan-form:hover {
     background: #0a5e3f;
 }
+/* akhir formulir perbarui profil */
 
-/* Responsive */
+/* responsive tata letak profil */
 @media (max-width: 992px) {
     .pf-info-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -425,15 +435,80 @@
     }
     .pf-form-actions {
         flex-direction: column;
+        gap: 14px;
+        width: 100%;
     }
     .pf-btn-batal-form, .pf-btn-simpan-form {
-        max-width: 100%;
+        width: 100%;
+        max-width: 380px;
+        height: 48px;
+        padding: 0 24px;
+        box-sizing: border-box;
     }
 }
 
-/* =============================================================
-   ALERT POPUP MODAL (BERHASIL / GAGAL — Sesuai Figma & Modul Lainnya)
-   ============================================================= */
+@media (max-width: 640px) {
+    .pf-card-head {
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 60px;
+    }
+    .pf-content {
+        padding: 16px 14px 24px;
+    }
+    .pf-top-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 0;
+        flex-wrap: wrap;
+    }
+    .pf-user-summary {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+    }
+    .pf-avatar-thumb,
+    .pf-avatar-initials {
+        width: 64px;
+        height: 64px;
+        font-size: 22px;
+    }
+    .pf-info-grid {
+        grid-template-columns: 1fr;
+    }
+    .pf-detail-card {
+        padding: 16px 14px;
+    }
+    .pf-form-actions {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin-top: 24px;
+    }
+    .pf-btn-batal-form, .pf-btn-simpan-form {
+        width: 100%;
+        max-width: 100%;
+        height: 48px;
+        padding: 0 24px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    .pf-alert-box {
+        width: 92vw;
+        padding: 24px 16px;
+    }
+}
+/* akhir responsive tata letak profil */
+
+/* modal notifikasi profil */
 .pf-alert-overlay {
     position: fixed;
     inset: 0;
@@ -542,4 +617,5 @@
 .pf-alert-btn-wrap.gagal a {
     background: #ef4444;
 }
-
+/* akhir modal notifikasi profil */
+/* akhir pembungkus halaman profil */

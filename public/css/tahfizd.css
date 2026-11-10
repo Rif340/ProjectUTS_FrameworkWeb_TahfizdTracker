@@ -1,9 +1,4 @@
-/* =============================================================
-   tahfizd.css — Modul Tahfizd / Daftar Kelas (SDIT At-Taubah)
-   Figma Node: 393:4682
-   ============================================================= */
-
-/* ---------- Card Header (Figma 595:6242) ---------- */
+/* header kartu tahfizd */
 .tz-card-head {
     display: flex;
     align-items: center;
@@ -33,7 +28,7 @@
     flex-wrap: wrap;
 }
 
-/* Tampilkan 10 dropdown (Figma 595:6249) */
+/* dropdown tampilkan entri */
 .tz-select-show {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
@@ -57,7 +52,7 @@
     align-items: center;
 }
 
-/* Tombol + Tambah (Figma 595:6253) */
+/* tombol tambah kelas */
 .tz-btn-tambah {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
@@ -81,8 +76,9 @@
     opacity: 0.9;
     color: #fff;
 }
+/* akhir header kartu tahfizd */
 
-/* ---------- Content Container & Cards List (Figma 616:949) ---------- */
+/* area konten dan daftar kelas */
 .tz-content {
     padding: 33px 37px 40px;
     display: flex;
@@ -94,8 +90,9 @@
     width: 100%;
     box-sizing: border-box;
 }
+/* akhir area konten dan daftar kelas */
 
-/* ---------- Single Class Card (Figma 597:6528) ---------- */
+/* kartu kelas */
 .tz-card {
     width: 100%;
     background: #FFFFFF;
@@ -113,7 +110,7 @@
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Card Top Section (Figma 597:6530) */
+/* bagian atas kartu kelas */
 .tz-card-top {
     background: #0E774F;
     height: 93px;
@@ -169,7 +166,7 @@
     display: block;
 }
 
-/* Card Bottom Section (Figma 597:6547) */
+/* bagian bawah kartu kelas */
 .tz-card-bottom {
     background: #FFFFFF;
     height: 89px;
@@ -183,7 +180,7 @@
     width: 100%;
 }
 
-/* Teacher Info (Figma 597:6548) */
+/* info guru pengampu */
 .tz-teacher {
     display: flex;
     align-items: center;
@@ -234,7 +231,7 @@
     margin: 0;
 }
 
-/* Actions Row (Figma 597:6553) */
+/* tombol aksi kartu kelas */
 .tz-card-actions {
     display: flex;
     align-items: center;
@@ -285,8 +282,9 @@
     color: #FFFFFF;
     transform: scale(1.03);
 }
+/* akhir kartu kelas */
 
-/* Empty State */
+/* tampilan kosong */
 .tz-empty {
     text-align: center;
     color: #6C757D;
@@ -295,8 +293,9 @@
     padding: 60px 20px;
     width: 100%;
 }
+/* akhir tampilan kosong */
 
-/* Pagination */
+/* pagination daftar kelas */
 .tz-pagination {
     display: flex;
     justify-content: center;
@@ -321,10 +320,9 @@
     color: #fff;
     border-color: #0E7651;
 }
+/* akhir pagination daftar kelas */
 
-/* =============================================================
-   MODAL STYLES (Tambah, Edit, Hapus)
-   ============================================================= */
+/* modal tambah dan edit kelas */
 .tz-modal-overlay {
     display: none;
     position: fixed;
@@ -351,14 +349,23 @@
 }
 .tz-modal-close {
     position: absolute;
-    top: 20px;
+    top: 18px;
     right: 20px;
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background-color 0.2s, opacity 0.2s;
 }
-.tz-modal-close img { width: 14px; height: 14px; }
+.tz-modal-close:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    opacity: 0.85;
+}
+.tz-modal-close img { width: 28px; height: 28px; display: block; }
 .tz-modal-logo {
     display: block;
     margin: 0 auto 12px;
@@ -446,10 +453,9 @@
     cursor: pointer;
 }
 .tz-btn-simpan:hover { opacity: 0.9; }
+/* akhir modal tambah dan edit kelas */
 
-/* =============================================================
-   MODAL HAPUS KELAS (Figma Node 599:7804)
-   ============================================================= */
+/* modal konfirmasi hapus kelas */
 .tz-del-overlay {
     display: none;
     position: fixed;
@@ -500,8 +506,8 @@
     justify-content: center;
 }
 .tz-del-close img {
-    width: 16px;
-    height: 16px;
+    width: 28px;
+    height: 28px;
     display: block;
 }
 
@@ -586,10 +592,9 @@
 .tz-del-btn-setujui:hover {
     opacity: 0.9;
 }
+/* akhir modal konfirmasi hapus kelas */
 
-/* =============================================================
-   FORM TAMBAH KELAS MODAL (Figma Node 597:6618)
-   ============================================================= */
+/* modal form tambah kelas lengkap */
 .tz-overlay {
     display: none;
     position: fixed;
@@ -807,10 +812,9 @@
         width: 100%;
     }
 }
+/* akhir modal form tambah kelas lengkap */
 
-/* =============================================================
-   DETAIL TARGET HAFALAN (Figma Node 599:8288)
-   ============================================================= */
+/* detail target hafalan */
 .tz-tg-container {
     padding: 24px 37px 40px;
     background: #FFFFFF;
@@ -894,7 +898,7 @@
 .tz-tg-table {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
 }
 
 .tz-tg-table th {
@@ -950,16 +954,9 @@
     transform: scale(1.1);
     opacity: 0.85;
 }
+/* akhir detail target hafalan */
 
-
-
-
-/* =============================================================
-   PROGRES KELAS — Figma Node 603:2185 / 607:7363
-   Prefix: tz-pk-
-   ============================================================= */
-
-/* --- Outer Wrapper --- */
+/* progres kelas */
 .tz-pk-wrap {
     background: #FFFFFF;
     border: 1px dashed #e5e7eb;
@@ -973,7 +970,7 @@
     overflow: hidden;
 }
 
-/* --- Flash Messages --- */
+/* pesan flash progres kelas */
 .tz-pk-flash {
     display: flex;
     align-items: center;
@@ -993,8 +990,9 @@
     color: #DC2626;
     border-bottom: 1px solid #f5c6c6;
 }
+/* akhir pesan flash progres kelas */
 
-/* --- Header Bar (Figma 607:7364) --- */
+/* header bar progres kelas */
 .tz-pk-header {
     display: flex;
     align-items: center;
@@ -1023,7 +1021,7 @@
     gap: 16px;
 }
 
-/* Cetak Hafalan button (Figma 607:7371) */
+/* tombol cetak hafalan */
 .tz-pk-btn-cetak {
     display: inline-flex;
     align-items: center;
@@ -1044,7 +1042,7 @@
 }
 .tz-pk-btn-cetak:hover { opacity: 0.87; color: #fff; }
 
-/* + Setoran button (Figma 607:7375) */
+/* tombol tambah setoran */
 .tz-pk-btn-setoran {
     display: inline-flex;
     align-items: center;
@@ -1064,8 +1062,9 @@
     transition: opacity 0.2s;
 }
 .tz-pk-btn-setoran:hover { opacity: 0.87; }
+/* akhir header bar progres kelas */
 
-/* --- Info Row (Figma 607:7377) — exactly matching Figma node 607:7378 --*/
+/* baris informasi kelas */
 .tz-pk-info-row {
     display: flex;
     align-items: center;
@@ -1076,7 +1075,7 @@
     box-sizing: border-box;
 }
 
-/* Metadata block (Figma 607:7379) */
+/* blok metadata kelas */
 .tz-pk-meta {
     display: flex;
     flex-direction: column;
@@ -1098,7 +1097,7 @@
 .tz-pk-meta-label { font-weight: 700; color: #000; }
 .tz-pk-meta-val   { font-weight: 300; color: #55566E; }
 
-/* Vertical divider (Figma 607:7392 & 607:7407: height 99px) */
+/* garis pemisah vertikal */
 .tz-pk-vdivider {
     width: 1px;
     height: 99px;
@@ -1106,7 +1105,7 @@
     flex-shrink: 0;
 }
 
-/* Stat card (Figma 607:7393: 148px, 607:7400: 136px) */
+/* kartu statistik kelas */
 .tz-pk-stat-card {
     display: flex;
     align-items: center;
@@ -1153,7 +1152,7 @@
     white-space: nowrap;
 }
 
-/* Circular Progress (Figma 607:7408) */
+/* lingkaran progres hafalan */
 .tz-pk-circle-wrap {
     display: flex;
     flex-direction: column;
@@ -1190,8 +1189,9 @@
     line-height: 1.35;
     white-space: nowrap;
 }
+/* akhir baris informasi kelas */
 
-/* --- Section --- */
+/* seksi konten progres */
 .tz-pk-section {
     padding: 0 37px;
     display: flex;
@@ -1206,14 +1206,14 @@
     line-height: 1.35;
 }
 
-/* --- Surat Target Grid (Figma 607:7417) --- */
+/* grid daftar surat target */
 .tz-pk-surat-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 19px 33px;
 }
 
-/* Surat Card (Figma 607:7418) */
+/* kartu surat hafalan */
 .tz-pk-surat-card {
     border: 1px dashed #000;
     border-radius: 10px;
@@ -1227,7 +1227,7 @@
     gap: 2px;
 }
 
-/* Islamic star badge */
+/* lencana bintang islami */
 .tz-pk-star-badge {
     position: absolute;
     left: 14px;
@@ -1279,7 +1279,7 @@
     margin: 0;
 }
 
-/* Status badge top right (Figma 607:7427) */
+/* badge status surat */
 .tz-pk-badge {
     position: absolute;
     right: 16px;
@@ -1296,7 +1296,7 @@
 .tz-pk-badge--progress { background: #FDBA74; color: #5F2D18; }
 .tz-pk-badge--belum    { background: #E5E7EB; color: #6C757D; }
 
-/* Lulus text (Figma 607:7434) */
+/* teks status lulus */
 .tz-pk-lulus-text {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
@@ -1306,7 +1306,7 @@
     line-height: 1.35;
 }
 
-/* Progress bar (Figma 607:7429) */
+/* progress bar surat hafalan */
 .tz-pk-progbar-row {
     display: flex;
     align-items: center;
@@ -1334,7 +1334,7 @@
     min-width: 28px;
 }
 
-/* --- Empty state --- */
+/* tampilan kosong progres */
 .tz-pk-empty {
     text-align: center;
     padding: 30px;
@@ -1345,7 +1345,7 @@
     border-radius: 10px;
 }
 
-/* --- Table (Figma 607:7488, 607:7561) --- */
+/* tabel riwayat setoran */
 .tz-pk-table-wrap {
     border: 1px solid #808080;
     border-radius: 10px;
@@ -1385,7 +1385,7 @@
 .tz-pk-table tbody td:last-child { border-right: none; }
 .tz-pk-table tbody tr:last-child td { border-bottom: none; }
 
-/* Action buttons in table */
+/* tombol aksi di tabel */
 .tz-pk-act-btn {
     background: transparent;
     border: none;
@@ -1398,8 +1398,9 @@
     transition: background 0.15s;
 }
 .tz-pk-act-btn:hover { background: rgba(0,0,0,0.06); }
+/* akhir tabel riwayat setoran */
 
-/* Status Text Colors */
+/* warna status setoran */
 .tz-status-lancar { color: #0E7651; font-weight: 600; }
 .tz-status-perbaikan { color: #D97706; font-weight: 600; }
 .tz-status-mengulang { color: #DC2626; font-weight: 600; }
@@ -1408,8 +1409,9 @@
 .tz-lulus-lancar { color: #0E7651; font-weight: 700; }
 .tz-lulus-progress { color: #fdba74; font-weight: 700; }
 .tz-lulus-belum { color: #6c757d; font-weight: 700; }
+/* akhir warna status setoran */
 
-/* --- Modal overlays --- */
+/* modal setoran hafalan */
 .tz-modal-overlay {
     position: fixed;
     inset: 0;
@@ -1519,7 +1521,7 @@
 }
 .tz-form-input:focus { border-color: #0E7651; background: #fff; }
 
-/* Radio options for Hasil Setoran (Figma 607:8043) */
+/* pilihan hasil setoran */
 .tz-radio-group {
     display: flex;
     align-items: center;
@@ -1565,4 +1567,65 @@
 .tz-radio-label input[type="radio"]:checked::before {
     transform: scale(1);
 }
+/* akhir pilihan hasil setoran */
+/* akhir modal setoran hafalan */
+/* akhir progres kelas */
 
+/* responsive tahfizd */
+@media (max-width: 768px) {
+    .tz-card-head {
+        padding: 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .tz-content {
+        padding: 16px 14px;
+        gap: 16px;
+    }
+    .tz-card-top {
+        height: auto;
+        min-height: 80px;
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .tz-card-bottom {
+        height: auto;
+        min-height: 80px;
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .tz-card-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .tz-form-modal,
+    .tz-modal-box,
+    .tz-del-modal {
+        width: 92vw;
+        max-width: 500px;
+        padding: 24px 16px;
+    }
+    .tz-tg-container {
+        padding: 16px 14px;
+    }
+    .tz-tg-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .tz-table-wrap,
+    .tz-tg-table-wrap,
+    .tz-pk-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+}
+/* akhir responsive tahfizd */

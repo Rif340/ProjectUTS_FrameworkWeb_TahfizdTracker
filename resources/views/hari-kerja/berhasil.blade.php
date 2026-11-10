@@ -67,7 +67,7 @@
     {{-- Alert Modal Overlay Berhasil --}}
     <div class="hk-overlay">
         <div class="hk-alert-modal berhasil">
-            {{-- Close Button (Figma ci:close-lg) --}}
+            <!-- tombol tutup jendela -->
             <a href="{{ route('hari-kerja.index') }}" class="hk-alert-close" title="Tutup">
                 <img src="{{ asset('icon/figma_close_lg.svg') }}" alt="Tutup">
             </a>

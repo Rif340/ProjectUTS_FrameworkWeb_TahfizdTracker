@@ -29,7 +29,7 @@
     </div>
 </div>
 
-{{-- Alert Modal Overlay (Figma Node 599:7949) --}}
+<!-- jendela status berhasil -->
 <div class="tz-del-overlay open">
     <div class="tz-del-modal">
         <a href="{{ route('tahfizd.index') }}" class="tz-del-close" title="Tutup">

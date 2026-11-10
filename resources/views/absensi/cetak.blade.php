@@ -1,41 +1,38 @@
+@extends('layouts.blank', ['title' => $judulLaporan ?? 'Laporan Rekapitulasi Kehadiran'])
+
+@section('content')
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Rekapitulasi Kehadiran Guru - SDIT At-Taubah</title>
-
-    <link rel="stylesheet" href="/css/cetak-laporan.css">
+    <title>{{ $judulLaporan ?? 'Laporan Kehadiran' }} - SDIT At-Taubah</title>
+    <link rel="stylesheet" href="{{ asset('css/cetak-laporan.css') }}">
 </head>
 <body>
 
-    <!-- TOP TOOLBAR (Hidden when printed) -->
-    <div class="toolbar-top">
-        <div class="toolbar-left">
-            <a href="{{ $backUrl ?? route('absensi.detail') }}" class="btn-toolbar btn-back">
-                &larr; Kembali
-            </a>
-            <span style="font-size: 14px; font-weight: 600; color: #111;">
-                Pratinjau Dokumen Cetak Kehadiran
-            </span>
-        </div>
+    <!-- bilah aksi atas cetak -->
+    <div class="print-toolbar no-print">
+        <a href="{{ $backUrl ?? route('absensi.detail') }}" class="btn-toolbar btn-kembali">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>Kembali</span>
+        </a>
 
-        <div style="display: flex; gap: 10px;">
-            <!-- Download Excel Format -->
+        <div class="toolbar-right">
             <a href="{{ $exportUrl ?? route('absensi.export.excel') }}" class="btn-toolbar btn-excel">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
                     <line x1="8" y1="13" x2="16" y2="13"></line>
                     <line x1="8" y1="17" x2="16" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
-                <span>Unduh Format Excel</span>
+                <span>Export Excel</span>
             </a>
 
-            <!-- Print / Save to PDF -->
-            <button type="button" class="btn-toolbar btn-print" onclick="window.print()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button type="button" onclick="window.print()" class="btn-toolbar btn-print">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="6 9 6 2 18 2 18 9"></polyline>
                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
                     <rect x="6" y="14" width="12" height="8"></rect>
@@ -44,11 +41,12 @@
             </button>
         </div>
     </div>
+    <!-- akhir bilah aksi atas cetak -->
 
-    <!-- PRINTABLE PAPER SHEET (Figma Node 639:8484) -->
+    <!-- lembar dokumen cetak -->
     <div class="paper-sheet">
 
-        <!-- 1. KOP SURAT (Figma Node 639:8485) -->
+        <!-- kop surat -->
         <div class="school-letterhead">
             <img src="/gambar/logo.png" alt="Logo SDIT At-Taubah" class="school-logo-img">
             <h1 class="school-name">SDIT AT-TAUBAH</h1>
@@ -56,18 +54,20 @@
                 Jl. KH. Ahmad Dahlan No. E/4 Kaum 1, Kelurahan Karawang Kulon, Kecamatan Karawang Barat, Kabupaten Karawang, Jawa Barat
             </p>
         </div>
+        <!-- akhir kop surat -->
 
         <div class="rule-thick"></div>
         <div class="rule-gap"></div>
         <div class="rule-thin"></div>
 
-        <!-- 2. JUDUL LAPORAN (Figma Node 639:8493) -->
+        <!-- judul laporan -->
         <div class="report-heading">
             <h2 class="report-title">{{ $judulLaporan ?? 'LAPORAN REKAPITULASI KEHADIRAN' }}</h2>
             <p class="report-subtitle">Periode {{ $bulanTahun }}</p>
         </div>
+        <!-- akhir judul laporan -->
 
-        <!-- 3. DETAIL LAPORAN / METADATA (Figma Node 639:8496) -->
+        <!-- rincian informasi laporan -->
         <div class="report-details-grid">
             <div class="details-col">
                 <div class="details-row">
@@ -91,8 +91,9 @@
                 </div>
             </div>
         </div>
+        <!-- akhir rincian informasi laporan -->
 
-        <!-- 4. TABEL REKAPITULASI KEHADIRAN (Figma Node 639:8515) -->
+        <!-- tabel rekapitulasi kehadiran -->
         <table class="report-table">
             <thead>
                 <tr>
@@ -122,10 +123,10 @@
                 @endforeach
             </tbody>
         </table>
+        <!-- akhir tabel rekapitulasi kehadiran -->
 
-        <!-- 5. TANDA TANGAN OTORISASI (Figma Node 639:8574) -->
+        <!-- tanda tangan pengesahan -->
         <div class="signatures-wrapper">
-            <!-- Tanda Tangan Kiri: Admin Tata Usaha -->
             <div class="signature-box">
                 <p class="sig-date">Karawang, {{ $tanggalCetak }}</p>
                 <p class="sig-title">Admin Tata Usaha</p>
@@ -136,7 +137,6 @@
                 </div>
             </div>
 
-            <!-- Tanda Tangan Kanan: Kepala SDIT At-Taubah -->
             <div class="signature-box">
                 <p class="sig-date">Karawang, {{ $tanggalCetak }}</p>
                 <p class="sig-title">Kepala SDIT At-Taubah</p>
@@ -147,8 +147,11 @@
                 </div>
             </div>
         </div>
+        <!-- akhir tanda tangan pengesahan -->
 
     </div>
+    <!-- akhir lembar dokumen cetak -->
 
 </body>
 </html>
+@endsection
