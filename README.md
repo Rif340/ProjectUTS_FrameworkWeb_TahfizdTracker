@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/readme_assets/named/01_banner.png" width="100%" alt="Banner Tahfizd Tracker SDIT At-Taubah">
+  <img src="docs/readme_assets/logo.png" width="180px" alt="Logo Sekolah Islam At-Taubah">
 </p>
 
 <h1 align="center">📖 TAHFIZD TRACKER — SDIT AT-TAUBAH</h1>
@@ -138,7 +138,138 @@ Berdasarkan observasi langsung di lapangan, proses presensi kehadiran dan evalua
 
 ---
 
-## 🗃️ Entity Relationship Diagram (ERD)
+# 🔄 ACTIVITY DIAGRAM (LENGKAP)
+
+### 1. Activity Diagram Login
+<p align="center">
+  <img src="docs/readme_assets/image33.png" width="85%" alt="Activity Diagram Login">
+</p>
+
+### 2. Activity Diagram Presensi Kehadiran
+<p align="center">
+  <img src="docs/readme_assets/image34.png" width="85%" alt="Activity Diagram Presensi Kehadiran">
+</p>
+
+### 3. Activity Diagram Cetak / Unduh Laporan Absensi
+<p align="center">
+  <img src="docs/readme_assets/image35.png" width="85%" alt="Activity Diagram Cetak Absensi">
+</p>
+
+### 4. Activity Diagram Mengelola Profil Pengguna
+<p align="center">
+  <img src="docs/readme_assets/image36.png" width="85%" alt="Activity Diagram Mengelola Profil">
+</p>
+
+### 5. Activity Diagram Mengelola Kelas & Setoran Tahfizd
+<p align="center">
+  <img src="docs/readme_assets/image37.png" width="85%" alt="Activity Diagram Kelola Setoran">
+</p>
+
+### 6. Activity Diagram Cetak Laporan Setoran Murid
+<p align="center">
+  <img src="docs/readme_assets/image38.png" width="85%" alt="Activity Diagram Cetak Setoran Murid">
+</p>
+
+### 7. Activity Diagram Cetak Rekapitulasi Setoran Kelas
+<p align="center">
+  <img src="docs/readme_assets/image39.png" width="85%" alt="Activity Diagram Cetak Setoran Kelas">
+</p>
+
+### 8. Activity Diagram Mengelola Pengguna (Admin)
+<p align="center">
+  <img src="docs/readme_assets/image40.png" width="85%" alt="Activity Diagram Mengelola Pengguna">
+</p>
+
+### 9. Activity Diagram Mengelola Hari Libur (Admin)
+<p align="center">
+  <img src="docs/readme_assets/image41.png" width="85%" alt="Activity Diagram Mengelola Hari Libur">
+</p>
+
+### 10. Activity Diagram Mengelola Hari Kerja (Admin)
+<p align="center">
+  <img src="docs/readme_assets/image42.png" width="85%" alt="Activity Diagram Mengelola Hari Kerja">
+</p>
+
+### 11. Activity Diagram Mengelola Tahun Akademik (Admin)
+<p align="center">
+  <img src="docs/readme_assets/image43.png" width="85%" alt="Activity Diagram Mengelola Tahun Akademik">
+</p>
+
+---
+
+# ⚡ SEQUENCE DIAGRAM (LENGKAP)
+
+### 1. Sequence Diagram Login
+<p align="center">
+  <img src="docs/readme_assets/image44.png" width="90%" alt="Sequence Diagram Login">
+</p>
+
+### 2. Sequence Diagram Presensi Kehadiran (QR Code & GPS)
+<p align="center">
+  <img src="docs/readme_assets/image45.png" width="90%" alt="Sequence Diagram Presensi Kehadiran">
+</p>
+
+### 3. Sequence Diagram Mencetak Laporan Absensi
+<p align="center">
+  <img src="docs/readme_assets/image46.png" width="90%" alt="Sequence Diagram Mencetak Absensi">
+</p>
+
+### 4. Sequence Diagram Mengelola Profil
+<p align="center">
+  <img src="docs/readme_assets/image47.png" width="90%" alt="Sequence Diagram Mengelola Profile">
+</p>
+
+### 5. Sequence Diagram Mengelola Kelas Tahfizd
+<p align="center">
+  <img src="docs/readme_assets/image48.png" width="90%" alt="Sequence Diagram Mengelola Kelas Tahfizd">
+</p>
+
+### 6. Sequence Diagram Kelola Setoran Hafalan Guru
+<p align="center">
+  <img src="docs/readme_assets/image49.png" width="90%" alt="Sequence Diagram Kelola Setoran Hafalan">
+</p>
+
+### 7. Sequence Diagram Melihat Riwayat Setoran Murid
+<p align="center">
+  <img src="docs/readme_assets/image50.png" width="90%" alt="Sequence Diagram Melihat Riwayat Setoran">
+</p>
+
+### 8. Sequence Diagram Cetak Laporan Setoran Murid
+<p align="center">
+  <img src="docs/readme_assets/image51.png" width="90%" alt="Sequence Diagram Cetak Setoran Murid">
+</p>
+
+### 9. Sequence Diagram Cetak Rekapitulasi Setoran Kelas
+<p align="center">
+  <img src="docs/readme_assets/image52.png" width="90%" alt="Sequence Diagram Cetak Setoran Kelas">
+</p>
+
+### 10. Sequence Diagram Mengelola Pengguna (CRUD)
+<p align="center">
+  <img src="docs/readme_assets/image53.png" width="90%" alt="Sequence Diagram Mengelola Pengguna">
+</p>
+
+### 11. Sequence Diagram Mengelola Hari Kerja
+<p align="center">
+  <img src="docs/readme_assets/image54.png" width="90%" alt="Sequence Diagram Mengelola Hari Kerja">
+</p>
+
+### 12. Sequence Diagram Mengelola Hari Libur
+<p align="center">
+  <img src="docs/readme_assets/image55.png" width="90%" alt="Sequence Diagram Mengelola Hari Libur">
+</p>
+
+---
+
+# 🏗️ CLASS DIAGRAM
+
+<p align="center">
+  <img src="docs/readme_assets/image56.png" width="95%" alt="Class Diagram Sistem Tahfizd Tracker">
+</p>
+
+---
+
+# 🗃️ ENTITY RELATIONSHIP DIAGRAM (ERD)
 
 <p align="center">
   <img src="docs/readme_assets/named/07_erd_database.png" width="95%" alt="Entity Relationship Diagram (ERD) Database">
@@ -238,10 +369,11 @@ TahfizdTracker/
 │   ├── migrations/            # Skema tabel database
 │   └── seeders/               # Data dummy pengguna & master data
 ├── docs/
-│   └── readme_assets/         # Aset gambar dokumentasi & diagram
+│   └── readme_assets/         # Aset gambar dokumentasi, UML, & diagram
 ├── public/
 │   ├── css/                   # Stylesheet responsif per modul
 │   ├── icon/                  # Aset ikon SVG & gambar
+│   ├── gambar/                # Logo resmi sekolah At-Taubah
 │   └── font/                  # Tipografi lokal
 ├── resources/
 │   └── views/                 # Blade views (layouts, absensi, tahfizd, siswa, dll.)
