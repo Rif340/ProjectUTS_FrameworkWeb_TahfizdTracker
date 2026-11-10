@@ -24,11 +24,11 @@
 ### Kelompok 2 — Framework Pemrograman Web
 **Dosen Pengampu**: Bapak Dadang Yusup, ST., M.Kom.
 
-| No | Nama | NPM | Peran / Fokus |
-|:---:|---|---|---|
-| 1 | **M Arif Wicaksono** | 2410631170034 | Fullstack Developer, Database & Deployment |
-| 2 | **Helmi Zain F.D** | 2410631170123 | UI/UX Designer & System Analyst |
-| 3 | **Kharisma Teguh W** | 2410631170125 | Frontend Developer & Documentation |
+| No | Nama | NPM |
+|:---:|---|---|
+| 1 | **M Arif Wicaksono** | 2410631170034 |
+| 2 | **Helmi Zain F.D** | 2410631170123 |
+| 3 | **Kharisma Teguh W** | 2410631170125 |
 
 ---
 
